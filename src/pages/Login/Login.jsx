@@ -82,7 +82,7 @@ const Login = () => {
                         <div className="mt-3">
                             <input
                                 type="submit"
-                                value="Sign Up"
+                                value="Login"
                                 className="w-full h-[44px] text-white font-semibold bg-gradient-to-r from-special to-head rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-[#0058AB] hover:to-[#00A6D0] transition transform active:scale-95"
                             />
                         </div>
