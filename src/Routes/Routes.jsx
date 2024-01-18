@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import SignUp from "../pages/SignUp/SignUp";
 import MainLayout from "../layout/MainLayout";
 import HomePage from "../pages/HomePage/HomePage";
 
@@ -13,4 +14,8 @@ export const routes = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "signup",
+    element: <SignUp />
+  }
 ]);
