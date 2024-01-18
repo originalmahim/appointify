@@ -44,7 +44,7 @@ Secondary/Feature/bugfix branches:
 ### Commit Message Rules
 
 Please write messages this way -
-![commit-msg-rule](commit-msg-rule.png)
+![commit-msg-rule](./public/commit-msg-rule.png)
 
 ### For those who want to run this project locally
 
