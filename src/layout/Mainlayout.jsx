@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 const Mainlayout = () => {
   return (
     <div>
-      {/* add Navbar here */}
+      {/*add Navbar here */}
       <div>
         <Outlet></Outlet>
       </div>
