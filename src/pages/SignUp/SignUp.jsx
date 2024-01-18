@@ -60,7 +60,7 @@ const SignUp = () => {
 
               {/* password field */}
               <div className="relative mt-3">
-                <FaLock className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-800" />
+                <FaLock size={18} className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-800" />
                 <input
                   type={isVisible ? "text" : "password"}
                   placeholder="Your Password"
