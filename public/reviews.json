@@ -1,0 +1,92 @@
+[
+  {
+    "reviewID": "1",
+    "email": "user1@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user1.png",
+    "displayName": "User 1",
+    "rating": "5",
+    "message": "Appointify is a lifesaver! Scheduling appointments is a breeze, and I love the user-friendly interface.",
+    "timeStamp": "2023-11-08T16:57:21.994Z"
+  },
+  {
+    "reviewID": "2",
+    "email": "user2@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user2.png",
+    "displayName": "User 2",
+    "rating": "4",
+    "message": "Efficient appointment scheduling with Appointify. A few minor tweaks could make it perfect.",
+    "timeStamp": "2023-11-09T12:45:30.123Z"
+  },
+  {
+    "reviewID": "3",
+    "email": "user3@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user3.png",
+    "displayName": "User 3",
+    "rating": "5",
+    "message": "Appointify streamlines my booking process. It's quick, reliable, and has improved my productivity.",
+    "timeStamp": "2023-11-10T09:22:45.678Z"
+  },
+  {
+    "reviewID": "4",
+    "email": "user4@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user4.png",
+    "displayName": "User 4",
+    "rating": "3",
+    "message": "Good for scheduling, but there are minor inconveniences. Overall, a decent appointment platform.",
+    "timeStamp": "2023-11-11T14:10:55.321Z"
+  },
+  {
+    "reviewID": "5",
+    "email": "user5@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user5.png",
+    "displayName": "User 5",
+    "rating": "4",
+    "message": "Appointify's scheduling features are top-notch. It helps me manage my appointments effortlessly.",
+    "timeStamp": "2023-11-12T17:38:12.456Z"
+  },
+  {
+    "reviewID": "6",
+    "email": "user6@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user6.png",
+    "displayName": "User 6",
+    "rating": "2",
+    "message": "Encountered some glitches while scheduling. Needs improvement in reliability.",
+    "timeStamp": "2023-11-13T20:05:30.789Z"
+  },
+  {
+    "reviewID": "7",
+    "email": "user7@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user7.png",
+    "displayName": "User 7",
+    "rating": "5",
+    "message": "I love using Appointify for appointments. It saves me time and simplifies the booking process.",
+    "timeStamp": "2023-11-14T12:20:40.234Z"
+  },
+  {
+    "reviewID": "8",
+    "email": "user8@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user8.png",
+    "displayName": "User 8",
+    "rating": "4",
+    "message": "Effortless scheduling with Appointify. A few additional features would make it even better.",
+    "timeStamp": "2023-11-15T15:45:55.567Z"
+  },
+  {
+    "reviewID": "9",
+    "email": "user9@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user9.png",
+    "displayName": "User 9",
+    "rating": "3",
+    "message": "Appointify serves its purpose, but there are areas where the scheduling process can be enhanced.",
+    "timeStamp": "2023-11-16T18:55:10.876Z"
+  },
+  {
+    "reviewID": "10",
+    "email": "user10@example.com",
+    "photoURL": "https://i.ibb.co/VC44z20/user10.png",
+    "displayName": "User 10",
+    "rating": "5",
+    "message": "Appointify is my go-to for scheduling appointments. It's reliable, easy to use, and never lets me down.",
+    "timeStamp": "2023-11-17T22:10:25.321Z"
+  }
+]
