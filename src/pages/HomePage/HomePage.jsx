@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import Banner from "../../components/Home/Banner/Banner";
 
 const HomePage = () => {
   return (
@@ -6,8 +7,9 @@ const HomePage = () => {
       <Helmet>
         <title>Appointify | Home</title>
       </Helmet>
+
       <section>
-        {/* add homepage components */}
+        <Banner />
       </section>
     </>
   );
