@@ -5,11 +5,48 @@ import { FaLock } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { createUser } = useAuth();
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  // handle signup
+  const onSubmit = async (data) => {
+    try {
+      const result = await createUser(data?.email, data?.password);
+      if(result?.user) {
+        toast.success("Registration Successful!",{
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+          }
+        })
+        navigate("/");
+      }
+    } 
+    catch (error) {
+      toast.error("Registration Failed!", {
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }
+  };
 
   return (
     <>
@@ -35,7 +72,6 @@ const SignUp = () => {
             />
           </div>
 
-          {/* signup form */}
           <div className="lg:w-1/2 lg:pl-3 lg:pr-16">
             <h3 className="font-play text-3xl font-bold mb-5">
               Create New Account
@@ -44,19 +80,24 @@ const SignUp = () => {
             {/* social login */}
             <SocialLogin />
 
-            <form className="mt-5">
+            {/* signup form */}
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-5">
               {/* email field */}
               <div className="relative">
                 <IoIosMail
-                  size={20}
+                  size={18}
                   className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-800"
                 />
                 <input
                   type="email"
                   placeholder="Your email"
                   className="block w-full py-1 px-3 border-b border-black text-sm text-[#757575] hover:border-special focus:border-special outline-none pl-8 transition"
+                  {...register("email", { required: true })}
                 />
               </div>
+              {errors.email && (
+                <span className="text-red-600">Email required*</span>
+              )}
 
               {/* password field */}
               <div className="relative mt-3">
@@ -68,6 +109,7 @@ const SignUp = () => {
                   type={isVisible ? "text" : "password"}
                   placeholder="Your Password"
                   className="block w-full py-1 px-3 border-b border-black text-sm text-[#757575] hover:border-special focus:border-special outline-none pl-8 transition"
+                  {...register("password", { required: true })}
                 />
                 <span
                   onClick={() => setIsVisible(!isVisible)}
@@ -76,10 +118,16 @@ const SignUp = () => {
                   {isVisible ? <IoEyeOff size={20} /> : <IoEye size={20} />}
                 </span>
               </div>
+              {errors.password && (
+                <span className="text-red-600">Password required*</span>
+              )}
 
               {/* checkbox */}
               <div className="flex gap-2 mt-3">
-                <input type="checkbox" className="" name="" id="" />
+                <input
+                  type="checkbox"
+                  {...register("terms", { required: true })}
+                />
                 <p className="text-sm text-gray-800">
                   I agree with the{" "}
                   <a href="#" className="text-special">
@@ -88,6 +136,11 @@ const SignUp = () => {
                   .
                 </p>
               </div>
+              {errors.terms && (
+                <span className="text-red-600">
+                  Please accept the terms and conditions.
+                </span>
+              )}
 
               {/* signup button */}
               <div className="mt-3">
