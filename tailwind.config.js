@@ -1,6 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+const withMT = require("@material-tailwind/react/utils/withMT");
+
+module.exports = withMT({
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
       play: ["Playfair Display", "serif"],
@@ -8,13 +9,21 @@ export default {
     },
     extend: {
       colors: {
-        special: "#0073FF",
-        head: "#00D4FF",
+        special: "#5E4E77",
+        head: "#4977b4",
         "sub-head": "#333333",
         details: "#888888",
-        cardBG: "#E3F3FF"
+        cardBG: "#E3F3FF",
+        "light-bg": "#F5F5F5",
+      },
+      backgroundImage: {
+        "gradient-special": "linear-gradient(90deg, #5E4E77 0%, #7C6C96 100%)",
+        "gradient-blue": "linear-gradient(90deg, #3A6FB3 0%, #4FA3D1 100%)",
       },
     },
   },
-  plugins: [],
-};
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light"],
+  },
+});
