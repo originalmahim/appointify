@@ -10,9 +10,9 @@ const HomePage = () => {
         <title>Appointify | Home</title>
       </Helmet>
       <section>
-      <FeatureOverview />
+        <FeatureOverview />
         <UserReviews />
-            <NewsLetter></NewsLetter>
+        <NewsLetter></NewsLetter>
       </section>
     </>
   );
