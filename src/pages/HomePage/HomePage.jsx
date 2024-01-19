@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import NewsLetter from "../../components/contacts/NewsLetter";
 import UserReviews from "../../components/customerReview/UserReviews";
 
 const HomePage = () => {
@@ -9,6 +10,7 @@ const HomePage = () => {
       </Helmet>
       <section>
         <UserReviews />
+            <NewsLetter></NewsLetter>
       </section>
     </>
   );
