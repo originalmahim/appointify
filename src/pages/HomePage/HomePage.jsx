@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import NewsLetter from "../../components/contacts/NewsLetter";
+import UserReviews from "../../components/customerReview/UserReviews";
 
 const HomePage = () => {
   return (
@@ -7,7 +9,8 @@ const HomePage = () => {
         <title>Appointify | Home</title>
       </Helmet>
       <section>
-        {/* add homepage components */}
+        <UserReviews />
+            <NewsLetter></NewsLetter>
       </section>
     </>
   );
