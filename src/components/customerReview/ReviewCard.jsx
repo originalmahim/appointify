@@ -22,7 +22,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
           <img
             alt={name}
             src={image}
-            className="h-14 w-14 rounded-full object-cover"
+            className="h-16 w-16 rounded-full border-2 border-cyan-400 p-1 object-cover"
           />
 
           <div>
