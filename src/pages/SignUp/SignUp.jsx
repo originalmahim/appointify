@@ -14,10 +14,10 @@ const SignUp = () => {
   return (
     <>
       <Helmet>
-        <title>Appointify - Signup</title>
+        <title>Appointify | Signup</title>
       </Helmet>
-
-      <div
+      
+      <section
         className="min-h-screen bg-cover flex items-center justify-center bg-center bg-no-repeat relative"
         style={{ backgroundImage: `url(${signup_bg})` }}
       >
@@ -60,7 +60,10 @@ const SignUp = () => {
 
               {/* password field */}
               <div className="relative mt-3">
-                <FaLock size={18} className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-800" />
+                <FaLock
+                  size={18}
+                  className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-800"
+                />
                 <input
                   type={isVisible ? "text" : "password"}
                   placeholder="Your Password"
@@ -99,12 +102,12 @@ const SignUp = () => {
             <p className="text-sm mt-6 text-gray-800">
               Already have an account?{" "}
               <Link to="/login" className="text-special">
-                Please Login
+                Login
               </Link>
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };
