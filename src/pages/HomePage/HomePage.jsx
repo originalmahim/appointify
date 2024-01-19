@@ -1,9 +1,16 @@
+import { Helmet } from "react-helmet-async";
+
 const HomePage = () => {
-    return (
-        <section>
-            {/* add home components */}
-        </section>
-    );
+  return (
+    <>
+      <Helmet>
+        <title>Appointify | Home</title>
+      </Helmet>
+      <section>
+        {/* add homepage components */}
+      </section>
+    </>
+  );
 };
 
 export default HomePage;
