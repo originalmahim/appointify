@@ -8,9 +8,13 @@ import { IoIosMail } from "react-icons/io";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
+import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const { signInUser } = useAuth()
+    
 
     // React hook functonalities
     const {
@@ -22,6 +26,45 @@ const Login = () => {
 
     const onSubmit = (data) => {
         console.log(data)
+        const email = data.email
+        const password = data.password
+        signInUser(email, password)
+            .then(res => {
+                console.log(res.user)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.onmouseenter = Swal.stopTimer;
+                      toast.onmouseleave = Swal.resumeTimer;
+                    }
+                  });
+                  Toast.fire({
+                    icon: "success",
+                    title: "Logged in successfully"
+                  });
+            })
+            .catch(error => {
+                console.log(`this ${error} Error Find`)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.onmouseenter = Swal.stopTimer;
+                      toast.onmouseleave = Swal.resumeTimer;
+                    }
+                  });
+                  Toast.fire({
+                    icon: "error",
+                    title: "Logged in failed"
+                  });
+            })
         reset()
     }
 
@@ -55,7 +98,7 @@ const Login = () => {
                         </h3>
 
                         {/* social login */}
-                        <SocialLogin />
+                        <SocialLogin/>
 
                         <form className="mt-5" onSubmit={handleSubmit(onSubmit)}>
                             {/* email field */}
