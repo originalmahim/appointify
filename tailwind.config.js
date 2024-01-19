@@ -12,6 +12,7 @@ export default {
         head: "#00D4FF",
         "sub-head": "#333333",
         details: "#888888",
+        cardBG: "#E3F3FF"
       },
     },
   },
