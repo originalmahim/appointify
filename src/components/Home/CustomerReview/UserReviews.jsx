@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import Container from "../Container/Container";
-import ReviewCard from "./reviewCard";
+import Container from "../../Container/Container";
+import ReviewCard from "./ReviewCard";
 
 const UserReviews = () => {
   const [expanded, setExpanded] = useState(false);
@@ -50,7 +50,7 @@ const UserReviews = () => {
       <div className="text-center mt-6">
         {shouldShowSeeMoreButton && (
           <button
-            className="w-max px-3 h-[44px] text-white font-semibold bg-gradient-to-r from-special to-head rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-[#0058AB] hover:to-[#00A6D0] transition transform active:scale-95"
+            className="w-max px-3 h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
             onClick={() => setExpanded(!expanded)}
           >
             {expanded ? "See Less" : "See More"}

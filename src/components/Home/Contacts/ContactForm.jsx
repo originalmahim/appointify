@@ -1,4 +1,3 @@
-
 const handleSubmit = (e) =>{
     e.preventDefault();
     alert("We will Contact you!");

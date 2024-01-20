@@ -1,12 +1,27 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import Container from "../Container/Container";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      setIsScrolled(scrollY >= 120);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleLogout = () => {
     const toastId = toast.loading("Logging Out...");
@@ -87,7 +102,7 @@ const NavBar = () => {
 
   return (
     <div className="fixed z-10 w-screen">
-      <nav className="bg-gray-50">
+      <nav className={`${isScrolled && "bg-gray-50"}`}>
         <Container>
           <div className="navbar">
             <div className="navbar-start">
@@ -185,7 +200,7 @@ const NavBar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="btn-ghost md:text-lg px-3 py-1.5 rounded-lg"
+                  className="btn-ghost md:text-lg font-medium px-3 py-1.5 rounded-lg"
                 >
                   Login
                 </Link>
