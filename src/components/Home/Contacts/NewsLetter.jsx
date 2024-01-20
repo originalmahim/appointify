@@ -1,14 +1,14 @@
 import Bird from "./Bird";
 
 const NewsLetter = () => {
-  const handleNewsLetter = e =>{
+  const handleNewsLetter = (e) => {
     e.preventDefault();
     alert("You will get notified!");
-  }
+  };
 
   return (
     <>
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center  mt-10 md:mt-20">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center mt-10 md:mt-20">
         {/* newsletter side */}
         <div className="flex-1 dark:text-gray-300 ">
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -26,8 +26,11 @@ const NewsLetter = () => {
                   type="text"
                   placeholder="Email"
                 />
-                <button type="submit" className="px-3 h-[44px] rounded-r-full text-white font-semibold bg-gradient-to-r from-special to-head cursor-pointer hover:bg-gradient-to-r hover:from-[#0058AB] hover:to-[#00A6D0] transition transform active:scale-95">
-                 Subscribe
+                <button
+                  type="submit"
+                  className="px-3 h-[44px] rounded-r-full text-white font-semibold bg-gradient-blue cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                >
+                  Subscribe
                 </button>
               </form>
             </div>

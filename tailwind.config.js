@@ -17,8 +17,8 @@ module.exports = withMT({
         "light-bg": "#F5F5F5",
       },
       backgroundImage: {
-        "gradient-special": "linear-gradient(90deg, #5E4E77 0%, #7C6C96 100%)",
-        "gradient-blue": "linear-gradient(90deg, #3A6FB3 0%, #4FA3D1 100%)",
+        "gradient-special": "linear-gradient(to right, #5E4E77, #7C6C96)",
+        "gradient-blue": "linear-gradient(to right, #3A6FB3, #4FA3D1)",
       },
     },
   },

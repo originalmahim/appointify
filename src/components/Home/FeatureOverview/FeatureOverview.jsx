@@ -1,15 +1,15 @@
 import Lottie from "lottie-react";
-import clientForm from "../../assets/clientForm.json";
-import schedule from "../../assets/images/Schedule.jpg";
-import automate from "../../assets/images/automate.jpg";
-import card1 from "../../assets/images/card1Image.jpg";
-import customer1 from "../../assets/images/customer1.jpg";
-import customer2 from "../../assets/images/customer2.jpg";
-import stack from "../../assets/images/stack.mp4";
+import clientForm from "../../../assets/clientForm.json";
+import schedule from "../../../assets/images/Schedule.jpg";
+import automate from "../../../assets/images/automate.jpg";
+import card1 from "../../../assets/images/card1Image.jpg";
+import customer1 from "../../../assets/images/customer1.jpg";
+import customer2 from "../../../assets/images/customer2.jpg";
+import stack from "../../../assets/stack.mp4";
 
 const FeatureOverview = () => {
   return (
-    <div className="max-w-[830px] p-5 mx-auto my-20">
+    <section className="max-w-[830px] p-5 mx-auto my-20">
       <div className="p-10 rounded-lg sm:h-[300px] flex flex-col sm:flex-row-reverse justify-between bg-cardBG">
         <div className="sm:w-2/5 h-[300px]">
           <div className="pl-4 sm:pl-0">
@@ -115,7 +115,7 @@ const FeatureOverview = () => {
           <video autoPlay loop muted playsInline src={stack}></video>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
