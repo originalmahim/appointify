@@ -26,18 +26,17 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     try {
       const result = await createUser(data?.email, data?.password);
-      if(result?.user) {
-        toast.success("Registration Successful!",{
+      if (result?.user) {
+        toast.success("Registration Successful!", {
           style: {
             borderRadius: "8px",
             background: "#333",
             color: "#fff",
-          }
-        })
+          },
+        });
         navigate("/");
       }
-    } 
-    catch (error) {
+    } catch (error) {
       toast.error("Registration Failed!", {
         style: {
           borderRadius: "8px",
@@ -51,9 +50,9 @@ const SignUp = () => {
   return (
     <>
       <Helmet>
-        <title>Appointify | Signup</title>
+        <title>Appointify | Sign Up</title>
       </Helmet>
-      
+
       <section
         className="min-h-screen bg-cover flex items-center justify-center bg-center bg-no-repeat relative"
         style={{ backgroundImage: `url(${signup_bg})` }}
@@ -73,7 +72,7 @@ const SignUp = () => {
           </div>
 
           <div className="lg:w-1/2 lg:pl-3 lg:pr-16">
-            <h3 className="font-play text-3xl font-bold mb-5">
+            <h3 className="text-center font-play text-3xl font-bold mb-5">
               Create New Account
             </h3>
 
@@ -85,12 +84,12 @@ const SignUp = () => {
               {/* email field */}
               <div className="relative">
                 <IoIosMail
-                  size={18}
+                  size={20}
                   className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-800"
                 />
                 <input
                   type="email"
-                  placeholder="Your email"
+                  placeholder="Your Email"
                   className="block w-full py-1 px-3 border-b border-black text-sm text-[#757575] hover:border-special focus:border-special outline-none pl-8 transition"
                   {...register("email", { required: true })}
                 />
@@ -102,7 +101,7 @@ const SignUp = () => {
               {/* password field */}
               <div className="relative mt-3">
                 <FaLock
-                  size={18}
+                  size={20}
                   className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-800"
                 />
                 <input
@@ -130,7 +129,10 @@ const SignUp = () => {
                 />
                 <p className="text-sm text-gray-800">
                   I agree with the{" "}
-                  <a href="#" className="text-special">
+                  <a
+                    href="#"
+                    className="text-special font-semibold hover:font-bold"
+                  >
                     Terms & Conditions
                   </a>
                   .
@@ -147,14 +149,17 @@ const SignUp = () => {
                 <input
                   type="submit"
                   value="Sign Up"
-                  className="w-full h-[44px] text-white font-semibold bg-gradient-to-r from-special to-head rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-[#0058AB] hover:to-[#00A6D0] transition transform active:scale-95"
+                  className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
                 />
               </div>
             </form>
 
-            <p className="text-sm mt-6 text-gray-800">
+            <p className="text-center text-sm mt-6 text-gray-800">
               Already have an account?{" "}
-              <Link to="/login" className="text-special">
+              <Link
+                to="/login"
+                className="text-special font-semibold hover:font-bold"
+              >
                 Login
               </Link>
             </p>

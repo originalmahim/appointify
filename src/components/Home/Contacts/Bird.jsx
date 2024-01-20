@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import bird from "../../assets/bird.json";
+import bird from "../../../assets/bird.json";
 
 const Bird = () => {
     return (
