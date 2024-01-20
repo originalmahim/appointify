@@ -13,6 +13,7 @@ module.exports = withMT({
         head: "#4977b4",
         "sub-head": "#333333",
         details: "#888888",
+        cardBG: "#E3F3FF",
         "light-bg": "#F5F5F5",
       },
       backgroundImage: {
