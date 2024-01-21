@@ -9,7 +9,7 @@ import stack from "../../../assets/stack.mp4";
 
 const FeatureOverview = () => {
   return (
-    <section className="max-w-[830px] p-5 mx-auto my-20">
+    <section className="max-w-[930px] p-5 mx-auto my-20">
       <div className="p-10 rounded-lg sm:h-[300px] flex flex-col sm:flex-row-reverse justify-between bg-cardBG">
         <div className="sm:w-2/5 h-[300px]">
           <div className="pl-4 sm:pl-0">
@@ -111,8 +111,15 @@ const FeatureOverview = () => {
             seamlessly.
           </p>
         </div>
-        <div className="sm:w-2/5 ">
-          <video autoPlay loop muted playsInline src={stack}></video>
+        <div className="sm:w-2/5 h-[200px] sm:h-[100px]">
+          <video
+            className=" rounded-lg"
+            autoPlay
+            loop
+            muted
+            playsInline
+            src={stack}
+          ></video>
         </div>
       </div>
     </section>
