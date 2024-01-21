@@ -102,7 +102,7 @@ const NavBar = () => {
 
   return (
     <div className="fixed z-10 w-screen">
-      <nav className={`${isScrolled && "bg-gray-50"}`}>
+      <nav className={`${isScrolled && "bg-gray-50 transition"}`}>
         <Container>
           <div className="navbar">
             <div className="navbar-start">
