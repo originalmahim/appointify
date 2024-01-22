@@ -1,9 +1,9 @@
+import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 import logo from "../../assets/images/logo.png";
 import Container from "../Container/Container";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
-import toast from "react-hot-toast";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -102,7 +102,11 @@ const NavBar = () => {
 
   return (
     <div className="fixed z-10 w-screen">
-      <nav className={`${isScrolled && "bg-gray-50 transition"}`}>
+      <nav
+        className={`${
+          isScrolled ? "bg-gray-50 transition-all duration-500" : "bg-cardBG"
+        }`}
+      >
         <Container>
           <div className="navbar">
             <div className="navbar-start">
