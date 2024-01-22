@@ -8,12 +8,13 @@ import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { IoIosMail } from "react-icons/io";
 import { FaLock } from "react-icons/fa";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { signInUser } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   // React hook functonalities
   const { register, handleSubmit, watch, reset } = useForm();
@@ -25,11 +26,24 @@ const Login = () => {
     signInUser(email, password)
       .then((res) => {
         console.log(res.user);
-        toast.success("Successfully logged in!");
+        toast.success("Logged in Successful!", {
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+        navigate("/");
       })
       .catch((error) => {
         console.log(`this ${error} Error Find`);
-        toast.error("Logged in failed");
+        toast.success("Logged in Failed!", {
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       });
     reset();
   };
@@ -50,9 +64,9 @@ const Login = () => {
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
         {/* Main Container */}
-        <div className="max-w-[800px] w-full min-h-[500px] bg-white rounded-lg p-2 flex items-center shadow-xl relative z-10">
+        <div className="max-w-[800px] w-full min-h-[500px] bg-white rounded-lg p-2 flex flex-col lg:flex-row md:flex-row items-center shadow-xl relative z-10">
           {/* signup image */}
-          <div className="w-1/2">
+          <div className="lg:w-1/2 md:lg:w-1/2 w-full">
             <img
               src={login_gif}
               alt="signup_gif"
@@ -108,7 +122,7 @@ const Login = () => {
 
               {/* checkbox */}
               <div className="flex gap-2 mt-3">
-                <input type="checkbox" className="" name="" id="" />
+                <input type="checkbox" className="" name="" id="" required/>
                 <p className="text-sm text-gray-800">
                   I agree with the{" "}
                   <a
@@ -127,6 +141,7 @@ const Login = () => {
                   type="submit"
                   value="Login"
                   className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                  
                 />
               </div>
             </form>
