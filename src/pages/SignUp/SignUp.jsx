@@ -54,16 +54,16 @@ const SignUp = () => {
       </Helmet>
 
       <section
-        className="min-h-screen bg-cover flex items-center justify-center bg-center bg-no-repeat relative"
+        className="min-h-screen bg-cover flex items-center justify-center bg-center bg-no-repeat relative px-8 lg:px-0"
         style={{ backgroundImage: `url(${signup_bg})` }}
       >
         {/* Overlay div */}
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
         {/* Main Container */}
-        <div className="max-w-[800px] w-full min-h-[500px] bg-white rounded-lg p-2 flex items-center shadow-xl relative z-10">
+        <div className="max-w-[800px] w-full min-h-[500px] bg-white rounded-lg p-2 md:flex items-center shadow-xl relative z-10 my-10 lg:my-0">
           {/* signup image */}
-          <div className="w-1/2">
+          <div className="lg:w-1/2">
             <img
               src={signup_gif}
               alt="signup_gif"
@@ -71,7 +71,7 @@ const SignUp = () => {
             />
           </div>
 
-          <div className="lg:w-1/2 lg:pl-3 lg:pr-16">
+          <div className="md:w-1/2 lg:pl-3 lg:pr-16">
             <h3 className="text-center font-play text-3xl font-bold mb-5">
               Create New Account
             </h3>
