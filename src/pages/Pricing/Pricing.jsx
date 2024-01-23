@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import planData from "../../../public/pricing.json";
 import Container from "../../components/Container/Container";
+import FAQ from "../../components/Faq/FAQ";
 import PricingCard from "../../components/Pricing/PricingCard";
 
 const Pricing = () => {
@@ -34,7 +35,7 @@ const Pricing = () => {
         </div>
       </div>
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {planData.map((plan, index) => (
             <PricingCard
               key={plan.id}
@@ -45,6 +46,7 @@ const Pricing = () => {
           ))}
         </div>
       </Container>
+      <FAQ />
     </>
   );
 };
