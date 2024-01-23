@@ -5,6 +5,8 @@ import HomePage from "../pages/HomePage/HomePage";
 import Login from "../pages/Login/Login";
 import Pricing from "../pages/Pricing/Pricing";
 import SignUp from "../pages/SignUp/SignUp";
+import BlogDetails from "../components/Blog/BlogDetails";
+import BlogPage from "../pages/Blog/BlogPage";
 
 export const routes = createBrowserRouter([
   {
@@ -20,6 +22,15 @@ export const routes = createBrowserRouter([
         path: "/pricing",
         element: <Pricing />,
       },
+      {
+        path: '/blogs',
+        element: <BlogPage></BlogPage>
+      },
+      {
+        path: '/blog/:id',
+        element: <BlogDetails></BlogDetails>,
+        loader: () => fetch('blogs.json')
+      }
     ],
   },
   {
