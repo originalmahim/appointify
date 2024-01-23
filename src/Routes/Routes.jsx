@@ -4,6 +4,8 @@ import MainLayout from "../layout/MainLayout";
 import HomePage from "../pages/HomePage/HomePage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Login from "../pages/Login/Login";
+import BlogPage from "../pages/Blog/BlogPage";
+import BlogDetails from "../components/Blog/BlogDetails";
 
 export const routes = createBrowserRouter([
   {
@@ -15,6 +17,15 @@ export const routes = createBrowserRouter([
         index: true,
         element: <HomePage />,
       },
+      {
+        path: '/blogs',
+        element: <BlogPage></BlogPage>
+      },
+      {
+        path: '/blog/:id',
+        element: <BlogDetails></BlogDetails>,
+        loader: () => fetch('blogs.json')
+      }
     ],
   },
   {

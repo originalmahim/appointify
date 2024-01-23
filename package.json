@@ -10,8 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "aos": "^2.3.4",
     "@material-tailwind/react": "^2.1.8",
+    "aos": "^2.3.4",
+    "axios": "^1.6.5",
     "firebase": "^10.7.2",
     "lottie-react": "^2.4.0",
     "prop-types": "^15.8.1",
