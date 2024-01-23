@@ -7,6 +7,7 @@ import Pricing from "../pages/Pricing/Pricing";
 import SignUp from "../pages/SignUp/SignUp";
 import BlogDetails from "../components/Blog/BlogDetails";
 import BlogPage from "../pages/Blog/BlogPage";
+import Contact from "../pages/Contact/Contact";
 
 export const routes = createBrowserRouter([
   {
@@ -23,14 +24,18 @@ export const routes = createBrowserRouter([
         element: <Pricing />,
       },
       {
-        path: '/blogs',
-        element: <BlogPage></BlogPage>
+        path: "/blogs",
+        element: <BlogPage></BlogPage>,
       },
       {
-        path: '/blog/:id',
+        path: "/blog/:id",
         element: <BlogDetails></BlogDetails>,
-        loader: () => fetch('blogs.json')
-      }
+        loader: () => fetch("blogs.json"),
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
     ],
   },
   {
