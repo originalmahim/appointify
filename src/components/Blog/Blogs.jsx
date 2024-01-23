@@ -36,7 +36,7 @@ const Blogs = () => {
             {/* all blogs */}
             <Container>
 
-                <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-6">
+                <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-6 max-w-[2250px]">
                     {
                         displayBlogs.map(blog => <Blog key={blog._id} blogs={blogs} blog={blog}></Blog>)
                     }

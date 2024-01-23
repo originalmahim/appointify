@@ -8,7 +8,7 @@ const PopularBlog = ({ blog }) => {
     return (
         
        <Link to={`/blog/${_id}`}>
-        <div className="card border-[1px] border-gray-300 rounded-xl max-w-[350px] h-32 p-4 space-y-3">
+        <div className="card border-[1px] border-gray-300 rounded-xl min-w-[310px] h-32 p-4 space-y-3">
             {/* blog title*/}
             <h2 className="text-sm font-medium text-gray-500">{blogTitle?.slice(0,30)}...</h2>
             {/* blog author details */}

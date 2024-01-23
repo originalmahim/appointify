@@ -7,7 +7,7 @@ import { FaComment, FaHeart } from "react-icons/fa";
 const BlogDetails = () => {
     const blogs = useLoaderData();
     const { id } = useParams()
-    const blog = blogs.find(blog => blog._id == id)
+    const blog = blogs?.find(blog => blog?._id == id)
     // console.log(blogs)
     const formatTimestamp = (timestamp) => {
         const date = new Date(timestamp);
@@ -22,22 +22,22 @@ const BlogDetails = () => {
     };
 
     //call the function
-    const formattedTime = formatTimestamp(blog.publishingDate);
+    const formattedTime = formatTimestamp(blog?.publishingDate);
     return (
         // blog details
         <Container>
-            <div className="flex flex-col md:flex-row lg:flex-row justify-center">
-                <div className="flex flex-col min-h-content gap-6 lg:mr-6 md:mr-6">
-                    <div className="space-y-4 border-[1px] border-gray-300 rounded-xl mt-24 flex-1 p-4">
+            <div className="flex flex-col md:flex-col lg:flex-row justify-center">
+                <div className="flex flex-col min-h-content gap-6 lg:mr-6 md:mr-6 w-[97vw] lg:w-[60vw] md:w-[97vw] mr-[2vw]">
+                    <div className="space-y-4 lg:border-[1px] border-gray-300 rounded-xl lg:mt-24 mt-16 p-4">
                         <h2 className="text-xl font-bold">{blog?.blogTitle}</h2>
                         {/* blog author details */}
                         <div className="flex justify-between items-center gap-2">
                             <div className="flex justify-start gap-4">
                                 <div className="">
-                                    <img src={blog.bloggerImage} alt="" className="w-12 h-12 rounded-full" />
+                                    <img src={blog?.bloggerImage} alt="" className="w-12 h-12 rounded-full" />
                                 </div>
                                 <div>
-                                    <h4>{blog.bloggerName}</h4>
+                                    <h4>{blog?.bloggerName}</h4>
                                     <p>{formattedTime}</p>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@ const BlogDetails = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="blogDiv space-y-4"
+                        <div className="blogDiv space-y-4 text-wrap"
                             dangerouslySetInnerHTML={{ __html: blog?.blogContent }}
                         />
 
@@ -62,12 +62,12 @@ const BlogDetails = () => {
                                 <textarea placeholder="Write your comments..." type="text" className="input input-bordered border-[1px] border-gray-300 w-full" />
                             </div>
                             <div className="">
-                                <input type="submit" value="Comment" className="btn btn-outline border-gray-300" />
+                                <input type="submit" value="Comment" className="btn btn-outline border-gray-300 text-xs" />
                             </div>
                         </form>
                     </div>
                 </div>
-                <div className="lg:mt-24 md:mt-24 mt-6 w-[350px]">
+                <div className="lg:mt-24 ">
                     <div className="flex flex-col gap-2">
                         {
                             blogs.map(blog => <PopularBlog key={blog._id} blogs={blogs} blog={blog}></PopularBlog>)
