@@ -140,7 +140,7 @@ const Login = () => {
                 <input
                   type="submit"
                   value="Login"
-                  className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                  className="w-full h-[44px] text-white font-semibold bg-gradient-to-r from-[#5E4E77] to-[#4977B4] rounded-lg cursor-pointer hover:bg-gradient-blue transition transform active:scale-95"
                   
                 />
               </div>

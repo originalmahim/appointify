@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import ContactBanner from "../../components/Contact/ContactBanner";
+import ContactForm from "../../components/Contact/ContactForm";
 
 const Contact = () => {
   return (
@@ -7,7 +8,10 @@ const Contact = () => {
       <Helmet>
         <title>Appointify - Contact Us</title>
       </Helmet>
-      <ContactBanner />
+      <section>
+        <ContactBanner />
+        <ContactForm />
+      </section>
     </>
   );
 };
