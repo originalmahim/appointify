@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import SignUp from "../pages/SignUp/SignUp";
 import MainLayout from "../layout/MainLayout";
-import HomePage from "../pages/HomePage/HomePage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import HomePage from "../pages/HomePage/HomePage";
 import Login from "../pages/Login/Login";
-import BlogPage from "../pages/Blog/BlogPage";
+import Pricing from "../pages/Pricing/Pricing";
+import SignUp from "../pages/SignUp/SignUp";
 import BlogDetails from "../components/Blog/BlogDetails";
+import BlogPage from "../pages/Blog/BlogPage";
 
 export const routes = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const routes = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "/pricing",
+        element: <Pricing />,
       },
       {
         path: '/blogs',
