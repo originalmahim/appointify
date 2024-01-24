@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 const Login = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { signInUser } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // React hook functonalities
   const { register, handleSubmit, watch, reset } = useForm();
@@ -122,7 +122,7 @@ const Login = () => {
 
               {/* checkbox */}
               <div className="flex gap-2 mt-3">
-                <input type="checkbox" className="" name="" id="" required/>
+                <input type="checkbox" className="" name="" id="" required />
                 <p className="text-sm text-gray-800">
                   I agree with the{" "}
                   <a
@@ -140,8 +140,7 @@ const Login = () => {
                 <input
                   type="submit"
                   value="Login"
-                  className="w-full h-[44px] text-white font-semibold bg-gradient-to-r from-[#5E4E77] to-[#4977B4] rounded-lg cursor-pointer hover:bg-gradient-blue transition transform active:scale-95"
-                  
+                  className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
                 />
               </div>
             </form>
