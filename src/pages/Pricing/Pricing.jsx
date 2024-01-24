@@ -25,13 +25,17 @@ const Pricing = () => {
           access advanced features.
         </p>
         <div className="flex items-center justify-center gap-3 md:gap-5 lg:gap-10">
-          <p className=" font-semibold text-lg">Monthly Billing</p>
+          <p className={` ${monthlyBill && "font-semibold"} text-lg`}>
+            Monthly Billing
+          </p>
           <input
             onChange={handleChange}
             type="checkbox"
             className="toggle bg-head"
           />
-          <p className=" font-medium text-lg">Annual Billing</p>
+          <p className={` ${!monthlyBill && "font-semibold"} text-lg`}>
+            Annual Billing
+          </p>
         </div>
       </div>
       <Container>

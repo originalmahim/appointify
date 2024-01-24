@@ -4,7 +4,7 @@ const PricingCard = ({ plan, index, monthlyBill }) => {
   return (
     <div
       className={`bg-cardBG mt-5 md:hover:scale-110 hover:z-30 hover:shadow-lg p-5 rounded-lg relative ${
-        index == 1 && "md:scale-110"
+        index == 1 && "md:scale-105"
       }`}
     >
       <div className=" flex justify-end">
