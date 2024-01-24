@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import ContactBanner from "../../components/Contact/ContactBanner";
 import ContactForm from "../../components/Contact/ContactForm";
+import GoogleMap from "../../components/Contact/GoogleMap";
 
 const Contact = () => {
   return (
@@ -11,6 +12,7 @@ const Contact = () => {
       <section>
         <ContactBanner />
         <ContactForm />
+        <GoogleMap />
       </section>
     </>
   );
