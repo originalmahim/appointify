@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import logo from "../../assets/images/logo.png";
 import Container from "../Container/Container";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -51,14 +52,14 @@ const NavBar = () => {
       </li>
       <li>
         <NavLink
-          to="/resources"
+          to="/blogs"
           className={({ isActive }) =>
             isActive
               ? "text-special text-sm md:text-lg font-semibold"
               : "text-sm md:text-base lg:text-lg font-medium"
           }
         >
-          Resources
+          Blogs
         </NavLink>
       </li>
       <li>
@@ -111,8 +112,8 @@ const NavBar = () => {
           <div className="navbar">
             <div className="navbar-start">
               <div className="dropdown">
-                <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                  <svg
+                {/* <label tabIndex={0} className="btn btn-ghost lg:hidden"> */}
+                {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-7 w-7"
                     fill="none"
@@ -125,11 +126,14 @@ const NavBar = () => {
                       strokeWidth="2"
                       d="M4 6h16M4 12h8m-8 6h16"
                     />
-                  </svg>
-                </label>
+                  </svg> */}
+                <div tabIndex={0} className="mr-5 p-1 lg:hidden">
+                  <HiOutlineMenuAlt1 className="scale-[1.2] md:scale-150"></HiOutlineMenuAlt1>
+                </div>
+                {/* </label> */}
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-4 z-[1] p-2 drop-shadow-lg bg-base-100 rounded-box w-max"
+                  className="menu menu-sm dropdown-content mt-4 z-[1] p-2 drop-shadow-lg bg-base-100 rounded-box w-36"
                 >
                   {links}
                 </ul>
