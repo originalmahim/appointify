@@ -1,8 +1,37 @@
 import { FiPhoneCall, FiMail } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
 import ContactCard from "./ContactCard";
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
 
 const ContactForm = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    const formField = e.target;
+
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJSSERVICEID,
+        import.meta.env.VITE_EMAILJSTEMPLATEID,
+        form.current,
+        import.meta.env.VITE_EMAILJSPUBLICKEY
+      )
+      .then(
+        (result) => {
+          if (result.status === 200) {
+            toast.success("Message Sent!");
+            formField.reset();
+          }
+        },
+        (error) => {
+          toast.error(error.text);
+        }
+      );
+  };
+
   return (
     <section className="bg-gray-200">
       <div className="max-w-6xl mx-auto py-10 lg:py-14 flex flex-col md:flex-row items-center justify-center md:justify-between">
@@ -16,6 +45,8 @@ const ContactForm = () => {
             Send Us a Message
           </h3>
           <form
+            ref={form}
+            onSubmit={sendEmail}
             data-aos="fade-in"
             data-aos-easing="ease-in-out"
             data-aos-duration="1000"
@@ -23,11 +54,13 @@ const ContactForm = () => {
             <div className="flex flex-col lg:flex-row gap-5">
               <input
                 type="text"
+                name="user_name"
                 placeholder="Your Name"
                 className="block w-full p-3 rounded-md border border-gray-600 text-sm text-[#757575] hover:border-special focus:border-special outline-none transition"
               />
               <input
                 type="tel"
+                name="user_phone"
                 placeholder="Phone"
                 className="block w-full p-3 rounded-md  border border-gray-600 text-sm text-[#757575] hover:border-special focus:border-special outline-none transition"
               />
@@ -35,6 +68,7 @@ const ContactForm = () => {
             <div className="my-5">
               <input
                 type="email"
+                name="user_email"
                 placeholder="Your Email"
                 className="block w-full p-3 rounded-md  border border-gray-600 text-sm text-[#757575] hover:border-special focus:border-special outline-none transition"
               />
@@ -42,6 +76,7 @@ const ContactForm = () => {
             <div>
               <textarea
                 placeholder="Your Message"
+                name="message"
                 className="block w-full h-[150px] lg:h-[200px] rounded-md text-sm text-[#757575] border border-gray-600 p-3 hover:border-special focus:border-special outline-none transition"
               ></textarea>
             </div>
