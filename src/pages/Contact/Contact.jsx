@@ -7,7 +7,7 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Appointify - Contact Us</title>
+        <title>Appointify | Contact Us</title>
       </Helmet>
       <section>
         <ContactBanner />

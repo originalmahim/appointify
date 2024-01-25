@@ -1,5 +1,3 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import login_bg from "../../assets/images/signup_bg.jpg";
@@ -10,14 +8,21 @@ import { FaLock } from "react-icons/fa";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
+import { TbFidgetSpinner } from "react-icons/tb";
+import { useState } from "react";
 
 const Login = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, loading } = useAuth();
   const navigate = useNavigate();
 
   // React hook functonalities
-  const { register, handleSubmit, watch, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -45,10 +50,8 @@ const Login = () => {
           },
         });
       });
-    reset();
   };
 
-  console.log(watch("example"));
   return (
     <>
       <Helmet>
@@ -74,7 +77,7 @@ const Login = () => {
             />
           </div>
 
-          {/* signup form */}
+          {/* login form */}
           <div className="md:w-1/2 px-3 md:px-0 lg:pl-3 md:pr-12 lg:pr-16">
             <h3 className="text-center font-play text-3xl font-bold mb-5">
               Sign In
@@ -98,6 +101,9 @@ const Login = () => {
                   className="block w-full py-1 px-3 border-b border-black text-sm text-[#757575] hover:border-special focus:border-special outline-none pl-8 transition"
                 />
               </div>
+              {errors.email && (
+                <span className="text-red-600">Email required*</span>
+              )}
 
               {/* password field */}
               <div className="relative mt-3">
@@ -119,6 +125,9 @@ const Login = () => {
                   {isVisible ? <IoEyeOff size={20} /> : <IoEye size={20} />}
                 </span>
               </div>
+              {errors.password && (
+                <span className="text-red-600">Password required*</span>
+              )}
 
               {/* forget password */}
               <div className="mt-3">
@@ -127,11 +136,17 @@ const Login = () => {
 
               {/* signup button */}
               <div className="mt-3">
-                <input
-                  type="submit"
-                  value="Login"
-                  className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
-                />
+                {loading ? (
+                  <button className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95 flex justify-center items-center">
+                    <TbFidgetSpinner className="animate-spin" size={20} />
+                  </button>
+                ) : (
+                  <input
+                    type="submit"
+                    value="Login"
+                    className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                  />
+                )}
               </div>
             </form>
 
