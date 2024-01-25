@@ -18,7 +18,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   // React hook functonalities
-  const { register, handleSubmit, watch, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -46,10 +50,8 @@ const Login = () => {
           },
         });
       });
-    reset();
   };
 
-  console.log(watch("example"));
   return (
     <>
       <Helmet>
@@ -75,7 +77,7 @@ const Login = () => {
             />
           </div>
 
-          {/* signup form */}
+          {/* login form */}
           <div className="md:w-1/2 px-3 md:px-0 lg:pl-3 md:pr-12 lg:pr-16">
             <h3 className="text-center font-play text-3xl font-bold mb-5">
               Sign In
@@ -99,6 +101,9 @@ const Login = () => {
                   className="block w-full py-1 px-3 border-b border-black text-sm text-[#757575] hover:border-special focus:border-special outline-none pl-8 transition"
                 />
               </div>
+              {errors.email && (
+                <span className="text-red-600">Email required*</span>
+              )}
 
               {/* password field */}
               <div className="relative mt-3">
@@ -120,6 +125,9 @@ const Login = () => {
                   {isVisible ? <IoEyeOff size={20} /> : <IoEye size={20} />}
                 </span>
               </div>
+              {errors.password && (
+                <span className="text-red-600">Password required*</span>
+              )}
 
               {/* forget password */}
               <div className="mt-3">

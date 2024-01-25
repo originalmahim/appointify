@@ -94,33 +94,46 @@ const ContactForm = () => {
         data-aos-duration="1000"
         className="w-full md:w-2/5 flex flex-col gap-5 md:pr-12 lg:pr-0 px-8 md:px-0"
       >
-        <div className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center">
+        <div className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center transform hover:scale-105 transition-all">
           <div className="bg-[#14AE5C] text-white w-12 h-12 rounded-full flex items-center justify-center">
             <FiPhoneCall size={26} />
           </div>
-          <ContactCard title={"Telephone"} subTitle={"+458 123 657 2324"} />
+          <div className="flex flex-col justify-center items-center md:gap-1 lg:gap-2">
+            <p className="text-2xl font-semibold font-play">Telephone</p>
+            <a
+              href="tel:+458 123 657 2324"
+              className="text-lg font-medium text-[#757575]"
+            >
+              +458 123 657 2324
+            </a>
+          </div>
         </div>
 
         <div
           data-aos="fade-up"
           data-aos-easing="ease-in-out"
           data-aos-duration="1000"
-          className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center"
+          className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center transform hover:scale-105 transition-all"
         >
           <div className="bg-[#4977B4] text-white w-12 h-12 rounded-full flex items-center justify-center">
             <FiMail size={26} />
           </div>
-          <ContactCard
-            title={"Drop Your Mail"}
-            subTitle={"appointify99@gmail.com"}
-          />
+          <div className="flex flex-col justify-center items-center md:gap-1 lg:gap-2">
+            <p className="text-2xl font-semibold font-play">Drop Your Mail</p>
+            <a
+              href="mailto:appointify99@gmail.com"
+              className="text-lg font-medium text-[#757575]"
+            >
+              appointify99@gmail.com
+            </a>
+          </div>
         </div>
 
         <div
           data-aos="fade-up"
           data-aos-easing="ease-in-out"
           data-aos-duration="1000"
-          className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center"
+          className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center transform hover:scale-105 transition-all"
         >
           <div className="bg-[#5e4e77] text-white w-12 h-12 rounded-full flex items-center justify-center">
             <IoLocationOutline size={26} />
