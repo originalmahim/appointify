@@ -38,11 +38,6 @@ export const routes = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path: "/blog/:id",
-        element: <BlogDetails />,
-        loader: () => fetch("blogs.json"),
-      },
     ],
   },
   {

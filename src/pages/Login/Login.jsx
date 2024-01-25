@@ -1,5 +1,3 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import login_bg from "../../assets/images/signup_bg.jpg";
@@ -10,10 +8,13 @@ import { FaLock } from "react-icons/fa";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
+import { TbFidgetSpinner } from "react-icons/tb";
+import { useState } from "react";
 
 const Login = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, loading } = useAuth();
   const navigate = useNavigate();
 
   // React hook functonalities
@@ -127,11 +128,17 @@ const Login = () => {
 
               {/* signup button */}
               <div className="mt-3">
-                <input
-                  type="submit"
-                  value="Login"
-                  className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
-                />
+                {loading ? (
+                  <button className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95 flex justify-center items-center">
+                    <TbFidgetSpinner className="animate-spin" size={20} />
+                  </button>
+                ) : (
+                  <input
+                    type="submit"
+                    value="Login"
+                    className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                  />
+                )}
               </div>
             </form>
 

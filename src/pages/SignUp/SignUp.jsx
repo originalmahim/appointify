@@ -10,10 +10,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import useSaveUser from "../../hooks/useSaveUser";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const SignUp = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { createUser } = useAuth();
+  const { createUser, loading } = useAuth();
+  const saveUser = useSaveUser();
   const navigate = useNavigate();
 
   const {
@@ -25,17 +28,20 @@ const SignUp = () => {
   // handle signup
   const onSubmit = async (data) => {
     try {
+      // create user with firebase
       const result = await createUser(data?.email, data?.password);
-      if (result?.user) {
-        toast.success("Registration Successful!", {
-          style: {
-            borderRadius: "8px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
-        navigate("/");
-      }
+
+      // save user to database
+      await saveUser(result?.user);
+
+      toast.success("Registration Successful!", {
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      navigate("/");
     } catch (error) {
       toast.error("Registration Failed!", {
         style: {
@@ -146,11 +152,17 @@ const SignUp = () => {
 
               {/* signup button */}
               <div className="mt-3">
-                <input
-                  type="submit"
-                  value="Sign Up"
-                  className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
-                />
+                {loading ? (
+                  <button className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95 flex justify-center items-center">
+                    <TbFidgetSpinner className="animate-spin" size={20} />
+                  </button>
+                ) : (
+                  <input
+                    type="submit"
+                    value="Sign Up"
+                    className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                  />
+                )}
               </div>
             </form>
 

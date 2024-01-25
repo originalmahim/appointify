@@ -4,8 +4,8 @@ const ContactCard = ({ title, subTitle }) => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center md:gap-1 lg:gap-2">
-        <p className="text-2xl font-semibold">{title}</p>
-        <p className="text-lg font-semibold text-[#757575]">{subTitle}</p>
+        <p className="text-2xl font-semibold font-play">{title}</p>
+        <p className="text-lg font-medium text-[#757575]">{subTitle}</p>
       </div>
     </div>
   );

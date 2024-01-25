@@ -66,6 +66,7 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       const loggedInUser = { email: currentUser?.email };
       setUser(currentUser);
+      console.log(currentUser);
       setLoading(false);
       if (currentUser) {
         // get token and store to local storage
