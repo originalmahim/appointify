@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 const Login = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { signInUser } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // React hook functonalities
   const { register, handleSubmit, watch, reset } = useForm();
@@ -54,8 +54,8 @@ const Login = () => {
       <Helmet>
         <title>Appointify | Sign In</title>
       </Helmet>
-      <div
-        className="min-h-screen w-full bg-cover flex items-center justify-center bg-center bg-no-repeat relative"
+      <section
+        className="min-h-screen bg-cover flex items-center justify-center bg-center bg-no-repeat relative md:px-10 lg:px-0"
         style={{
           backgroundImage: `url(${login_bg})`,
         }}
@@ -64,9 +64,9 @@ const Login = () => {
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
         {/* Main Container */}
-        <div className="max-w-[800px] w-full min-h-[500px] bg-white rounded-lg p-2 flex flex-col lg:flex-row md:flex-row items-center shadow-xl relative z-10">
+        <div className="max-w-[800px] w-full min-h-[500px] bg-white md:rounded-lg p-2 md:flex items-center shadow-xl relative z-10 pb-10 md:pb-0 md:my-10 lg:my-0">
           {/* signup image */}
-          <div className="lg:w-1/2 md:lg:w-1/2 w-full">
+          <div className="md:w-1/2">
             <img
               src={login_gif}
               alt="signup_gif"
@@ -75,7 +75,7 @@ const Login = () => {
           </div>
 
           {/* signup form */}
-          <div className="lg:w-1/2 lg:pl-3 lg:pr-16">
+          <div className="md:w-1/2 px-3 md:px-0 lg:pl-3 md:pr-12 lg:pr-16">
             <h3 className="text-center font-play text-3xl font-bold mb-5">
               Sign In
             </h3>
@@ -120,19 +120,9 @@ const Login = () => {
                 </span>
               </div>
 
-              {/* checkbox */}
-              <div className="flex gap-2 mt-3">
-                <input type="checkbox" className="" name="" id="" required/>
-                <p className="text-sm text-gray-800">
-                  I agree with the{" "}
-                  <a
-                    href="#"
-                    className="text-special font-semibold hover:font-bold"
-                  >
-                    Terms & Conditions
-                  </a>
-                  .
-                </p>
+              {/* forget password */}
+              <div className="mt-3">
+                <p className="text-sm text-special">Forget your password?</p>
               </div>
 
               {/* signup button */}
@@ -141,7 +131,6 @@ const Login = () => {
                   type="submit"
                   value="Login"
                   className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
-                  
                 />
               </div>
             </form>
@@ -157,7 +146,7 @@ const Login = () => {
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

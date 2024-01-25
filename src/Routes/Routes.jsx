@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import Pricing from "../pages/PricingPage/Pricing";
 import SignUp from "../pages/SignUp/SignUp";
 import BlogDetails from "../components/Blog/BlogDetails";
+import Contact from "../pages/Contact/Contact";
 import BlogPage from "../pages/BlogPage/BlogPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
@@ -26,7 +27,16 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/blogs",
-        element: <BlogPage />,
+        element: <BlogPage></BlogPage>,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails></BlogDetails>,
+        loader: () => fetch("blogs.json"),
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/blog/:id",
