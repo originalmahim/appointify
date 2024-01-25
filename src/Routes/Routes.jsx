@@ -7,6 +7,8 @@ import Pricing from "../pages/PricingPage/Pricing";
 import SignUp from "../pages/SignUp/SignUp";
 import BlogDetails from "../components/Blog/BlogDetails";
 import BlogPage from "../pages/BlogPage/BlogPage";
+import DashboardLayout from "../layout/DashboardLayout";
+import PrivateRoute from "./PrivateRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ export const routes = createBrowserRouter([
         loader: () => fetch("blogs.json"),
       },
     ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/signup",
