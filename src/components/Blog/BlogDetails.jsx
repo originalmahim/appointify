@@ -1,7 +1,7 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import Container from "../Container/Container";
 import './style.css'
-import PopularBlog from "./PopulaBlog";
+import PopularBlog from "./PopularBlog";
 import { FaComment, FaHeart } from "react-icons/fa";
 
 const BlogDetails = () => {

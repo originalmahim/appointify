@@ -3,11 +3,13 @@ import MainLayout from "../layout/MainLayout";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import HomePage from "../pages/HomePage/HomePage";
 import Login from "../pages/Login/Login";
-import Pricing from "../pages/Pricing/Pricing";
+import Pricing from "../pages/PricingPage/Pricing";
 import SignUp from "../pages/SignUp/SignUp";
 import BlogDetails from "../components/Blog/BlogDetails";
-import BlogPage from "../pages/Blog/BlogPage";
 import Contact from "../pages/Contact/Contact";
+import BlogPage from "../pages/BlogPage/BlogPage";
+import DashboardLayout from "../layout/DashboardLayout";
+import PrivateRoute from "./PrivateRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -36,7 +38,20 @@ export const routes = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails />,
+        loader: () => fetch("blogs.json"),
+      },
     ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/signup",
