@@ -14,7 +14,7 @@ const NavBar = () => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
-      setIsScrolled(scrollY >= 120);
+      setIsScrolled(scrollY >= 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -102,10 +102,10 @@ const NavBar = () => {
   );
 
   return (
-    <div className="fixed z-10 w-screen">
+    <div className="fixed z-50 w-screen">
       <nav
         className={`${
-          isScrolled ? "bg-gray-50 transition-all duration-500" : "bg-cardBG"
+          isScrolled ? "bg-gray-50 transition-all duration-1000" : "bg-cardBG"
         }`}
       >
         <Container>
