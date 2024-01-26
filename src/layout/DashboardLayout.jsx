@@ -6,20 +6,16 @@ import { BiSolidWalletAlt, BiSolidContact } from "react-icons/bi";
 import { TbBrandBooking } from "react-icons/tb";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
-import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { AiFillHome } from "react-icons/ai";
-import { BiSolidContact, BiSolidWalletAlt } from "react-icons/bi";
-import { FaBook, FaCalendarAlt, FaListUl } from "react-icons/fa";
 import { IoBookmarksSharp, IoInformationCircleSharp } from "react-icons/io5";
 import { MdAddTask, MdOutlinePriceChange, MdReviews } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
+import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
   const [isAdmin] = useAdmin();
-  const { logOut } = useContext(AuthContext);
+  const { logOut } = useAuth();
 
   const handleLogout = () => {
     const toastId = toast.loading("Logging Out...");

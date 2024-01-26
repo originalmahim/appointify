@@ -33,11 +33,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/blogs",
-        element: <BlogPage></BlogPage>,
+        element: <BlogPage />,
       },
       {
         path: "/blog/:id",
-        element: <BlogDetails></BlogDetails>,
+        element: <BlogDetails />,
         loader: () => fetch("blogs.json"),
       },
       {
@@ -53,7 +53,6 @@ export const routes = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
-    errorElement: <ErrorPage />,
     children: [
       {
         path: "user-home",
