@@ -6,7 +6,7 @@ import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { IoIosMail } from "react-icons/io";
 import { FaLock } from "react-icons/fa";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { TbFidgetSpinner } from "react-icons/tb";
@@ -16,6 +16,8 @@ const Login = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { signInUser, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   // React hook functonalities
   const {
@@ -24,32 +26,31 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    const email = data.email;
-    const password = data.password;
-    signInUser(email, password)
-      .then((res) => {
-        console.log(res.user);
-        toast.success("Logged in Successful!", {
+  const onSubmit = async (data) => {
+    try {
+      const result = await signInUser(data?.email, data?.password);
+      
+      if (result?.user) {
+        toast.success("Login Successful!", {
           style: {
             borderRadius: "8px",
             background: "#333",
             color: "#fff",
           },
         });
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(`this ${error} Error Find`);
-        toast.success("Logged in Failed!", {
-          style: {
-            borderRadius: "8px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
+
+        // navigate user after successfull sign up and show a toast
+        navigate(from, { replace: true });
+      }
+    } catch (error) {
+      toast.error("Login Failed!", {
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+        },
       });
+    }
   };
 
   return (
@@ -68,7 +69,7 @@ const Login = () => {
 
         {/* Main Container */}
         <div className="max-w-[800px] w-full min-h-[500px] bg-white md:rounded-lg p-2 md:flex items-center shadow-xl relative z-10 pb-10 md:pb-0 md:my-10 lg:my-0">
-          {/* signup image */}
+          {/* signin image */}
           <div className="md:w-1/2">
             <img
               src={login_gif}

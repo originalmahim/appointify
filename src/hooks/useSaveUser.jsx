@@ -9,6 +9,7 @@ const useSaveUser = () => {
       email: user?.email,
       photo: user?.photoURL,
       status: "free",
+      role: "user",
     };
     const { data } = await axiosPublic.post("/users", newUser);
     return data;
