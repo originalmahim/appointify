@@ -4,32 +4,45 @@ import ContactCard from "./ContactCard";
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const ContactForm = () => {
   const form = useRef();
+  const axiosPublic = useAxiosPublic();
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     const formField = e.target;
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJSSERVICEID,
-        import.meta.env.VITE_EMAILJSTEMPLATEID,
-        form.current,
-        import.meta.env.VITE_EMAILJSPUBLICKEY
-      )
-      .then(
-        (result) => {
-          if (result.status === 200) {
-            toast.success("Message Sent!");
-            formField.reset();
+    const name = formField.user_name.value;
+    const phone = formField.user_phone.value;
+    const email = formField.user_email.value;
+    const message = formField.message.value;
+
+    const newMessage = { name, phone, email, message };
+
+    const { data } = await axiosPublic.post("/messages", newMessage);
+
+    if (data?._id) {
+      emailjs
+        .sendForm(
+          import.meta.env.VITE_EMAILJSSERVICEID,
+          import.meta.env.VITE_EMAILJSTEMPLATEID,
+          form.current,
+          import.meta.env.VITE_EMAILJSPUBLICKEY
+        )
+        .then(
+          (result) => {
+            if (result.status === 200) {
+              toast.success("Message Sent!");
+              formField.reset();
+            }
+          },
+          (error) => {
+            toast.error(error.text);
           }
-        },
-        (error) => {
-          toast.error(error.text);
-        }
-      );
+        );
+    }
   };
 
   return (
