@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "plan": "Free",
+    "annualFee": 0,
+    "monthlyFee": 0,
+    "facilities": [
+      "One event type with 50 meetings",
+      "Connect one calendar and basic integration",
+      "Accept payments",
+      "Limited support",
+      "Email reminders"
+    ]
+  },
+  {
+    "id": 2,
+    "plan": "Standard",
+    "annualFee": 500,
+    "monthlyFee": 50,
+    "facilities": [
+      "One event types with unlimited meetings",
+      "Connect one calendar and basic integration",
+      "Accept payments",
+      "24/7 livechat support",
+      "Automate event notifications",
+      "Email reminders"
+    ]
+  },
+  {
+    "id": 3,
+    "plan": "Pro",
+    "annualFee": 1000,
+    "monthlyFee": 80,
+    "facilities": [
+      "Unlimited event types with unlimited meetings",
+      "Connect multiple calendar and basic integration",
+      "Accept payments",
+      "24/7 oncall & livechat support",
+      "Automate event notifications",
+      "Email reminders"
+    ]
+  }
+]

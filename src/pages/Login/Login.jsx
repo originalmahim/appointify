@@ -1,5 +1,3 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import login_bg from "../../assets/images/signup_bg.jpg";
@@ -8,54 +6,60 @@ import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { IoIosMail } from "react-icons/io";
 import { FaLock } from "react-icons/fa";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
+import { TbFidgetSpinner } from "react-icons/tb";
+import { useState } from "react";
 
 const Login = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { signInUser } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const { signInUser, loading } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   // React hook functonalities
-  const { register, handleSubmit, watch, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    const email = data.email;
-    const password = data.password;
-    signInUser(email, password)
-      .then((res) => {
-        console.log(res.user);
-        toast.success("Logged in Successful!", {
+  const onSubmit = async (data) => {
+    try {
+      const result = await signInUser(data?.email, data?.password);
+      
+      if (result?.user) {
+        toast.success("Login Successful!", {
           style: {
             borderRadius: "8px",
             background: "#333",
             color: "#fff",
           },
         });
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(`this ${error} Error Find`);
-        toast.success("Logged in Failed!", {
-          style: {
-            borderRadius: "8px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
+
+        // navigate user after successfull sign up and show a toast
+        navigate(from, { replace: true });
+      }
+    } catch (error) {
+      toast.error("Login Failed!", {
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+        },
       });
-    reset();
+    }
   };
 
-  console.log(watch("example"));
   return (
     <>
       <Helmet>
         <title>Appointify | Sign In</title>
       </Helmet>
-      <div
-        className="min-h-screen w-full bg-cover flex items-center justify-center bg-center bg-no-repeat relative"
+      <section
+        className="min-h-screen bg-cover flex items-center justify-center bg-center bg-no-repeat relative md:px-10 lg:px-0"
         style={{
           backgroundImage: `url(${login_bg})`,
         }}
@@ -64,9 +68,9 @@ const Login = () => {
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
         {/* Main Container */}
-        <div className="max-w-[800px] w-full min-h-[500px] bg-white rounded-lg p-2 flex flex-col lg:flex-row md:flex-row items-center shadow-xl relative z-10">
-          {/* signup image */}
-          <div className="lg:w-1/2 md:lg:w-1/2 w-full">
+        <div className="max-w-[800px] w-full min-h-[500px] bg-white md:rounded-lg p-2 md:flex items-center shadow-xl relative z-10 pb-10 md:pb-0 md:my-10 lg:my-0">
+          {/* signin image */}
+          <div className="md:w-1/2">
             <img
               src={login_gif}
               alt="signup_gif"
@@ -74,8 +78,8 @@ const Login = () => {
             />
           </div>
 
-          {/* signup form */}
-          <div className="lg:w-1/2 lg:pl-3 lg:pr-16">
+          {/* login form */}
+          <div className="md:w-1/2 px-3 md:px-0 lg:pl-3 md:pr-12 lg:pr-16">
             <h3 className="text-center font-play text-3xl font-bold mb-5">
               Sign In
             </h3>
@@ -98,6 +102,9 @@ const Login = () => {
                   className="block w-full py-1 px-3 border-b border-black text-sm text-[#757575] hover:border-special focus:border-special outline-none pl-8 transition"
                 />
               </div>
+              {errors.email && (
+                <span className="text-red-600">Email required*</span>
+              )}
 
               {/* password field */}
               <div className="relative mt-3">
@@ -119,30 +126,28 @@ const Login = () => {
                   {isVisible ? <IoEyeOff size={20} /> : <IoEye size={20} />}
                 </span>
               </div>
+              {errors.password && (
+                <span className="text-red-600">Password required*</span>
+              )}
 
-              {/* checkbox */}
-              <div className="flex gap-2 mt-3">
-                <input type="checkbox" className="" name="" id="" required/>
-                <p className="text-sm text-gray-800">
-                  I agree with the{" "}
-                  <a
-                    href="#"
-                    className="text-special font-semibold hover:font-bold"
-                  >
-                    Terms & Conditions
-                  </a>
-                  .
-                </p>
+              {/* forget password */}
+              <div className="mt-3">
+                <p className="text-sm text-special">Forget your password?</p>
               </div>
 
               {/* signup button */}
               <div className="mt-3">
-                <input
-                  type="submit"
-                  value="Login"
-                  className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
-                  
-                />
+                {loading ? (
+                  <button className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95 flex justify-center items-center">
+                    <TbFidgetSpinner className="animate-spin" size={20} />
+                  </button>
+                ) : (
+                  <input
+                    type="submit"
+                    value="Login"
+                    className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                  />
+                )}
               </div>
             </form>
 
@@ -157,7 +162,7 @@ const Login = () => {
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

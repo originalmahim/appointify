@@ -1,9 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import SignUp from "../pages/SignUp/SignUp";
 import MainLayout from "../layout/MainLayout";
-import HomePage from "../pages/HomePage/HomePage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import HomePage from "../pages/HomePage/HomePage";
 import Login from "../pages/Login/Login";
+import Pricing from "../pages/PricingPage/Pricing";
+import SignUp from "../pages/SignUp/SignUp";
+import BlogDetails from "../components/Blog/BlogDetails";
+import Contact from "../pages/Contact/Contact";
+import BlogPage from "../pages/BlogPage/BlogPage";
+import DashboardLayout from "../layout/DashboardLayout";
+import PrivateRoute from "./PrivateRoute";
 import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 
 export const routes = createBrowserRouter([
@@ -20,7 +26,32 @@ export const routes = createBrowserRouter([
         path: "/about-us",
         element: <AboutUsPage />,
       },
+      {
+        path: "/pricing",
+        element: <Pricing />,
+      },
+      {
+        path: "/blogs",
+        element: <BlogPage></BlogPage>,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails></BlogDetails>,
+        loader: () => fetch("blogs.json"),
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
     ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/signup",

@@ -11,7 +11,7 @@ const Banner = () => {
   };
 
   return (
-    <section className="bg-[#E4EDFF] min-h-[100vh] flex items-center py-48">
+    <section className="bg-cardBG min-h-[100vh] flex items-center py-48 ">
       <Container>
         <div className="flex flex-col md:flex-row gap-10 items-center px-2 ">
           <div>

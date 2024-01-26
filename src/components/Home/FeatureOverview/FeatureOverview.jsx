@@ -9,7 +9,7 @@ import stack from "../../../assets/stack.mp4";
 
 const FeatureOverview = () => {
   return (
-    <section className="max-w-[830px] p-5 mx-auto my-20">
+    <section className="max-w-[930px] p-5 mx-auto my-20">
       <div className="p-10 rounded-lg sm:h-[300px] flex flex-col sm:flex-row-reverse justify-between bg-cardBG">
         <div className="sm:w-2/5 h-[300px]">
           <div className="pl-4 sm:pl-0">
@@ -58,19 +58,19 @@ const FeatureOverview = () => {
             encourage customers to return.
           </p>
 
-          <div className=" relative">
+          <div className="mx-auto w-64 relative">
             <div className="mt-5 flex justify-center">
               <div className=" w-48  bg-white rounded-lg">
                 <Lottie animationData={clientForm} autoPlay={true} />
               </div>
             </div>
             <img
-              className=" absolute -top-4 right-10 w-10 h-10 rounded-full object-contain"
+              className=" absolute -top-4 right-4 w-10 h-10 rounded-full object-contain"
               src={customer1}
               alt=""
             />
             <img
-              className=" absolute -bottom-4 left-10 w-10 h-10 rounded-full bg-cover"
+              className=" absolute -bottom-4 left-4 w-10 h-10 rounded-full bg-cover"
               src={customer2}
               alt=""
             />
@@ -111,8 +111,15 @@ const FeatureOverview = () => {
             seamlessly.
           </p>
         </div>
-        <div className="sm:w-2/5 ">
-          <video autoPlay loop muted playsInline src={stack}></video>
+        <div className="sm:w-2/5 flex  items-center mb-5 sm:mb-0">
+          <video
+            className=" rounded-lg"
+            autoPlay
+            loop
+            muted
+            playsInline
+            src={stack}
+          ></video>
         </div>
       </div>
     </section>
