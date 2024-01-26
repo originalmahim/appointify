@@ -12,12 +12,13 @@ import { IoInformationCircleSharp } from "react-icons/io5";
 import { MdAddTask } from "react-icons/md";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Provider/AuthProvider";
+import useAdmin from "../hooks/useAdmin";
 
 const DashboardLayout = () => {
-  const [isAdmin] = useState(false);
+  const [isAdmin] = useAdmin();
   const { logOut } = useContext(AuthContext);
 
   const handleLogout = () => {
