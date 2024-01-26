@@ -1,20 +1,17 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
-import Container from "../components/Container/Container";
-import { IoMdCart } from "react-icons/io";
-import { FaBook, FaCalendarAlt, FaListUl } from "react-icons/fa";
-import { AiFillHome } from "react-icons/ai";
-import { BiSolidWalletAlt, BiSolidContact } from "react-icons/bi";
-import { MdReviews } from "react-icons/md";
-import { TbBrandBooking } from "react-icons/tb";
-import { IoBookmarksSharp } from "react-icons/io5";
-import { MdOutlinePriceChange } from "react-icons/md";
-import { IoInformationCircleSharp } from "react-icons/io5";
-import { MdAddTask } from "react-icons/md";
-import { PiUsersThreeFill } from "react-icons/pi";
-import { FiLogOut } from "react-icons/fi";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { AiFillHome } from "react-icons/ai";
+import { BiSolidContact, BiSolidWalletAlt } from "react-icons/bi";
+import { FaBook, FaCalendarAlt, FaListUl } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+import { IoMdCart } from "react-icons/io";
+import { IoBookmarksSharp, IoInformationCircleSharp } from "react-icons/io5";
+import { MdAddTask, MdOutlinePriceChange, MdReviews } from "react-icons/md";
+import { PiUsersThreeFill } from "react-icons/pi";
+import { TbBrandBooking } from "react-icons/tb";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import Container from "../components/Container/Container";
 
 const DashboardLayout = () => {
   const [isAdmin] = useState(false);
