@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import logo from "../../assets/images/logo.png";
+import useUserData from "../../hooks/useUserData";
 import Container from "../Container/Container";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { logOut } = useContext(AuthContext);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [userDB] = useUserData();
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -160,7 +161,7 @@ const NavBar = () => {
               <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal">{links}</ul>
               </div>
-              {user?.email ? (
+              {userDB?.email ? (
                 // dropdown icon
                 <div className="dropdown dropdown-end">
                   <label
@@ -168,10 +169,10 @@ const NavBar = () => {
                     className="btn btn-ghost btn-circle avatar"
                   >
                     <div className="w-10 md:w-14 lg:w-16 rounded-full">
-                      {user?.photoURL ? (
+                      {userDB?.photo ? (
                         <img
                           className="text-[10px]"
-                          src={user?.photoURL}
+                          src={userDB?.photo}
                           alt="img-error"
                         />
                       ) : (
@@ -189,16 +190,21 @@ const NavBar = () => {
                   >
                     <>
                       <li>
-                        <p className="pointer-events-none">
-                          {user?.displayName}
-                        </p>
+                        <p className="pointer-events-none">{userDB?.name}</p>
                       </li>
                       <li>
-                        <p className="pointer-events-none">{user?.email}</p>
+                        <p className="pointer-events-none">{userDB?.email}</p>
                       </li>
-                      <li>
-                        <Link to="/dashboard">Dashboard</Link>
-                      </li>
+                      {userDB?.role === "admin" && (
+                        <li>
+                          <Link to="/dashboard/admin-home">Dashboard</Link>
+                        </li>
+                      )}
+                      {userDB?.role === "user" && (
+                        <li>
+                          <Link to="/dashboard/user-home">Dashboard</Link>
+                        </li>
+                      )}
                       <li>
                         <button onClick={handleLogout}>Logout</button>
                       </li>
