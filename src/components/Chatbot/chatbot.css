@@ -12,6 +12,8 @@
   display: grid;
   place-items: center;
   border-radius: 100%;
+  background-color: #2898ec;
+  color: white;
   border: 1px solid skyblue;
 }
 .strt {
