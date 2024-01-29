@@ -1,11 +1,11 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Container from "../components/Container/Container";
 import { IoMdCart } from "react-icons/io";
-import { FaBook, FaCalendarAlt, FaListUl } from "react-icons/fa";
+import { FaCalendarAlt, FaListUl } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidWalletAlt, BiSolidContact } from "react-icons/bi";
 import { MdReviews } from "react-icons/md";
-import { TbBrandBooking } from "react-icons/tb";
+import { TbBrandBooking, TbMessage } from "react-icons/tb";
 import { IoBookmarksSharp } from "react-icons/io5";
 import { MdOutlinePriceChange } from "react-icons/md";
 import { IoInformationCircleSharp } from "react-icons/io5";
@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const DashboardLayout = () => {
-  const [isAdmin] = useState(false);
+  const [isAdmin] = useState(true);
   const { logOut } = useContext(AuthContext);
 
   const handleLogout = () => {
@@ -121,15 +121,15 @@ const DashboardLayout = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/dashboard/manage-message"
+                      to="/dashboard/inbox"
                       className={({ isActive }) =>
                         isActive
                           ? "text-white md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
-                      <FaBook />
-                      Manage messages
+                      <TbMessage />
+                      Inbox
                     </NavLink>
                   </li>
                   <li>

@@ -10,6 +10,7 @@ import Contact from "../pages/Contact/Contact";
 import BlogPage from "../pages/BlogPage/BlogPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
+import Inbox from "../pages/Inbox/Inbox";
 
 export const routes = createBrowserRouter([
   {
@@ -47,6 +48,13 @@ export const routes = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
+    children: [
+      // admin routes
+      {
+        path: "/dashboard/inbox",
+        element: <Inbox />
+      }
+    ]
   },
   {
     path: "/signup",
