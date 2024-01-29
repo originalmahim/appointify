@@ -1,5 +1,3 @@
-import { createContext, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -10,6 +8,8 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import PropTypes from "prop-types";
+import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
@@ -64,23 +64,24 @@ const AuthProvider = ({ children }) => {
   // observe auth state change
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      const loggedInUser = { email: currentUser?.email };
       setUser(currentUser);
       console.log(currentUser);
-      setLoading(false);
       if (currentUser) {
         // get token and store to local storage
+        const loggedInUser = { email: currentUser?.email };
         axiosPublic.post("/jwt", loggedInUser).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
           }
         });
       } else {
         localStorage.removeItem("access-token");
+        setLoading(false);
       }
     });
     return () => {
-      unSubscribe();
+      return unSubscribe();
     };
   }, [axiosPublic]);
 

@@ -1,24 +1,21 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
 import Container from "../components/Container/Container";
 import { IoMdCart } from "react-icons/io";
 import { FaCalendarAlt, FaListUl } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidWalletAlt, BiSolidContact } from "react-icons/bi";
-import { MdReviews } from "react-icons/md";
 import { TbBrandBooking, TbMessage } from "react-icons/tb";
-import { IoBookmarksSharp } from "react-icons/io5";
-import { MdOutlinePriceChange } from "react-icons/md";
-import { IoInformationCircleSharp } from "react-icons/io5";
-import { MdAddTask } from "react-icons/md";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
-import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { AuthContext } from "../Provider/AuthProvider";
+import { IoBookmarksSharp, IoInformationCircleSharp } from "react-icons/io5";
+import { MdAddTask, MdOutlinePriceChange, MdReviews } from "react-icons/md";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
+import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
-  const [isAdmin] = useState(true);
-  const { logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
+  const { logOut } = useAuth();
 
   const handleLogout = () => {
     const toastId = toast.loading("Logging Out...");
