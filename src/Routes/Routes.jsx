@@ -11,6 +11,7 @@ import Login from "../pages/Login/Login";
 import Pricing from "../pages/PricingPage/Pricing";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import Inbox from "../pages/Inbox/Inbox";
 import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 
 export const routes = createBrowserRouter([
@@ -54,6 +55,11 @@ export const routes = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // admin routes
+      {
+        path: "/dashboard/inbox",
+        element: <Inbox />,
+      },
       {
         path: "user-home",
         element: <UserHome />,

@@ -1,9 +1,9 @@
 import Container from "../components/Container/Container";
 import { IoMdCart } from "react-icons/io";
-import { FaBook, FaCalendarAlt, FaListUl } from "react-icons/fa";
+import { FaCalendarAlt, FaListUl } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidWalletAlt, BiSolidContact } from "react-icons/bi";
-import { TbBrandBooking } from "react-icons/tb";
+import { TbBrandBooking, TbMessage } from "react-icons/tb";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
 import toast from "react-hot-toast";
@@ -118,15 +118,15 @@ const DashboardLayout = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/dashboard/manage-message"
+                      to="/dashboard/inbox"
                       className={({ isActive }) =>
                         isActive
                           ? "text-white md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
-                      <FaBook />
-                      Manage messages
+                      <TbMessage />
+                      Inbox
                     </NavLink>
                   </li>
                   <li>
