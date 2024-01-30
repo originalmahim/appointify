@@ -26,14 +26,34 @@ const NavBar = () => {
   }, []);
 
   const handleLogout = () => {
-    const toastId = toast.loading("Logging Out...");
+    const toastId = toast.loading("Logging Out...", {
+      style: {
+        borderRadius: "8px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
     logOut()
       .then(() => {
-        toast.success("Logged Out Successfully.", { id: toastId });
+        toast.success("Logged Out Successfully.", {
+          id: toastId,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Something went wrong!", { id: toastId });
+        toast.error("Something went wrong!", {
+          id: toastId,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       });
   };
 
@@ -113,25 +133,9 @@ const NavBar = () => {
           <div className="navbar">
             <div className="navbar-start">
               <div className="dropdown">
-                {/* <label tabIndex={0} className="btn btn-ghost lg:hidden"> */}
-                {/* <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-7 w-7"
-                    fill="none"
-                    viewBox="0 0 30 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h8m-8 6h16"
-                    />
-                  </svg> */}
                 <div tabIndex={0} className="mr-5 p-1 lg:hidden">
                   <HiOutlineMenuAlt1 className="scale-[1.2] md:scale-150"></HiOutlineMenuAlt1>
                 </div>
-                {/* </label> */}
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content mt-4 z-[1] p-2 drop-shadow-lg bg-base-100 rounded-box w-36"

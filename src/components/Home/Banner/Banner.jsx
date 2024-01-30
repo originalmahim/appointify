@@ -11,11 +11,11 @@ const Banner = () => {
   };
 
   return (
-    <section className="bg-cardBG min-h-[100vh] flex items-center py-48 ">
+    <section className="bg-cardBG min-h-[100vh] flex items-center py-24">
       <Container>
-        <div className="flex flex-col md:flex-row gap-10 items-center px-2 ">
+        <div className="flex flex-col md:flex-row gap-10 items-center px-2">
           <div>
-            <h1 className="font-play text-5xl font-semibold text-black leading-[60px]">
+            <h1 className="text-black text-5xl font-play font-semibold leading-[60px]">
               Empower Your Day with
               <br />
               Appointify
@@ -24,13 +24,13 @@ const Banner = () => {
               </span>
             </h1>
 
-            <p className="text-[#121212] font-medium leading-7 mt-10 mb-16">
+            <p className="text-sub-head font-medium leading-7 mt-8 mb-10">
               Effortlessly organize appointments, meetings, and tasks in one
               intuitive platform, empowering you to elevate productivity and
               reclaim control over your daily routine.
             </p>
 
-            <button className="btn border-none hover:border-none text-white bg-gradient-blue hover:bg-gradient-to-r hover:from-special hover:to-head px-6">
+            <button className="px-4 h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95">
               Create a Schedule
             </button>
           </div>

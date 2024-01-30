@@ -3,7 +3,7 @@ import ContactBanner from "../../components/Contact/ContactBanner";
 import ContactForm from "../../components/Contact/ContactForm";
 import GoogleMap from "../../components/Contact/GoogleMap";
 
-const Contact = () => {
+const ContactPage = () => {
   return (
     <>
       <Helmet>
@@ -18,4 +18,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactPage;

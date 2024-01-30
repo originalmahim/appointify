@@ -1,46 +1,56 @@
+import toast from "react-hot-toast";
 import Bird from "./Bird";
+import Container from "../../Container/Container";
 
 const NewsLetter = () => {
   const handleNewsLetter = (e) => {
     e.preventDefault();
-    alert("You will get notified!");
+    toast.success("Successfully Subscribed!", {
+      style: {
+        borderRadius: "8px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+    e.target.reset();
   };
 
   return (
     <>
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center mt-10 md:mt-20">
-        {/* newsletter side */}
-        <div className="flex-1 dark:text-gray-300 ">
-          <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <div className="mx-auto max-w-screen-md sm:text-center">
-              <h2 className="mb-4 text-3xl tracking-tight font-extrabold dark:text-gray-300 sm:text-4xl">
+      <section className="max-w-[1400px] mx-auto mt-24 md:mt-32 lg:mt-36 xl:mt-40">
+        <Container>
+          {/* newsletter side */}
+          <div className="text-center flex flex-col md:flex-row items-center gap-6">
+            <div className="flex-1">
+              <h1 className="text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold dark:text-slate-300">
                 Sign up for our newsletter
-              </h2>
-              <p className="mx-auto mb-8 max-w-2xl font-light text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400">
+              </h1>
+              <p className="px-5 my-8 font-medium text-details dark:text-gray-400">
                 Stay up to date with the announcements and exclusive discounts
                 feel free to sign up with your email.
               </p>
               <form onSubmit={handleNewsLetter} className="join">
                 <input
-                  className="border-2 px-3 h-[45px] rounded-l-full"
-                  type="text"
+                  className="border-2 px-4 h-12 w-full lg:w-4/5 xl:w-11/12 rounded-l-xl"
+                  type="email"
                   placeholder="Email"
+                  required
                 />
                 <button
                   type="submit"
-                  className="px-3 h-[44px] rounded-r-full text-white font-semibold bg-gradient-blue cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                  className="px-4 h-12 rounded-r-xl text-white font-semibold bg-gradient-blue cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95"
                 >
                   Subscribe
                 </button>
               </form>
             </div>
+            {/* animation side */}
+            <div className="flex-1">
+              <Bird />
+            </div>
           </div>
-        </div>
-        {/* animation side */}
-        <div className="flex-1">
-          <Bird></Bird>
-        </div>
-      </div>
+        </Container>
+      </section>
     </>
   );
 };

@@ -5,7 +5,7 @@ import Container from "../../components/Container/Container";
 import FAQ from "../../components/Faq/FAQ";
 import PricingCard from "../../components/Pricing/PricingCard";
 
-const Pricing = () => {
+const PricingPage = () => {
   const [monthlyBill, setMonthlyBill] = useState(true);
   const handleChange = () => {
     console.log("toggled");
@@ -55,4 +55,4 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+export default PricingPage;
