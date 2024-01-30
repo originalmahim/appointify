@@ -2,17 +2,18 @@ import { createBrowserRouter } from "react-router-dom";
 import BlogDetails from "../components/Blog/BlogDetails";
 import DashboardLayout from "../layout/DashboardLayout";
 import MainLayout from "../layout/MainLayout";
+import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 import BlogPage from "../pages/BlogPage/BlogPage";
 import Contact from "../pages/Contact/Contact";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import HomePage from "../pages/HomePage/HomePage";
+import Inbox from "../pages/Inbox/Inbox";
 import Login from "../pages/Login/Login";
 import Pricing from "../pages/PricingPage/Pricing";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
-import Inbox from "../pages/Inbox/Inbox";
-import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 
 export const routes = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const routes = createBrowserRouter([
       {
         path: "user-home",
         element: <UserHome />,
+      },
+      {
+        path: "admin-home",
+        element: <AdminHome />,
       },
     ],
   },
