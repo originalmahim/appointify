@@ -27,7 +27,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
 
           <div>
             {/* rating stars  */}
-            <div className="flex justify-center gap-0.5 text-yellow-400">
+            <div className="flex justify-center gap-0.5 text-head">
               {Array.from({ length: rating }).map((_, index) => (
                 <svg
                   key={index}

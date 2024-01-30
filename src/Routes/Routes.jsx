@@ -4,14 +4,14 @@ import DashboardLayout from "../layout/DashboardLayout";
 import MainLayout from "../layout/MainLayout";
 import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 import BlogPage from "../pages/BlogPage/BlogPage";
-import Contact from "../pages/Contact/Contact";
+import ContactPage from "../pages/ContactPage/ContactPage";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import HomePage from "../pages/HomePage/HomePage";
 import Inbox from "../pages/Inbox/Inbox";
 import Login from "../pages/Login/Login";
-import Pricing from "../pages/PricingPage/Pricing";
+import PricingPage from "../pages/PricingPage/PricingPage";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
@@ -32,7 +32,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/pricing",
-        element: <Pricing />,
+        element: <PricingPage />,
       },
       {
         path: "/blogs",
@@ -45,7 +45,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact />,
+        element: <ContactPage />,
       },
     ],
   },
@@ -59,7 +59,7 @@ export const routes = createBrowserRouter([
     children: [
       // admin routes
       {
-        path: "/dashboard/inbox",
+        path: "inbox",
         element: (
           <AdminRoute>
             <Inbox />
