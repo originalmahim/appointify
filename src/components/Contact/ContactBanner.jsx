@@ -28,6 +28,7 @@ const ContactBanner = () => {
             data-aos="fade-down"
             data-aos-easing="ease-in-out"
             data-aos-duration="1000"
+            className="w-[70%]"
           >
             <Lottie animationData={serviceAnimation} />
           </div>
