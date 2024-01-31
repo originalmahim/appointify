@@ -7,15 +7,24 @@ const Banner = () => {
     <section className="bg-cardBG min-h-[100vh] flex items-center py-24">
       <Container>
         <div className="flex flex-col md:flex-row gap-10 items-center px-2 2xl:px-3">
-          <h1 className="font-play text-4xl md:text-5xl font-semibold text-center lg:text-start leading-[44px] lg:leading-[52px] xl:leading-[80px] text-black">
+          <h1
+            data-aos="zoom-in"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1500"
+            data-aos-easing="ease-in-out"
+            data-aos-mirror="true"
+            data-aos-once="true"
+            className="font-play text-4xl md:text-5xl font-semibold text-center lg:text-start leading-[44px] lg:leading-[52px] xl:leading-[80px] text-black"
+          >
             Transforming scheduling dreams into effortless reality for global
             connections.
           </h1>
           <div
-            data-aos="zoom-up"
+            data-aos="zoom-out"
             data-aos-offset="200"
             data-aos-delay="50"
-            data-aos-duration="700"
+            data-aos-duration="1500"
             data-aos-easing="ease-in-out"
             data-aos-mirror="true"
             data-aos-once="true"
