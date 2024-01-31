@@ -126,7 +126,7 @@ const NavBar = () => {
     <div className="fixed z-50 w-screen">
       <nav
         className={`${
-          isScrolled ? "bg-gray-50 transition-all duration-1000" : "bg-cardBG"
+          isScrolled ? "bg-gray-50 transition duration-1000" : "bg-cardBG"
         }`}
       >
         <Container>
@@ -170,7 +170,7 @@ const NavBar = () => {
                 <div className="dropdown dropdown-end">
                   <label
                     tabIndex={0}
-                    className="btn btn-ghost btn-circle avatar"
+                    className="btn btn-ghost btn-circle avatar 2xl:mr-3"
                   >
                     <div className="w-10 md:w-14 lg:w-16 rounded-full">
                       {userDB?.photo ? (
@@ -218,7 +218,7 @@ const NavBar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="btn-ghost md:text-lg font-medium px-3 py-1.5 rounded-lg"
+                  className="btn-ghost md:text-lg font-medium px-3 py-1.5 rounded-lg 2xl:mr-1"
                 >
                   Login
                 </Link>

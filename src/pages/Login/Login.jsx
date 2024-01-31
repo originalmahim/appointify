@@ -29,7 +29,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const result = await signInUser(data?.email, data?.password);
-      
+
       if (result?.user) {
         toast.success("Login Successful!", {
           style: {
@@ -130,22 +130,22 @@ const Login = () => {
                 <span className="text-red-600">Password required*</span>
               )}
 
-              {/* forget password */}
-              <div className="mt-3">
-                <p className="text-sm text-special">Forget your password?</p>
+              {/* forgot password */}
+              <div className="mt-2">
+                <a href="#" className="text-sm text-special font-semibold hover:font-bold">Forgot password?</a>
               </div>
 
               {/* signup button */}
               <div className="mt-3">
                 {loading ? (
-                  <button className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95 flex justify-center items-center">
+                  <button className="w-full h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95 flex justify-center items-center">
                     <TbFidgetSpinner className="animate-spin" size={20} />
                   </button>
                 ) : (
                   <input
                     type="submit"
                     value="Login"
-                    className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                    className="w-full h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95"
                   />
                 )}
               </div>

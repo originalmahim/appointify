@@ -82,7 +82,7 @@ const BlogDetails = () => {
         </div>
         <div className="lg:mt-24 ">
           <div className="flex flex-col gap-2">
-            {blogs.map((blog) => (
+            {blogs?.map((blog) => (
               <PopularBlog
                 key={blog._id}
                 blogs={blogs}

@@ -13,7 +13,7 @@ const Banner = () => {
   return (
     <section className="bg-cardBG min-h-[100vh] flex items-center py-24">
       <Container>
-        <div className="flex flex-col md:flex-row gap-10 items-center px-2">
+        <div className="flex flex-col md:flex-row gap-10 items-center px-2 2xl:px-3">
           <div>
             <h1 className="text-black text-5xl font-play font-semibold leading-[60px]">
               Empower Your Day with
@@ -24,7 +24,7 @@ const Banner = () => {
               </span>
             </h1>
 
-            <p className="text-sub-head font-medium leading-7 mt-8 mb-10">
+            <p className="text-sub-head 2xl:text-lg font-medium leading-7 mt-6 mb-10">
               Effortlessly organize appointments, meetings, and tasks in one
               intuitive platform, empowering you to elevate productivity and
               reclaim control over your daily routine.

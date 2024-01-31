@@ -10,7 +10,6 @@ const AboutUsPage = () => {
       <Helmet>
         <title>Appointify | About Us</title>
       </Helmet>
-
       <section>
         <Banner />
         <State />

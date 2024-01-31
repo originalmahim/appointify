@@ -35,8 +35,8 @@ const UserReviews = () => {
           User Testimonials
         </h1>
 
-        <div className="grid grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayRatings.map((testimonial) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayRatings?.map((testimonial) => (
             <ReviewCard
               key={testimonial?.reviewID}
               image={testimonial?.photoURL}
