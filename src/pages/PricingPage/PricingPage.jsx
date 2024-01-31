@@ -16,15 +16,15 @@ const PricingPage = () => {
       <Helmet>
         <title>Appointify | Pricing</title>
       </Helmet>
-      <div className="p-5 max-w-3xl mx-auto pt-32">
-        <h2 className=" font-play text-center text-2xl md:text-4xl font-bold mb-6">
+      <div className="p-2 max-w-3xl mx-auto pt-24 md:pt-28 lg:pt-32 xl:pt-36">
+        <h1 className="text-center text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold mb-6">
           Pick the perfect plan
-        </h2>
-        <p className="lg:text-lg text-center mb-14">
+        </h1>
+        <p className="text-center 2xl:text-lg text-sub-head font-medium mb-8 md:mb-12 lg:mb-14 xl:mb-16">
           Get started with Appointify Free or choose from Pro and Standard to
           access advanced features.
         </p>
-        <div className="flex items-center justify-center gap-3 md:gap-5 lg:gap-10">
+        <div className="text-center flex items-center justify-center gap-3 md:gap-5 lg:gap-10">
           <p className={` ${monthlyBill && "font-semibold"} text-lg`}>
             Monthly Billing
           </p>
@@ -39,8 +39,8 @@ const PricingPage = () => {
         </div>
       </div>
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-          {planData.map((plan, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-12 px-2 2xl:px-3">
+          {planData?.map((plan, index) => (
             <PricingCard
               key={plan.id}
               monthlyBill={monthlyBill}
@@ -49,8 +49,8 @@ const PricingPage = () => {
             />
           ))}
         </div>
+        <FAQ />
       </Container>
-      <FAQ />
     </>
   );
 };

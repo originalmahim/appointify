@@ -1,11 +1,10 @@
 const OurStory = () => {
   return (
-    <div className="px-4 lg:px-20 py-32">
-      <h1 className="text-3xl lg:text-5xl font-bold font-play text-center">
+    <section className="mt-24 md:mt-32 lg:mt-36 xl:mt-40">
+      <h1 className="text-center text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold mb-8 md:mb-12">
         Our Story
       </h1>
-
-      <p className="text-[#6c6c6c] text-sm lg:max-w-3xl text-center leading-6 mt-10 lg:mt-16 m-auto">
+      <p className="px-5 md:px-14 lg:max-w-3xl mx-auto text-center 2xl:text-lg text-sub-head">
         At Apointify, our journey is rooted in the pursuit of simplifying
         scheduling complexities. Fueled by innovation and a commitment to
         efficiency, we&apos;ve crafted a user-friendly platform that transforms
@@ -14,7 +13,7 @@ const OurStory = () => {
         connections flourish. Apointify: Redefining the essence of time
         management.
       </p>
-    </div>
+    </section>
   );
 };
 

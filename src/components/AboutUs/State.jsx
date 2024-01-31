@@ -1,4 +1,5 @@
 import CountUp from "react-countup";
+import Container from "../Container/Container";
 
 const State = () => {
   const statsData = [
@@ -25,17 +26,21 @@ const State = () => {
   ];
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 justify-center items-center gap-20 text-head bg-[#E4EDFF] px-20 py-16">
-      {statsData.map((stat, index) => (
-        <div key={index} className="text-center">
-          <div className="text-5xl lg:text-6xl font-bold mb-6">
-            <CountUp end={stat.value} duration={3} enableScrollSpy={true} />
-            <span className="text-dark">{stat.suffix}</span>
-          </div>
-          <h3 className="text-xl font-medium">{stat.label}</h3>
+    <section className="text-head bg-gray-50">
+      <Container>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 items-center gap-20 py-20">
+          {statsData?.map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="text-4xl lg:text-5xl 2xl:text-6xl font-bold mb-6">
+                <CountUp end={stat.value} duration={3} enableScrollSpy={true} />
+                <span className="text-special">{stat.suffix}</span>
+              </div>
+              <h3 className="text-xl font-medium">{stat.label}</h3>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </Container>
+    </section>
   );
 };
 

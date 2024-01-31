@@ -4,16 +4,13 @@ import Container from "../Container/Container";
 
 const Banner = () => {
   return (
-    <div className="min-h-[100vh] pt-32 lg:pt-48 pb-32">
+    <section className="bg-cardBG min-h-[100vh] flex items-center py-24">
       <Container>
-        <div className="grid lg:grid-cols-2 items-center gap-16 lg:gap-10">
-          <div>
-            <h1 className="font-play text-3xl lg:text-4xl xl:text-6xl font-semibold text-center lg:text-start leading-[44px] lg:leading-[52px] xl:leading-[80px] text-head">
-              Transforming scheduling dreams into effortless reality for global
-              connections.
-            </h1>
-          </div>
-
+        <div className="flex flex-col md:flex-row gap-10 items-center px-2 2xl:px-3">
+          <h1 className="font-play text-4xl md:text-5xl font-semibold text-center lg:text-start leading-[44px] lg:leading-[52px] xl:leading-[80px] text-black">
+            Transforming scheduling dreams into effortless reality for global
+            connections.
+          </h1>
           <div
             data-aos="zoom-up"
             data-aos-offset="200"
@@ -27,7 +24,7 @@ const Banner = () => {
           </div>
         </div>
       </Container>
-    </div>
+    </section>
   );
 };
 

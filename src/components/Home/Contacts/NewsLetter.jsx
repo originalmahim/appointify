@@ -25,7 +25,7 @@ const NewsLetter = () => {
               <h1 className="text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold dark:text-slate-300">
                 Sign up for our newsletter
               </h1>
-              <p className="px-5 my-8 font-medium text-details dark:text-gray-400">
+              <p className="px-5 mt-6 mb-10 font-medium text-sub-head 2xl:text-lg dark:text-gray-400">
                 Stay up to date with the announcements and exclusive discounts
                 feel free to sign up with your email.
               </p>
