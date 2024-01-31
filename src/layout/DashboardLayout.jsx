@@ -21,11 +21,25 @@ const DashboardLayout = () => {
     const toastId = toast.loading("Logging Out...");
     logOut()
       .then(() => {
-        toast.success("Logged Out Successfully.", { id: toastId });
+        toast.success("Logged Out Successfully.", {
+          id: toastId,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Something went wrong!", { id: toastId });
+        toast.error("Something went wrong!", {
+          id: toastId,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       });
   };
 
@@ -82,7 +96,7 @@ const DashboardLayout = () => {
                       to="/dashboard/admin-home"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -95,7 +109,7 @@ const DashboardLayout = () => {
                       to="/dashboard/add-event"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -108,7 +122,7 @@ const DashboardLayout = () => {
                       to="/dashboard/manage-event"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -121,7 +135,7 @@ const DashboardLayout = () => {
                       to="/dashboard/inbox"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -134,7 +148,7 @@ const DashboardLayout = () => {
                       to="/dashboard/users"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -150,7 +164,7 @@ const DashboardLayout = () => {
                       to="/dashboard/user-home"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -163,7 +177,7 @@ const DashboardLayout = () => {
                       to="/dashboard/make-reservation"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -176,7 +190,7 @@ const DashboardLayout = () => {
                       to="/dashboard/payment-history"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -189,7 +203,7 @@ const DashboardLayout = () => {
                       to="/dashboard/cart"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -202,7 +216,7 @@ const DashboardLayout = () => {
                       to="/dashboard/review"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -215,7 +229,7 @@ const DashboardLayout = () => {
                       to="/dashboard/bookings"
                       className={({ isActive }) =>
                         isActive
-                          ? "text-white md:text-lg font-semibold uppercase"
+                          ? "text-special md:text-lg font-semibold uppercase"
                           : "md:text-lg font-medium uppercase"
                       }
                     >
@@ -233,7 +247,7 @@ const DashboardLayout = () => {
                   to="/"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-white md:text-lg font-semibold uppercase"
+                      ? "text-special md:text-lg font-semibold uppercase"
                       : "md:text-lg font-medium uppercase"
                   }
                 >
@@ -246,7 +260,7 @@ const DashboardLayout = () => {
                   to="/blogs"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-white md:text-lg font-semibold uppercase"
+                      ? "text-special md:text-lg font-semibold uppercase"
                       : "md:text-lg font-medium uppercase"
                   }
                 >
@@ -259,7 +273,7 @@ const DashboardLayout = () => {
                   to="/pricing"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-white md:text-lg font-semibold uppercase"
+                      ? "text-special md:text-lg font-semibold uppercase"
                       : "md:text-lg font-medium uppercase"
                   }
                 >
@@ -272,7 +286,7 @@ const DashboardLayout = () => {
                   to="/contact"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-white md:text-lg font-semibold uppercase"
+                      ? "text-special md:text-lg font-semibold uppercase"
                       : "md:text-lg font-medium uppercase"
                   }
                 >
@@ -285,7 +299,7 @@ const DashboardLayout = () => {
                   to="/about-us"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-white md:text-lg font-semibold uppercase"
+                      ? "text-special md:text-lg font-semibold uppercase"
                       : "md:text-lg font-medium uppercase"
                   }
                 >
