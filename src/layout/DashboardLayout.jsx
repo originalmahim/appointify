@@ -1,15 +1,14 @@
-import Container from "../components/Container/Container";
-import { IoMdCart } from "react-icons/io";
-import { FaCalendarAlt, FaListUl } from "react-icons/fa";
-import { AiFillHome } from "react-icons/ai";
-import { BiSolidWalletAlt, BiSolidContact } from "react-icons/bi";
-import { TbBrandBooking, TbMessage } from "react-icons/tb";
-import { PiUsersThreeFill } from "react-icons/pi";
-import { FiLogOut } from "react-icons/fi";
 import toast from "react-hot-toast";
-import { IoBookmarksSharp, IoInformationCircleSharp } from "react-icons/io5";
-import { MdAddTask, MdOutlinePriceChange, MdReviews } from "react-icons/md";
+import { AiFillHome } from "react-icons/ai";
+import { BiSolidWalletAlt } from "react-icons/bi";
+import { FaCalendarAlt, FaListUl } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+import { IoMdCart } from "react-icons/io";
+import { MdAddTask, MdReviews } from "react-icons/md";
+import { PiUsersThreeFill } from "react-icons/pi";
+import { TbBrandBooking, TbMessage } from "react-icons/tb";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import Container from "../components/Container/Container";
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 
@@ -33,7 +32,7 @@ const DashboardLayout = () => {
     <section>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content min-h-screen">
+        <div className="drawer-content bg-cardBG min-h-screen">
           {/* Page content here */}
           <label
             htmlFor="my-drawer-2"
@@ -67,14 +66,14 @@ const DashboardLayout = () => {
             className="drawer-overlay"
           ></label>
           {/* sidebar content here */}
-          <div className="w-72 min-h-screen bg-cardBG py-12">
+          <div className="w-72 min-h-screen bg-head py-8">
             <p className="text-2xl font-play font-black uppercase ml-6">
               Appointify
             </p>
-            <p className="text-xl font-play font-medium uppercase tracking-[3px] ml-6">
+            <p className="text-lg font-medium uppercase tracking-[3px] ml-6">
               Schedule Now
             </p>
-            <ul className="menu mt-16 space-y-2">
+            <ul className="menu mt-16">
               {isAdmin ? (
                 <>
                   <li>
@@ -227,7 +226,7 @@ const DashboardLayout = () => {
               )}
             </ul>
             <div className="divider px-5"></div>
-            <ul className="menu space-y-2">
+            <ul className="menu">
               <li>
                 <NavLink
                   to="/"
@@ -241,7 +240,7 @@ const DashboardLayout = () => {
                   Home
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/blogs"
                   className={({ isActive }) =>
@@ -292,7 +291,7 @@ const DashboardLayout = () => {
                   <IoInformationCircleSharp />
                   About Us
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <Link
                   onClick={handleLogout}
