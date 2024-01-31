@@ -14,7 +14,15 @@ const Banner = () => {
     <section className="bg-cardBG min-h-[100vh] flex items-center py-24">
       <Container>
         <div className="flex flex-col md:flex-row gap-10 items-center px-2 2xl:px-3">
-          <div>
+          <div
+            data-aos="fade-in"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1500"
+            data-aos-easing="ease-in-out"
+            data-aos-mirror="true"
+            data-aos-once="true"
+          >
             <h1 className="text-black text-5xl font-play font-semibold leading-[60px]">
               Empower Your Day with
               <br />
@@ -36,13 +44,14 @@ const Banner = () => {
           </div>
 
           <div
-            data-aos="zoom-up"
+            data-aos="zoom-in"
             data-aos-offset="200"
             data-aos-delay="50"
-            data-aos-duration="700"
+            data-aos-duration="1500"
             data-aos-easing="ease-in-out"
             data-aos-mirror="true"
             data-aos-once="true"
+            className="w-4/5"
           >
             <Lottie animationData={animationData} />
           </div>
