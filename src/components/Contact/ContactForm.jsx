@@ -34,7 +34,13 @@ const ContactForm = () => {
         .then(
           (result) => {
             if (result.status === 200) {
-              toast.success("Message Sent!");
+              toast.success("Message Sent!", {
+                style: {
+                  borderRadius: "8px",
+                  background: "#333",
+                  color: "#fff",
+                },
+              });
               formField.reset();
             }
           },
@@ -69,12 +75,14 @@ const ContactForm = () => {
               name="user_name"
               placeholder="Your Name"
               className="block w-full p-3 rounded-md border border-gray-600 text-sm text-[#757575] hover:border-special focus:border-special outline-none transition"
+              required
             />
             <input
               type="tel"
               name="user_phone"
               placeholder="Phone"
               className="block w-full p-3 rounded-md  border border-gray-600 text-sm text-[#757575] hover:border-special focus:border-special outline-none transition"
+              required
             />
           </div>
           <div className="my-5">
@@ -83,6 +91,7 @@ const ContactForm = () => {
               name="user_email"
               placeholder="Your Email"
               className="block w-full p-3 rounded-md  border border-gray-600 text-sm text-[#757575] hover:border-special focus:border-special outline-none transition"
+              required
             />
           </div>
           <div>
@@ -90,6 +99,7 @@ const ContactForm = () => {
               placeholder="Your Message"
               name="message"
               className="block w-full h-[150px] lg:h-[200px] rounded-md text-sm text-[#757575] border border-gray-600 p-3 hover:border-special focus:border-special outline-none transition"
+              required
             ></textarea>
           </div>
           <div className="mt-8 flex justify-center">

@@ -5,7 +5,9 @@ import {
   DialogHeader,
   DialogBody,
 } from "@material-tailwind/react";
-import { FiEye, FiTrash } from "react-icons/fi";
+import { FiTrash } from "react-icons/fi";
+import { CiBookmark } from "react-icons/ci";
+import { MdOutlineCheck } from "react-icons/md";
 import { formatDistance } from "date-fns";
 import PropTypes from "prop-types";
 import { useState } from "react";
@@ -15,7 +17,7 @@ import toast from "react-hot-toast";
 const TableRow = ({ classes, mess, refetch }) => {
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { name, email, message, phone, timestamp, _id } = mess || {};
+  const { name, email, message, phone, timestamp, _id, status } = mess || {};
   const axiosSecure = useAxiosSecure();
 
   const postedTime = formatDistance(new Date(timestamp), new Date(), {
@@ -23,6 +25,20 @@ const TableRow = ({ classes, mess, refetch }) => {
   });
 
   const handleOpen = () => setOpen(!open);
+
+  const handleMarkAsRead = async () => {
+    const { data } = await axiosSecure.patch(`/messages/${_id}`);
+    if (data?.modifiedCount > 0) {
+      toast.success("Marked as Read!", {
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      refetch();
+    }
+  };
 
   const handleDelete = async () => {
     const { data } = await axiosSecure.delete(`/messages/${_id}`);
@@ -40,38 +56,47 @@ const TableRow = ({ classes, mess, refetch }) => {
   };
 
   return (
-    <tr key={name}>
-      <td className={classes}>
+    <tr className="hover:bg-gray-100 transition duration-300 cursor-pointer">
+      <td onClick={handleOpen} className={classes}>
         <Typography variant="small" color="blue-gray">
           {name}
         </Typography>
       </td>
-      <td className={classes}>
+      <td onClick={handleOpen} className={classes}>
         <Typography variant="small" color="blue-gray">
           {email}
         </Typography>
       </td>
       {message?.length > 45 ? (
-        <td className={classes}>
+        <td onClick={handleOpen} className={classes}>
           <Typography variant="small" color="blue-gray">
             {message?.slice(0, 45)}...
           </Typography>
         </td>
       ) : (
-        <td className={classes}>
+        <td onClick={handleOpen} className={classes}>
           <Typography variant="small" color="blue-gray">
             {message}
           </Typography>
         </td>
       )}
       <td className={classes}>
-        <div className="flex gap-2">
-          <button className="text-gray-700 btn btn-sm btn-circle">
-            <FiEye onClick={handleOpen} />
-          </button>
+        <div className="flex items-center gap-2">
+          {status === "completed" ? (
+            <MdOutlineCheck color="green" size={24} className="ml-2" />
+          ) : (
+            <button
+              title="Mark as Read"
+              onClick={handleMarkAsRead}
+              className="text-gray-700 btn btn-sm btn-circle"
+            >
+              <CiBookmark size={17} />
+            </button>
+          )}
           <button
+            title="Delete"
             onClick={() => setIsOpen(!open)}
-            className="text-orange-900 btn btn-sm btn-circle"
+            className="text-orange-900 btn btn-sm btn-circle z-50"
           >
             <FiTrash />
           </button>
