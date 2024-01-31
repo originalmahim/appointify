@@ -56,7 +56,7 @@ const ContactForm = () => {
     <section className="max-w-[1400px] mx-auto mt-24 md:mt-32 lg:mt-36 xl:mt-40">
       <Container>
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:justify-between">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-3/5">
             <h1
               data-aos="fade-up"
               data-aos-easing="ease-in-out"

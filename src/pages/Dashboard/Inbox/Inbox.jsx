@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
-import TableRow from "../../components/Inbox/TableRow";
-import useGetMessages from "../../hooks/useGetMessages";
+import TableRow from "../../../components/Inbox/TableRow";
+import useGetMessages from "../../../hooks/useGetMessages";
 import { Card, Typography } from "@material-tailwind/react";
 
 const TABLE_HEAD = ["Name", "Email", "Message", "Actions"];
