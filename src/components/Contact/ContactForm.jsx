@@ -35,7 +35,13 @@ const ContactForm = () => {
         .then(
           (result) => {
             if (result.status === 200) {
-              toast.success("Message Sent!");
+              toast.success("Message Sent!", {
+                style: {
+                  borderRadius: "8px",
+                  background: "#333",
+                  color: "#fff",
+                },
+              });
               formField.reset();
             }
           },
