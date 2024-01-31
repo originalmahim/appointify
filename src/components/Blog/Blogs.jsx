@@ -25,9 +25,11 @@ const Blogs = () => {
   return (
     <>
       {/* Blog page banner */}
-      <div className="h-[600px] w-full flex flex-col lg:flex-row md:flex-row justify-center items-center">
-        <div className=" lg:pt-20 md:pt-28 pt-16 text-center">
-          <h2 className="text-3xl font-bold">Blogs</h2>
+      <div className="flex flex-col lg:flex-row md:flex-row justify-center items-center pt-24 md:pt-28 lg:pt-32 xl:pt-36 mb-8 md:mb-12 lg:mb-14 xl:mb-16 px-2 2xl:px-3">
+        <div className="pt-10 md:pt-12 lg:pt-14 xl:pt-20">
+          <h1 className="text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold">
+            Blogs
+          </h1>
         </div>
         <div>
           <Lottie
@@ -39,18 +41,18 @@ const Blogs = () => {
 
       {/* all blogs */}
       <Container>
-        <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-6 max-w-[2250px]">
-          {displayBlogs.map((blog) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-2 2xl:px-3">
+          {displayBlogs?.map((blog) => (
             <Blog key={blog._id} blogs={blogs} blog={blog}></Blog>
           ))}
         </div>
       </Container>
 
       {/* see more button */}
-      <div className="text-center mt-6">
+      <div className="text-center mt-10">
         {shouldShowSeeMoreButton && (
           <button
-            className="w-max px-3 h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+            className="px-4 h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95"
             onClick={() => setIsSeeMore(!isSeeMore)}
           >
             {isSeeMore ? "See Less" : "See More"}

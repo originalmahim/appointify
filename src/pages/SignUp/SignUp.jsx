@@ -153,14 +153,14 @@ const SignUp = () => {
               {/* signup button */}
               <div className="mt-3">
                 {loading ? (
-                  <button className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95 flex justify-center items-center">
+                  <button className="w-full h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95 flex justify-center items-center">
                     <TbFidgetSpinner className="animate-spin" size={20} />
                   </button>
                 ) : (
                   <input
                     type="submit"
                     value="Sign Up"
-                    className="w-full h-[44px] text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head transition transform active:scale-95"
+                    className="w-full h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95"
                   />
                 )}
               </div>
