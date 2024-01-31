@@ -46,7 +46,7 @@ const DashboardLayout = () => {
     <section>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content bg-cardBG min-h-screen">
+        <div className="drawer-content bg-gray-50 min-h-screen">
           {/* Page content here */}
           <label
             htmlFor="my-drawer-2"
@@ -67,7 +67,7 @@ const DashboardLayout = () => {
               />
             </svg>
           </label>
-          <div className="mt-8 lg:mt-12 mb-20">
+          <div className="mt-8 lg:mt-14 mb-20">
             <Container>
               <Outlet />
             </Container>
@@ -80,7 +80,7 @@ const DashboardLayout = () => {
             className="drawer-overlay"
           ></label>
           {/* sidebar content here */}
-          <div className="w-72 min-h-screen bg-head py-8">
+          <div className="w-72 min-h-screen bg-cardBG py-10 lg:py-12">
             <p className="text-2xl font-play font-black uppercase ml-6">
               Appointify
             </p>
