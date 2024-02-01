@@ -51,10 +51,14 @@ Please write messages this way -
 You will need to add (.env.local) file in the root directory <br>
 N.B. Before use replace the things with quotation and also remove the quotation
 
-VITE_APIKEY="provide the api-key from firebase project" <br>
-VITE_AUTHDOMAIN="provide the auth-domain from firebase project" <br>
-VITE_PROJECTID="provide the project-id from firebase project" <br>
-VITE_STORAGEBUCKET="provide the storage-bucket from firebase project" <br>
-VITE_MESSAGINGSENDERID="provide the messaging-sender-id from firebase project" <br>
-VITE_APPID="provide the app-id from firebase project" <br>
-VITE_MEASUREMENTID="provide the measurement-id from firebase project" <br>
+VITE_APIKEY="api-key_firebase" <br>
+VITE_AUTHDOMAIN="auth-domain_firebase" <br>
+VITE_PROJECTID="project-id_firebase" <br>
+VITE_STORAGEBUCKET="storage-bucket_firebase" <br>
+VITE_MESSAGINGSENDERID="messaging-sender-id_firebase" <br>
+VITE_APPID="app-id_firebase" <br>
+VITE_MEASUREMENTID="measurement-id_firebase" <br>
+VITE_SERVER_URL="backend-url" <br>
+VITE_EMAILJSSERVICEID="service_id_emailjs" <br>
+VITE_EMAILJSTEMPLATEID="template_id_emailjs" <br>
+VITE_EMAILJSPUBLICKEY="public-key_emailjs" <br>

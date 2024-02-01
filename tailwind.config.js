@@ -15,6 +15,7 @@ module.exports = withMT({
         details: "#888888",
         cardBG: "#E3F3FF",
         "light-bg": "#F5F5F5",
+        dark: "#12121299",
       },
       backgroundImage: {
         "gradient-special": "linear-gradient(to right, #5E4E77, #7C6C96)",

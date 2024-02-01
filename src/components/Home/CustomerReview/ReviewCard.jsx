@@ -27,7 +27,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
 
           <div>
             {/* rating stars  */}
-            <div className="flex justify-center gap-0.5 text-yellow-400">
+            <div className="flex justify-center gap-0.5 text-head">
               {Array.from({ length: rating }).map((_, index) => (
                 <svg
                   key={index}
@@ -41,12 +41,12 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
               ))}
             </div>
 
-            <p className="mt-0.5 text-lg font-medium">{name}</p>
-            <p className="text-sm ">{formattedTime}</p>
+            <p className="mt-0.5 text-lg font-semibold">{name}</p>
+            <p className="text-sm">{formattedTime}</p>
           </div>
         </div>
 
-        <p className="mt-4 ">
+        <p className="mt-4">
           {content.length > 160 ? <>{content.slice(0, 160)} ...</> : content}
         </p>
       </blockquote>
