@@ -16,6 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Inbox from "../pages/Dashboard/Inbox/Inbox";
 import RatingsPage from "../pages/RatingsPage/RatingsPage";
+import AddReview from "../pages/RatingsPage/AddReview";
 
 export const routes = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ export const routes = createBrowserRouter([
       {
         path: "user-home",
         element: <UserHome />,
+      },
+      {
+        path: "review",
+        element: <AddReview/>
       },
       {
         path: "admin-home",
