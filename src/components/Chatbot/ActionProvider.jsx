@@ -23,21 +23,38 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     updateState(message);
   };
 
-  const HandleContact = () => {
+  const handleContact = () => {
     const message = createChatBotMessage(
-      "Thank you for your interest in Appointify. You can send us an email at appointify99@gmail.com"
+      "Thank you for your interest in Appointify. You can send us an email at appointify99@gmail.com",
+      {
+        withAvatar: true,
+        delay: 800,
+        widget: "contact",
+      }
     );
 
     updateState(message);
   };
 
-  const HandleTeam = () => {
+  const handleTeam = () => {
     const message = createChatBotMessage(
       "Discover the faces behind our platform and learn more about the dedicated individuals who make everything possible.",
       {
         withAvatar: true,
         delay: 800,
         widget: "team",
+      }
+    );
+
+    updateState(message);
+  };
+  const handlePricing = () => {
+    const message = createChatBotMessage(
+      "We offer three flexible pricing plans to cater to your needs starting from $0",
+      {
+        withAvatar: true,
+        delay: 800,
+        widget: "pricing",
       }
     );
 
@@ -59,8 +76,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             initialAction,
             AboutAppointify,
             HandleUnknown,
-            HandleTeam,
-            HandleContact,
+            handleTeam,
+            handleContact,
+            handlePricing,
           },
         });
       })}

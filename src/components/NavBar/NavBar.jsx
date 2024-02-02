@@ -97,6 +97,18 @@ const NavBar = () => {
       </li>
       <li>
         <NavLink
+          to="/ratings"
+          className={({ isActive }) =>
+            isActive
+              ? "text-special text-sm md:text-lg font-semibold"
+              : "text-sm md:text-base lg:text-lg font-medium"
+          }
+        >
+          Ratings
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/contact"
           className={({ isActive }) =>
             isActive

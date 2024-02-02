@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Container from "../../Container/Container";
 import ReviewCard from "./ReviewCard";
+import { Link } from "react-router-dom";
 
 const UserReviews = () => {
-  const [expanded, setExpanded] = useState(false);
-
   const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const UserReviews = () => {
   }, []);
 
   //how many ratings to show
-  const displayRatings = expanded ? ratings : ratings.slice(0, 3);
+  const displayRatings = ratings.slice(0, 3);
 
   // Check if there are 3 or fewer ratings
   const shouldShowSeeMoreButton = ratings.length > 3;
@@ -50,12 +49,11 @@ const UserReviews = () => {
 
         <div className="text-center mt-6">
           {shouldShowSeeMoreButton && (
-            <button
-              className="px-4 h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95"
-              onClick={() => setExpanded(!expanded)}
-            >
-              {expanded ? "See Less" : "See More"}
-            </button>
+            <Link to={"/ratings"}>
+              <button className="px-4 h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95">
+                {"See More"}
+              </button>
+            </Link>
           )}
         </div>
       </Container>
