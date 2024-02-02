@@ -1,7 +1,9 @@
+import RatingAnimation from "../../../pages/RatingsPage/RatingAnimation";
+
 const RatingForm = () => {
   return (
-    <div>
-      <form className="flex flex-col border-2 rounded-xl shadow-lg border-special p-5 justify-center items-center">
+    <div className="flex flex-col md:flex-row border-2 rounded-xl shadow-lg border-special">
+      <form className="flex flex-col flex-1 p-2 md:p-5 justify-center items-center">
 
         <select
           name="rating"
@@ -29,6 +31,7 @@ const RatingForm = () => {
           </button>
         </div>
       </form>
+      <div className="max-w-lg"><RatingAnimation></RatingAnimation></div>
     </div>
   );
 };
