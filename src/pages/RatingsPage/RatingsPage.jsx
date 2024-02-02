@@ -1,6 +1,26 @@
 import { Helmet } from "react-helmet-async";
+import Container from "../../components/Container/Container";
+import { useEffect, useState } from "react";
+import ReviewCard from "../../components/Home/CustomerReview/ReviewCard";
 
 const RatingsPage = () => {
+
+    const [ratings, setRatings] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch("reviews.json");
+          const data = await response.json();
+          setRatings(data);
+          // console.log(data);
+        } catch (error) {
+          console.log("there was an error: ", error);
+        }
+      };
+      fetchData();
+    }, []);
+
   return (
     <>
       <Helmet>
@@ -16,6 +36,20 @@ const RatingsPage = () => {
           Appointify. Read what others have to say about their experiences.
         </p>
       </div>
+      <Container>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {ratings?.map((testimonial) => (
+            <ReviewCard
+              key={testimonial?.reviewID}
+              image={testimonial?.photoURL}
+              name={testimonial?.displayName}
+              rating={parseInt(testimonial?.rating)}
+              content={testimonial?.message}
+              timeStamp={testimonial?.timeStamp}
+            />
+          ))}
+        </div>
+      </Container>
     </>
   );
 };
