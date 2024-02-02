@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 
-const Team = () => {
+const ContactButton = () => {
   return (
     <div className="flex items-center ml-14">
-      <Link to="/about-us">
+      <Link to="/contact">
         <button className="strt p-2 rounded-3xl text-sm hover:scale-105">
-          Meet Our Team
+          or just click here to notify us
         </button>
       </Link>
     </div>
   );
 };
 
-export default Team;
+export default ContactButton;
