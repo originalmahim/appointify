@@ -15,6 +15,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Inbox from "../pages/Dashboard/Inbox/Inbox";
+import RatingsPage from "../pages/RatingsPage/RatingsPage";
 
 export const routes = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const routes = createBrowserRouter([
         path: "/blog/:id",
         element: <BlogDetails />,
         loader: () => fetch("blogs.json"),
+      },
+      {
+        path: "/ratings",
+        element: <RatingsPage/>
       },
       {
         path: "/contact",
