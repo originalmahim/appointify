@@ -47,7 +47,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/ratings",
-        element: <RatingsPage/>
+        element: <RatingsPage />,
       },
       {
         path: "/contact",
@@ -65,6 +65,14 @@ export const routes = createBrowserRouter([
     children: [
       // admin routes
       {
+        path: "admin-home",
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
+      },
+      {
         path: "inbox",
         element: (
           <AdminRoute>
@@ -77,16 +85,8 @@ export const routes = createBrowserRouter([
         element: <UserHome />,
       },
       {
-        path: "review",
-        element: <AddReview/>
-      },
-      {
-        path: "admin-home",
-        element: (
-          <AdminRoute>
-            <AdminHome />
-          </AdminRoute>
-        ),
+        path: "add-review",
+        element: <AddReview />,
       },
     ],
   },
