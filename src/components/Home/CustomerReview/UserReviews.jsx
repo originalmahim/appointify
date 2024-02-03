@@ -3,23 +3,32 @@ import { useEffect } from "react";
 import Container from "../../Container/Container";
 import ReviewCard from "./ReviewCard";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const UserReviews = () => {
   const [ratings, setRatings] = useState([]);
+  const axiosPublic = useAxiosPublic();
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("reviews.json");
+  //       const data = await response.json();
+  //       setRatings(data);
+  //       // console.log(data);
+  //     } catch (error) {
+  //       console.log("there was an error: ", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  const url = `/ratings`;
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("reviews.json");
-        const data = await response.json();
-        setRatings(data);
-        // console.log(data);
-      } catch (error) {
-        console.log("there was an error: ", error);
-      }
-    };
-    fetchData();
-  }, []);
+    axiosPublic.get(url).then((res) => {
+      setRatings(res.data);
+    });
+  }, [axiosPublic, url]);
 
   //how many ratings to show
   const displayRatings = ratings.slice(0, 3);
@@ -37,7 +46,7 @@ const UserReviews = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayRatings?.map((testimonial) => (
             <ReviewCard
-              key={testimonial?.reviewID}
+              key={testimonial?._id}
               image={testimonial?.photoURL}
               name={testimonial?.displayName}
               rating={parseInt(testimonial?.rating)}
