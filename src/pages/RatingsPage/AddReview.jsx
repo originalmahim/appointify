@@ -2,12 +2,13 @@ import { Helmet } from "react-helmet-async";
 import RatingForm from "../../components/Home/CustomerReview/RatingForm";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const AddReview = () => {
   const {user} = useAuth();
   const axiosPublic = useAxiosPublic();
 
-  console.log(user);
+  // console.log(user);
   //user info
   const { email, photoURL, displayName } = user;
 
@@ -28,7 +29,7 @@ const AddReview = () => {
 
     axiosPublic.post("ratings", ratingInfo).then((res) => {
       if (res.data.acknowledged) {
-        console.log("success");
+        toast.success("Your review was added successfully!");
       }
     });
   };
