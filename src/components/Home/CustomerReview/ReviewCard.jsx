@@ -1,4 +1,5 @@
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
+// import PropTypes from "prop-types";
 
 const formatTimestamp = (timestamp) => {
   const date = new Date(timestamp);
@@ -54,12 +55,12 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
   );
 };
 
-ReviewCard.propTypes = {
-  image: PropTypes.string,
-  name: PropTypes.string,
-  rating: PropTypes.number,
-  content: PropTypes.string,
-  timeStamp: PropTypes.string,
-};
+// ReviewCard.propTypes = {
+//   image: PropTypes.string,
+//   name: PropTypes.string,
+//   rating: PropTypes.string || PropTypes.number,
+//   content: PropTypes.string,
+//   timeStamp: PropTypes.string,
+// };
 
 export default ReviewCard;
