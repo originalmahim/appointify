@@ -26,7 +26,7 @@ const UserReviews = () => {
   const url = `/ratings`;
   useEffect(() => {
     axiosPublic.get(url).then((res) => {
-      setRatings(res.data);
+      setRatings(res.data.result);
     });
   }, [axiosPublic, url]);
 

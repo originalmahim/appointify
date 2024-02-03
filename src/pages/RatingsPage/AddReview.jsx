@@ -28,7 +28,7 @@ const AddReview = () => {
     };
 
     axiosPublic.post("ratings", ratingInfo).then((res) => {
-      if (res.data.acknowledged) {
+      if (res.data.message) {
         toast.success("Your review was added successfully!");
       }
     });
