@@ -43,7 +43,7 @@ const RatingsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {ratings?.map((testimonial) => (
             <ReviewCard
-              key={testimonial?.reviewID}
+              key={testimonial?._id}
               image={testimonial?.photoURL}
               name={testimonial?.displayName}
               rating={parseInt(testimonial?.rating)}

@@ -1,7 +1,39 @@
 import { Helmet } from "react-helmet-async";
 import RatingForm from "../../components/Home/CustomerReview/RatingForm";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAuth from "../../hooks/useAuth";
 
 const AddReview = () => {
+  const {user} = useAuth();
+  const axiosPublic = useAxiosPublic();
+
+  console.log(user);
+  //user info
+  const { email, photoURL, displayName } = user;
+
+  const handleRating = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const rating = form.rating.value;
+    const message = form.message.value;
+    const timeStamp = new Date();
+    const ratingInfo = {
+      email,
+      photoURL,
+      displayName,
+      rating,
+      message,
+      timeStamp,
+    };
+
+    axiosPublic.post("ratings", ratingInfo).then((res) => {
+      if (res.data.acknowledged) {
+        console.log("success");
+      }
+    });
+  };
+
+
   return (
     <>
       <Helmet>
@@ -15,7 +47,7 @@ const AddReview = () => {
           Share your thoughts and experiences to inspire and guide others. Your
           review makes a difference and helps our community thrive.
         </p>
-        <RatingForm />
+        <RatingForm handleRating={handleRating} />
       </section>
     </>
   );

@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import RatingAnimation from "../../../pages/RatingsPage/RatingAnimation";
 
-const RatingForm = () => {
+const RatingForm = ({ handleRating }) => {
   return (
     <div className="flex flex-col md:flex-row border-2 rounded-xl shadow-lg border-special">
-      <form className="flex flex-col flex-1 p-2 md:p-5 justify-center items-center">
+      <form onSubmit={handleRating} className="flex flex-col flex-1 p-2 md:p-5 justify-center items-center">
 
         <select
           name="rating"
@@ -25,7 +26,7 @@ const RatingForm = () => {
 
         {/* buttons  */}
         <div className="p-3 mt-4 text-center space-x-4 md:block border-special">
-          <p className="btn btn-sm bg-blue-gray-200 md:btn-md">Cancel</p>
+          {/* <p className="btn btn-sm bg-blue-gray-200 md:btn-md">Cancel</p> */}
           <button type="submit" className="btn bg-special text-white btn-sm md:btn-md">
             Rate
           </button>
