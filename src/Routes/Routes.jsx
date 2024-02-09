@@ -43,7 +43,8 @@ export const routes = createBrowserRouter([
       {
         path: "/blog/:id",
         element: <BlogDetails />,
-        loader: () => fetch("blogs.json"),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/blogs/${params.id}`),
       },
       {
         path: "/ratings",
