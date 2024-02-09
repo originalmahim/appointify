@@ -5,7 +5,7 @@ const BlogPage = () => {
   return (
     <>
       <Helmet>
-        <title>Appointify | Blog</title>
+        <title>Appointify | Blogs</title>
       </Helmet>
       <section>
         <Blogs />
