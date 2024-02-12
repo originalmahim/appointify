@@ -18,7 +18,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
 
   return (
     <div className="mb-4 sm:break-inside-avoid dark:text-gray-300">
-      <blockquote className="rounded-lg border p-6 shadow-sm sm:p-8">
+      <blockquote className="rounded-lg border p-6 shadow-sm sm:p-8 h-60 bg-[#E3F3FF] hover:bg-special hover:text-white transition duration-300 ease-in-out transform hover:scale-105">
         <div className="flex items-center gap-4">
           <img
             alt={name}
@@ -48,7 +48,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
         </div>
 
         <p className="mt-4">
-          {content.length > 160 ? <>{content.slice(0, 160)} ...</> : content}
+          {content.length > 100 ? <>{content.slice(0, 100)} ...</> : content}
         </p>
       </blockquote>
     </div>
