@@ -18,7 +18,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
 
   return (
     <div className="mb-4 sm:break-inside-avoid dark:text-gray-300">
-      <blockquote className="rounded-lg border p-6 shadow-sm sm:p-8 h-60 bg-[#E3F3FF] hover:bg-special hover:text-white transition duration-300 ease-in-out transform hover:scale-105">
+      <blockquote className="rounded-lg border p-6 shadow-sm sm:p-8 h-60 bg-[#E3F3FF] hover:bg-gradient-blue hover:!text-white transition duration-300 ease-in-out transform hover:scale-105">
         <div className="flex items-center gap-4">
           <img
             alt={name}
@@ -28,7 +28,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
 
           <div>
             {/* rating stars  */}
-            <div className="flex justify-center gap-0.5 text-head">
+            <div className="flex justify-center gap-0.5 text-yellow-900 hover:text-inherit">
               {Array.from({ length: rating }).map((_, index) => (
                 <svg
                   key={index}
