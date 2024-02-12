@@ -10,6 +10,7 @@ import NewsLetter from "../../components/Home/Contacts/NewsLetter";
 import UserReviews from "../../components/Home/CustomerReview/UserReviews";
 import FeatureOverview from "../../components/Home/FeatureOverview/FeatureOverview";
 import LatestAchievementsCards from "../../components/Home/LatestAchievement/LatestAchievementCards";
+import TrustedCompanies from "../../components/Home/TrustedCompaniesSection/TrustedCompanies";
 
 const HomePage = () => {
   const [showChatbot, toggleChatbot] = useState(false);
@@ -23,6 +24,7 @@ const HomePage = () => {
         <FeatureOverview />
         <UserReviews />
         <LatestAchievementsCards></LatestAchievementsCards>
+        <TrustedCompanies></TrustedCompanies>
         <NewsLetter />
       </section>
       <div className="app-chatbot-container">
