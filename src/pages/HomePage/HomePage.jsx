@@ -9,9 +9,14 @@ import Banner from "../../components/Home/Banner/Banner";
 import NewsLetter from "../../components/Home/Contacts/NewsLetter";
 import UserReviews from "../../components/Home/CustomerReview/UserReviews";
 import FeatureOverview from "../../components/Home/FeatureOverview/FeatureOverview";
+import LatestAchievementsCards from "../../components/Home/LatestAchievement/LatestAchievementCards";
+import TrustedCompanies from "../../components/Home/TrustedCompaniesSection/TrustedCompanies";
+import useScrollToTop from "../../hooks/useScrollToTop";
+import { FaArrowUp } from "react-icons/fa";
 
 const HomePage = () => {
   const [showChatbot, toggleChatbot] = useState(false);
+  const { isScrollVisible, scrollToTop } = useScrollToTop(200);
   return (
     <>
       <Helmet>
@@ -21,6 +26,8 @@ const HomePage = () => {
         <Banner />
         <FeatureOverview />
         <UserReviews />
+        <LatestAchievementsCards></LatestAchievementsCards>
+        <TrustedCompanies></TrustedCompanies>
         <NewsLetter />
       </section>
       <div className="app-chatbot-container">
@@ -32,6 +39,18 @@ const HomePage = () => {
           />
         )}
       </div>
+      {/* scroll to top */}
+      {/* Render the scroll-to-top button when showScrollButton is true */}
+      {isScrollVisible && (
+        <button
+          className="fixed z-50 bottom-10 left-10 md:left-20 border bg-special text-white dark:bg-white text-3xl md:text-4xl rounded-full cursor-pointer"
+          onClick={scrollToTop}
+        >
+          <FaArrowUp />
+        </button>
+      )}
+
+      {/* chatbot */}
       <button
         className="app-chatbot-button"
         onClick={() => toggleChatbot((prev) => !prev)}

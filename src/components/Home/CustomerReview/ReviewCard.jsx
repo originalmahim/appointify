@@ -1,4 +1,5 @@
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
+// import PropTypes from "prop-types";
 
 const formatTimestamp = (timestamp) => {
   const date = new Date(timestamp);
@@ -17,7 +18,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
 
   return (
     <div className="mb-4 sm:break-inside-avoid dark:text-gray-300">
-      <blockquote className="rounded-lg border p-6 shadow-sm sm:p-8">
+      <blockquote className="rounded-lg border p-6 shadow-sm sm:p-8 h-60 bg-[#E3F3FF] hover:bg-gradient-blue hover:!text-white transition duration-300 ease-in-out transform hover:scale-105">
         <div className="flex items-center gap-4">
           <img
             alt={name}
@@ -27,7 +28,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
 
           <div>
             {/* rating stars  */}
-            <div className="flex justify-center gap-0.5 text-head">
+            <div className="flex justify-center gap-0.5 text-yellow-900 hover:text-inherit">
               {Array.from({ length: rating }).map((_, index) => (
                 <svg
                   key={index}
@@ -47,19 +48,19 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
         </div>
 
         <p className="mt-4">
-          {content.length > 160 ? <>{content.slice(0, 160)} ...</> : content}
+          {content.length > 100 ? <>{content.slice(0, 100)} ...</> : content}
         </p>
       </blockquote>
     </div>
   );
 };
 
-ReviewCard.propTypes = {
-  image: PropTypes.string,
-  name: PropTypes.string,
-  rating: PropTypes.number,
-  content: PropTypes.string,
-  timeStamp: PropTypes.string,
-};
+// ReviewCard.propTypes = {
+//   image: PropTypes.string,
+//   name: PropTypes.string,
+//   rating: PropTypes.string || PropTypes.number,
+//   content: PropTypes.string,
+//   timeStamp: PropTypes.string,
+// };
 
 export default ReviewCard;
