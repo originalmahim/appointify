@@ -182,7 +182,9 @@ const NavBar = () => {
                 <div className="dropdown dropdown-end">
                   <label
                     tabIndex={0}
-                    className="btn btn-ghost btn-circle avatar 2xl:mr-3"
+                    className={`btn btn-circle 2xl:mr-3 ${
+                      userDB?.photo ? "avatar" : ""
+                    }`}
                   >
                     <div className="w-10 md:w-14 lg:w-16 rounded-full">
                       {userDB?.photo ? (
@@ -192,11 +194,9 @@ const NavBar = () => {
                           alt="img-error"
                         />
                       ) : (
-                        <img
-                          className="text-[10px]"
-                          src="https://img.icons8.com/ios-filled/50/user-male-circle.png"
-                          alt="default"
-                        />
+                        <p className="text-xl text-head uppercase">
+                          {userDB?.email.slice(0, 1)}
+                        </p>
                       )}
                     </div>
                   </label>
