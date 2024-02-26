@@ -31,10 +31,10 @@ const UserReviews = () => {
   }, [axiosPublic, url]);
 
   //how many ratings to show
-  const displayRatings = ratings.slice(0, 3);
+  const displayRatings = ratings?.slice(0, 3);
 
   // Check if there are 3 or fewer ratings
-  const shouldShowSeeMoreButton = ratings.length > 3;
+  const shouldShowSeeMoreButton = ratings?.length > 3;
 
   return (
     <section className="max-w-[1400px] mx-auto mt-24 md:mt-32 lg:mt-36 xl:mt-40">
