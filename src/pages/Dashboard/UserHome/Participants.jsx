@@ -1,7 +1,6 @@
-
 import { AiOutlineMail } from "react-icons/ai";
 
-const Participants = ({ isOpenParticipants,setSelectedParticipants }) => {
+const Participants = ({ isOpenParticipants, setSelectedParticipants }) => {
   // Dummy data for participants
   const participantsData = [
     {
@@ -27,16 +26,12 @@ const Participants = ({ isOpenParticipants,setSelectedParticipants }) => {
     },
   ];
 
-
   const handleParticipantClick = (participant) => {
-      // Check if participant is already selected
-    
-      // If participant is not selected, add it to the array
-      setSelectedParticipants((prevSelected) => [...prevSelected, participant]);
-      
-    };
+    // Check if participant is already selected
 
-
+    // If participant is not selected, add it to the array
+    setSelectedParticipants((prevSelected) => [...prevSelected, participant]);
+  };
 
   return (
     <div>
@@ -45,13 +40,11 @@ const Participants = ({ isOpenParticipants,setSelectedParticipants }) => {
           role="menu"
           data-popover="notifications-menu"
           data-popover-placement="bottom"
-          className="absolute z-10 flex min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
+          className="absolute z-10 flex min-w-[180px] right-0 flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
           {participantsData.map((participant, index) => (
             <p
               key={index}
               role="menuitem"
-
-              
               className={`
               
               

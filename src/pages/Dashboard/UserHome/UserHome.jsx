@@ -3,12 +3,17 @@ import { Helmet } from "react-helmet-async";
 import { FaPlusCircle } from "react-icons/fa";
 import { LiaCalendarWeekSolid } from "react-icons/lia";
 // material tailwind
-import { Input } from "@material-tailwind/react";
+import { Input, Option, Select } from "@material-tailwind/react";
 import AvailableDays from "./AvailableDays";
 import AvailabilityDayAndTimeFormat from "../../../utils/AvailabilityDayAndTimeFormat";
 import AvailableTimeRange from "./AvailableTimeRange";
 import DurationSelector from "./DurationSelector";
 import Participants from "./Participants";
+import { LuUsers2 } from "react-icons/lu";
+import BufferTime from "./BufferTime";
+// platform icon
+import { SiGooglemeet } from "react-icons/si";
+import { BiLogoZoom } from "react-icons/bi";
 
 const UserHome = () => {
   // // Manage all booking time state
@@ -19,15 +24,17 @@ const UserHome = () => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
-  // State for selected hour and minute
+  // selected hour, minute, schedule time,location and platform
   const [selectedHour, setSelectedHour] = useState("");
   const [selectedMinute, setSelectedMinute] = useState("");
+  const [scheduleTime, setScheduleTime] = useState("");
+  const [location, setLocation] = useState("");
+  const [platform, setPlatform] = useState("");
 
-  // State for selected hour and minute
+  // State selected participant and buffer time
   const [isOpenParticipants, setIsOpenParticipants] = useState(false);
-
-  // State to keep track of the selected participant
-  const [selectedParticipant, setSelectedParticipant] = useState([]);
+  const [selectedParticipants, setSelectedParticipants] = useState([]);
+  const [bufferTime, setBufferTime] = useState(0);
 
   // Example usage in your handleDayToggle function
   const handleDayToggle = (day) => {
@@ -54,7 +61,6 @@ const UserHome = () => {
   //     ],
   //     "scheduled_time": "2024-03-01T10:00:00",
   //     "status": "scheduled"
-  //   }
 
   const handleSchedule = (e) => {
     e.preventDefault();
@@ -71,11 +77,16 @@ const UserHome = () => {
       type: "Meeting",
       // Duration in minutes
       duration: parseInt(selectedHour) * 60 + parseInt(selectedMinute),
-      location: "virtual",
-      participants: [{ name: "Alice Smith", email: "alice@example.com" }],
+      buffer_time: bufferTime,
+      location,
+      participants: selectedParticipants,
+      scheduled_time: scheduleTime,
+      status: "pending",
+      platform,
+      availability,
     };
 
-    console.log(selectedParticipant);
+    console.log(event);
   };
 
   return (
@@ -116,21 +127,37 @@ const UserHome = () => {
                   setSelectedMinute={setSelectedMinute}
                 />
               </div>
-              <div className="mt-4">
-                <label
-                  onClick={() => setOnDaysToggle(!onDaysToggle)}
-                  className="flex gap-1 items-center cursor-pointer text-md  font-medium text-gray-700">
-                  {/* Days' dropdown toggler */}
-                  <LiaCalendarWeekSolid />
-                  Select Available Days:
-                </label>
 
-                {/* Available days component  */}
-                <AvailableDays
-                  handleDayToggle={handleDayToggle}
-                  onDaysToggle={onDaysToggle}
-                  availableDays={availableDays}
-                />
+              <div className="mt-4 flex justify-between items-center">
+                <div>
+                  <label
+                    onClick={() => setOnDaysToggle(!onDaysToggle)}
+                    className="flex gap-1 items-center cursor-pointer   font-medium text-gray-700">
+                    {/* Days' dropdown toggler */}
+                    <LiaCalendarWeekSolid className="text-[18px]" />
+                    Available Days:
+                  </label>
+
+                  {/* Available days component  */}
+                  <AvailableDays
+                    handleDayToggle={handleDayToggle}
+                    onDaysToggle={onDaysToggle}
+                    availableDays={availableDays}
+                  />
+                </div>
+                {/* Select participants */}
+                <div>
+                  <p
+                    onClick={() => setIsOpenParticipants(!isOpenParticipants)}
+                    className="flex items-center gap-1">
+                    <LuUsers2 className="text-[18px]" /> Participants
+                  </p>
+                  <Participants
+                    setSelectedParticipants={setSelectedParticipants}
+                    selectedParticipants={selectedParticipants}
+                    isOpenParticipants={isOpenParticipants}
+                  />
+                </div>
               </div>
 
               {/* Choose your available time  */}
@@ -141,16 +168,56 @@ const UserHome = () => {
                 endTime={endTime}
               />
 
-              {/* Select participants */}
-              <div>
-                <p onClick={() => setIsOpenParticipants(!isOpenParticipants)}>
-                  Open
-                </p>
-                <Participants
-                  setSelectedParticipants={setSelectedParticipant}
-                  selectedParticipants={selectedParticipant}
-                  isOpenParticipants={isOpenParticipants}
-                />
+              {/* Buffer time & Location */}
+              <div className="flex gap-2 justify-between items-center space-x-2 mt-4">
+                <BufferTime setBufferTime={setBufferTime} />
+
+                <span className="text-gray-500">:</span>
+                <div className="w-1/2">
+                  <Select
+                    label="Location"
+                    variant="standard"
+                    onChange={setLocation}>
+                    <Option value="Physical">Physical</Option>
+                    <Option value="Virtual">Virtual</Option>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="flex gap-2 justify-between items-center space-x-2 mt-4">
+                {/* Platform  */}
+                <div className="w-1/2">
+                  <Select
+                    label="Platform"
+                    style={{ display: "flex" }}
+                    variant="standard"
+                    onChange={setPlatform}>
+                    <Option value="zoom" className="flex items-center gap-2">
+                      <BiLogoZoom className="text-xl text-[blue]" /> Zoom
+                    </Option>
+                    <Option
+                      value="google-meet"
+                      className="flex items-center gap-2">
+                      <SiGooglemeet className="text-[#00A745]" />
+                      Google Meet
+                    </Option>
+                  </Select>
+                </div>
+                <span className="text-gray-500">:</span> {/* Scheduled time  */}
+                <div className="w-1/2">
+                  <input
+                    title="Shedule time"
+                    required
+                    className="h-8 w-1/2 rounded-md focus-within:outline-none cursor-pointer border px-2 appearance-none"
+                    type="time"
+                    name="start"
+                    value={scheduleTime}
+                    onChange={(e) => setScheduleTime(e.target.value)}
+                    // Specify time format to include AM/PM
+                    inputMode="text"
+                    pattern="[0-9]{2}:[0-9]{2} [APap][mM]"
+                  />
+                </div>
               </div>
 
               <button

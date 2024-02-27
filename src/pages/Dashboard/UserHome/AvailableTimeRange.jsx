@@ -1,7 +1,9 @@
-
-const AvailableTimeRange = ({setStartTime,setEndTime,startTime,endTime}) => {
-  
-
+const AvailableTimeRange = ({
+  setStartTime,
+  setEndTime,
+  startTime,
+  endTime,
+}) => {
   // Handler functions for input changes
   const handleStartTimeChange = (event) => {
     setStartTime(event.target.value);
@@ -11,11 +13,10 @@ const AvailableTimeRange = ({setStartTime,setEndTime,startTime,endTime}) => {
     setEndTime(event.target.value);
   };
 
-
   return (
     <div>
       <div className="mt-4">
-        <label className="block text-sm font-medium">
+        <label className="block text-md text-gray-500 font-medium">
           When are you free to take bookings?
         </label>
         <div className="flex sm:items-center flex-col sm:flex-row mt-2 gap-4">

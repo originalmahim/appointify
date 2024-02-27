@@ -27,28 +27,6 @@ input[type="time"]::-webkit-datetime-edit-text {
 /* The naming convention for the hour, minute, second, and am/pm field is
   `-webkit-datetime-edit-{field}-field` */
 
-/* Hour */
-input[type="time"]::-webkit-datetime-edit-hour-field {
-  background-color: #acc3ce;
-  border-radius: 15%;
-  padding: 19px 13px;
-}
-
-/* Minute */
-input[type="time"]::-webkit-datetime-edit-minute-field {
-  background-color: #acc3ce;
-  border-radius: 15%;
-  padding: 19px 13px;
-}
-
-/* AM/PM */
-input[type="time"]::-webkit-datetime-edit-ampm-field {
-  background-color: #7155d3;
-  border-radius: 15%;
-  color: #fff;
-  padding: 19px 13px;
-}
-
 /* 'X' button for resetting/clearing time */
 input[type="time"]::-webkit-clear-button {
   display: none;
@@ -93,4 +71,17 @@ input[type="time"]::-webkit-inner-spin-button {
 /* Remove all default style */
 .all-unset {
   all: unset !important;
+}
+
+/* Remove the default style of the time slot */
+input[type="time"]::-webkit-datetime-edit-hour-field,
+input[type="time"]::-webkit-datetime-edit-minute-field,
+input[type="time"]::-webkit-datetime-edit-ampm-field {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  color: black;
+  background-color: rgb(242, 242, 242);
 }
