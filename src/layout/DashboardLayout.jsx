@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { AiFillHome } from "react-icons/ai";
-import { FaCalendarAlt, FaListUl } from "react-icons/fa";
+import { FaCalendarAlt, FaListUl, FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { MdAddTask, MdReviews } from "react-icons/md";
 import { PiUsersThreeFill } from "react-icons/pi";
@@ -155,7 +155,7 @@ const DashboardLayout = () => {
                         }
                       >
                         <PiUsersThreeFill />
-                        All Users
+                        Manage Users
                       </NavLink>
                     </li>
                   </>
@@ -172,6 +172,19 @@ const DashboardLayout = () => {
                       >
                         <AiFillHome />
                         User Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/profile"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-special md:text-lg font-semibold uppercase"
+                            : "md:text-lg font-medium uppercase"
+                        }
+                      >
+                        <FaUser />
+                        Profile
                       </NavLink>
                     </li>
                     <li>
