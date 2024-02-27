@@ -49,19 +49,17 @@ const DashboardLayout = () => {
       <section>
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content bg-gray-50 min-h-screen">
+          <div className="drawer-content bg-[#F8FAFC] min-h-screen">
             {/* Page content here */}
             <label
               htmlFor="my-drawer-2"
-              className="btn btn-ghost drawer-button lg:hidden flex justify-end mr-4 mt-2"
-            >
+              className="btn btn-ghost drawer-button lg:hidden flex justify-end mr-4 mt-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+                stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -76,18 +74,17 @@ const DashboardLayout = () => {
               </Container>
             </div>
           </div>
-          <div className="drawer-side">
+          <div className="drawer-side ">
             <label
               htmlFor="my-drawer-2"
               aria-label="close sidebar"
-              className="drawer-overlay"
-            ></label>
+              className="drawer-overlay"></label>
             {/* sidebar content here */}
-            <div className="w-64 min-h-screen bg-cardBG py-10 lg:py-12">
-              <p className="text-2xl font-play font-black uppercase ml-6">
+            <div className="w-52 min-h-screen py-10 lg:py-12">
+              <p className="text-1xl font-play font-black uppercase ml-6">
                 Appointify
               </p>
-              <p className="text-lg font-medium uppercase tracking-[3px] ml-6">
+              <p className=" font-medium uppercase tracking-[3px] ml-6">
                 Schedule Now
               </p>
               <ul className="menu mt-16">
@@ -100,8 +97,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <AiFillHome />
                         Admin Home
                       </NavLink>
@@ -113,8 +109,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <MdAddTask />
                         Add Blog
                       </NavLink>
@@ -126,8 +121,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <FaListUl />
                         Manage Blog
                       </NavLink>
@@ -139,8 +133,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <TbMessage />
                         Inbox
                       </NavLink>
@@ -152,8 +145,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <PiUsersThreeFill />
                         All Users
                       </NavLink>
@@ -168,8 +160,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <AiFillHome />
                         User Home
                       </NavLink>
@@ -181,8 +172,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <FaCalendarAlt />
                         Manage Booking
                       </NavLink>
@@ -222,8 +212,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <TbBrandBooking />
                         My Bookings
                       </NavLink>
@@ -235,8 +224,7 @@ const DashboardLayout = () => {
                           isActive
                             ? "text-special md:text-lg font-semibold uppercase"
                             : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        }>
                         <MdReviews />
                         Add Review
                       </NavLink>
@@ -253,8 +241,7 @@ const DashboardLayout = () => {
                       isActive
                         ? "text-special md:text-lg font-semibold uppercase"
                         : "md:text-lg font-medium uppercase"
-                    }
-                  >
+                    }>
                     <AiFillHome />
                     Home
                   </NavLink>
@@ -314,8 +301,7 @@ const DashboardLayout = () => {
                 <li>
                   <Link
                     onClick={handleLogout}
-                    className="md:text-lg font-medium uppercase"
-                  >
+                    className="md:text-lg font-medium uppercase">
                     <FiLogOut />
                     Logout
                   </Link>

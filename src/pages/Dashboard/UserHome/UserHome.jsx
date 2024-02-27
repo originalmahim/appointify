@@ -14,6 +14,9 @@ import BufferTime from "./BufferTime";
 // platform icon
 import { SiGooglemeet } from "react-icons/si";
 import { BiLogoZoom } from "react-icons/bi";
+import AllBookings from "../../../components/All-bookings/AllBookings";
+import { SlCalender } from "react-icons/sl";
+import { PopOver } from "../../../components/common/Popover/PopOver";
 
 const UserHome = () => {
   // // Manage all booking time state
@@ -36,6 +39,9 @@ const UserHome = () => {
   const [selectedParticipants, setSelectedParticipants] = useState([]);
   const [bufferTime, setBufferTime] = useState(0);
 
+  //hover state
+  const [isCreateBookingHover, setIsCreateBookingHover] = useState(false);
+
   // Example usage in your handleDayToggle function
   const handleDayToggle = (day) => {
     setavailableDays((prevavailableDays) => {
@@ -48,19 +54,6 @@ const UserHome = () => {
       return updatedDays;
     });
   };
-
-  // "events": [
-  //   {
-  //     "id": "event1",
-  //     "type": "Meeting",
-  //     "duration": 60,
-  //     "buffer_time": 10,
-  //     "location": "Virtual",
-  //     "participants": [
-  //       {"name": "Alice Smith", "email": "alice@example.com"}
-  //     ],
-  //     "scheduled_time": "2024-03-01T10:00:00",
-  //     "status": "scheduled"
 
   const handleSchedule = (e) => {
     e.preventDefault();
@@ -94,14 +87,23 @@ const UserHome = () => {
       <Helmet>
         <title>Dashboard | User Home</title>
       </Helmet>
-      <section className="flex items-center container  justify-between">
-        <h2 className="text-2xl font-bold sm:text-3xl">All Booking pages</h2>
-        <h2
-          onClick={() => document.getElementById("my_modal_3").showModal()}
-          className="text-lg py-2 px-3 rounded-full bg-teal-100 hover:bg-teal-200 font-bold sm:text-xl inline-flex items-center cursor-pointer">
-          Create booking page
-          <FaPlusCircle className="ml-1" />
+      <section className="flex items-center container sticky top-0 z-50 bg-white mb-2 p-2 justify-between">
+        <h2 className="text-2xl flex gap-2 items-center mb-3 font-bold sm:text-2xl">
+          <SlCalender />
+          All Booking pages
         </h2>
+        <h2
+          onMouseEnter={() => setIsCreateBookingHover(true)}
+          onMouseLeave={() => setIsCreateBookingHover(false)}
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+          className="  rounded-full bg-primary text-white hover:bg-[#ff5e00] p-2  transition-all duration-300 inline-flex items-center cursor-pointer relative">
+          <FaPlusCircle className="ml-1" />
+          <PopOver
+            text={"Create booking page"}
+            isHover={isCreateBookingHover}
+          />
+        </h2>
+
         {/* modal */}
 
         <dialog id="my_modal_3" className="modal">
@@ -229,6 +231,8 @@ const UserHome = () => {
           </div>
         </dialog>
       </section>
+      {/*All bookings page  */}
+      <AllBookings />
     </>
   );
 };

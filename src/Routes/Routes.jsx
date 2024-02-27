@@ -17,6 +17,7 @@ import AdminRoute from "./AdminRoute";
 import Inbox from "../pages/Dashboard/Inbox/Inbox";
 import RatingsPage from "../pages/RatingsPage/RatingsPage";
 import AddReview from "../pages/RatingsPage/AddReview";
+import DynamicMeetingPage from "../pages/DynamicMeetingPage/DynamicMeetingPage";
 
 export const routes = createBrowserRouter([
   {
@@ -99,4 +100,8 @@ export const routes = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path:"/meeting/:email/:id",
+    element:<DynamicMeetingPage/>
+  }
 ]);

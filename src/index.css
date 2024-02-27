@@ -4,6 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom class for animation delay */
+@layer utilities {
+  .animation-delay-2000{
+        animation-delay: 2s;
+  }
+  .animation-delay-4000{
+        animation-delay: 4s;
+  }
+}
+
+
+
+
 input[type="time"] {
   border: none;
   color: #2a2c2d;
@@ -11,6 +24,7 @@ input[type="time"] {
   font-family: helvetica;
   width: 180px;
 }
+
 
 /* Wrapper around the hour, minute, second, and am/pm fields as well as 
   the up and down buttons and the 'X' button */
