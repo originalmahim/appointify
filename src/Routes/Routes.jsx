@@ -17,6 +17,8 @@ import AdminRoute from "./AdminRoute";
 import Inbox from "../pages/Dashboard/Inbox/Inbox";
 import RatingsPage from "../pages/RatingsPage/RatingsPage";
 import AddReview from "../pages/RatingsPage/AddReview";
+import Profile from "../pages/Dashboard/Profile/Profile";
+import Users from "../pages/Dashboard/Users/Users";
 
 export const routes = createBrowserRouter([
   {
@@ -82,12 +84,20 @@ export const routes = createBrowserRouter([
         ),
       },
       {
+        path: "users",
+        element: <Users />
+      },
+      {
         path: "user-home",
         element: <UserHome />,
       },
       {
         path: "add-review",
         element: <AddReview />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
