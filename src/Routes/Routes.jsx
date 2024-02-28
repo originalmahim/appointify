@@ -12,12 +12,13 @@ import HomePage from "../pages/HomePage/HomePage";
 import Login from "../pages/Login/Login";
 import PricingPage from "../pages/PricingPage/PricingPage";
 import SignUp from "../pages/SignUp/SignUp";
-// import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Inbox from "../pages/Dashboard/Inbox/Inbox";
 import RatingsPage from "../pages/RatingsPage/RatingsPage";
 import AddReview from "../pages/RatingsPage/AddReview";
 import DynamicMeetingPage from "../pages/DynamicMeetingPage/DynamicMeetingPage";
+import Availability from "../pages/Availability/Availability";
 
 export const routes = createBrowserRouter([
   {
@@ -60,9 +61,9 @@ export const routes = createBrowserRouter([
   {
     path: "dashboard",
     element: (
-      // <PrivateRoute>
-      <DashboardLayout />
-      // </PrivateRoute>
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
     ),
     children: [
       // admin routes
@@ -90,6 +91,10 @@ export const routes = createBrowserRouter([
         path: "add-review",
         element: <AddReview />,
       },
+      {
+        path: "availability",
+        element: <Availability />,
+      },
     ],
   },
   {
@@ -101,7 +106,7 @@ export const routes = createBrowserRouter([
     element: <Login />,
   },
   {
-    path:"/meeting/:email/:id",
-    element:<DynamicMeetingPage/>
-  }
+    path: "/meeting/:email/:id",
+    element: <DynamicMeetingPage />,
+  },
 ]);

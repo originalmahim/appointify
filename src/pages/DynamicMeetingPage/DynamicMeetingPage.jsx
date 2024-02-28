@@ -11,7 +11,8 @@ const DynamicMeetingPage = () => {
     type: "General",
     location: "Virtual",
     duration: "1 hour",
-    notes: "Lorem ipsum dolor sit amet.",
+    notes:
+      "Lorem dolor sit amet. Hey good to see you. Our today's meeting is all about planning day",
   };
 
   const availableTimeSlots = [
@@ -42,14 +43,11 @@ const DynamicMeetingPage = () => {
             className={`transition-opacity ${
               isOrganizerView ? "opacity-100" : "opacity-100"
             } duration-300 ease-in-out`}>
-            <h1 className="text-[22px] font-semibold">
-              {meetingDetails.title}
-            </h1>
 
             {/* Toggle between Organizer and Participant views */}
-            <OrganizerParticipantsToggler 
-            setIsOrganizerView={setIsOrganizerView}
-            isOrganizerView={isOrganizerView}
+            <OrganizerParticipantsToggler
+              setIsOrganizerView={setIsOrganizerView}
+              isOrganizerView={isOrganizerView}
             />
 
             {isOrganizerView ? (

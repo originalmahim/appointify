@@ -11,7 +11,7 @@ const DurationSelector = ({ setSelectedHour, setSelectedMinute }) => {
   };
 
   return (
-    <div className="flex items-center justify-between space-x-2">
+    <div className="flex items-center justify-between space-x-2 mt-2">
       {/* Set Hour */}
       <div className="flex items-center space-x-2">
         <div className="w-1/2">
