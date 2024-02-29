@@ -61,8 +61,7 @@ const ContactForm = () => {
               data-aos="fade-up"
               data-aos-easing="ease-in-out"
               data-aos-duration="1000"
-              className="text-center text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold mb-8 md:mb-12 lg:mb-14 xl:mb-16"
-            >
+              className="text-center text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold mb-8 md:mb-12 lg:mb-14 xl:mb-16">
               Send Us a Message
             </h1>
             <form
@@ -70,8 +69,7 @@ const ContactForm = () => {
               onSubmit={sendEmail}
               data-aos="fade-in"
               data-aos-easing="ease-in-out"
-              data-aos-duration="1000"
-            >
+              data-aos-duration="1000">
               <div className="flex flex-col lg:flex-row gap-5">
                 <input
                   type="text"
@@ -102,8 +100,7 @@ const ContactForm = () => {
                   placeholder="Your Message"
                   name="message"
                   className="block w-full h-[150px] lg:h-[200px] rounded-md text-sm text-[#757575] border border-gray-600 p-3 hover:border-special focus:border-special outline-none"
-                  required
-                ></textarea>
+                  required></textarea>
               </div>
               <div className="mt-8 flex justify-center">
                 <input
@@ -118,8 +115,7 @@ const ContactForm = () => {
             data-aos="fade-up"
             data-aos-easing="ease-in-out"
             data-aos-duration="1000"
-            className="w-full md:w-2/5 flex flex-col gap-5"
-          >
+            className="w-full md:w-2/5 flex flex-col gap-5">
             <div className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center md:hover:scale-110 transition duration-300">
               <div className="bg-[#14AE5C] text-white w-12 h-12 rounded-full flex items-center justify-center">
                 <FiPhoneCall size={26} />
@@ -128,8 +124,7 @@ const ContactForm = () => {
                 <p className="text-2xl font-semibold font-play">Telephone</p>
                 <a
                   href="tel:+458 123 657 2324"
-                  className="text-lg font-medium text-[#757575]"
-                >
+                  className="text-lg font-medium text-[#757575]">
                   +458 123 657 2324
                 </a>
               </div>
@@ -139,8 +134,7 @@ const ContactForm = () => {
               data-aos="fade-up"
               data-aos-easing="ease-in-out"
               data-aos-duration="1000"
-              className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center md:hover:scale-110 transition duration-300"
-            >
+              className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center md:hover:scale-110 transition duration-300">
               <div className="bg-[#4977B4] text-white w-12 h-12 rounded-full flex items-center justify-center">
                 <FiMail size={26} />
               </div>
@@ -149,9 +143,8 @@ const ContactForm = () => {
                   Drop Your Mail
                 </p>
                 <a
-                  href="mailto:appointify99@gmail.com"
-                  className="text-lg font-medium text-[#757575]"
-                >
+                  href="http://localhost:5173/dashboard/availability"
+                  className="text-lg font-medium text-[#757575]">
                   appointify99@gmail.com
                 </a>
               </div>
@@ -161,8 +154,7 @@ const ContactForm = () => {
               data-aos="fade-up"
               data-aos-easing="ease-in-out"
               data-aos-duration="1000"
-              className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center md:hover:scale-110 transition duration-300"
-            >
+              className=" bg-[#E3F3FF] rounded-md shadow-lg py-5 w-full lg:w-[80%] ml-auto flex flex-col md:gap-1 lg:gap-2 justify-center items-center md:hover:scale-110 transition duration-300">
               <div className="bg-[#5e4e77] text-white w-12 h-12 rounded-full flex items-center justify-center">
                 <IoLocationOutline size={26} />
               </div>

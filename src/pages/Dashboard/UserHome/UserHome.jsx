@@ -21,6 +21,8 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 import { MdCelebration } from "react-icons/md";
 import BookingConfirmation from "./BookingConfirmation";
+import { SendJoiningMailToParticipants } from "./Email";
+// import { EmailJSResponseStatus } from "@emailjs/browser";
 
 const UserHome = () => {
   // use axios for data fetching
@@ -54,6 +56,7 @@ const UserHome = () => {
   const [newAddedEvent, setNewlyAddedEvent] = useState({});
   const [isAddedEvent, setIsAddedEvent] = useState(false);
   // Example usage in your handleDayToggle function
+
   const handleDayToggle = (day) => {
     setAvailableDays((prevAvailableDays) => {
       // Push unchecked days to the state
@@ -104,6 +107,8 @@ const UserHome = () => {
   const link = `${import.meta.env.VITE_CLIENT_BASE_URL}/meeting/forhad/${
     newAddedEvent?._id
   }`;
+
+  // const link = "http://localhost:5173/dashboard/availability";
 
   return (
     <>
@@ -156,8 +161,19 @@ const UserHome = () => {
 
             {/* Form for creating a booking */}
             {isAddedEvent ? (
-              // Create event form
-              <BookingConfirmation link={link} event={newAddedEvent} />
+              // see..
+              <>
+                <BookingConfirmation link={link} event={newAddedEvent} />
+                {newAddedEvent?.participants?.map((guest, index) => (
+                  <SendJoiningMailToParticipants
+                    key={index}
+                    participant={guest?.email}
+                    participantName={guest?.name}
+                    organizer={"shakil"}
+                    meetingLink={link}
+                  />
+                ))}
+              </>
             ) : (
               <>
                 <form onSubmit={handleSchedule} className="space-y-6">
@@ -294,11 +310,6 @@ const UserHome = () => {
               </>
             )}
           </div>
-
-          {/* if new event create successfully 
-          show congratualtions message and link to join */}
-
-          <div>{setNewlyAddedEvent?._id && "..............____________"}</div>
         </dialog>
       </section>
 
