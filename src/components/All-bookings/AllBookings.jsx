@@ -1,25 +1,28 @@
+import { useEffect, useState } from "react";
 import { Booking } from "./Booking";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 // Component to display bookings and additional information
 const AllBookings = () => {
+  const axios = useAxiosPublic();
+  const [allEvents, setAllEvents] = useState([]);
+
+  useEffect(() => {
+    axios.get("/events/shakilahmmed8882@gmail.com").then((res) => {
+      if (res?.data.length > 0) {
+        setAllEvents(res?.data);
+      }
+    });
+  }, [axios]);
+
   return (
     // Main grid layout with 7 columns and a gap
     <div className="md:grid grid-cols-7 gap-2">
       {/* Left side with bookings grid */}
       <div className="col-span-5 grid lg:grid-cols-2 gap-4">
-        {/* Displaying Booking components with different platforms */}
-        <Booking platform={"zoom"} />
-        <Booking platform={"google"} />
-        <Booking platform={"google"} />
-        <Booking platform={"zoom"} />
-        <Booking platform={"zoom"} />
-        <Booking platform={"google"} />
-        <Booking platform={"zoom"} />
-        <Booking platform={"google"} />
-        <Booking platform={"zoom"} />
-        <Booking platform={"google"} />
-        <Booking platform={"zoom"} />
-        <Booking platform={"zoom"} />
+        {allEvents?.map((event) => (
+          <Booking key={event?._id} meeting={event} />
+        ))}
       </div>
 
       {/* Right side with a sticky sidebar */}

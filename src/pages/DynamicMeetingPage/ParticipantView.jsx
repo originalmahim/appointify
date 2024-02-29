@@ -3,8 +3,6 @@ import { ParticipantsList } from "./Participants";
 
 const ParticipantView = ({
   meetingDetails,
-  //   availableTimeSlots,
-  //   onAvailabilitySubmit,
   onConfirmation,
   onReschedule,
 }) => {

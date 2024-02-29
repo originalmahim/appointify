@@ -12,7 +12,7 @@ const useScrollToTop = (scrollThreshold = 40) => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > scrollThreshold) {
-        setScrollVisible(true);
+      setScrollVisible(true);
       } else {
         setScrollVisible(false);
       }

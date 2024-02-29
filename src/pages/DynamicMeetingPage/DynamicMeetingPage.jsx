@@ -1,26 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrganizerView from "./OrganizerView";
 import ParticipantView from "./ParticipantView";
 import OrganizerParticipantsToggler from "./OrganizerParticipantsToggler";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useParams } from "react-router-dom";
 
 const DynamicMeetingPage = () => {
   const [isOrganizerView, setIsOrganizerView] = useState(true);
+  const [meetingDetails, setMeetingDetails] = useState({});
+  const axios = useAxiosPublic();
 
-  const meetingDetails = {
-    title: "Sample Meeting",
-    type: "General",
-    location: "Virtual",
-    duration: "1 hour",
-    notes:
-      "Lorem dolor sit amet. Hey good to see you. Our today's meeting is all about planning day",
-  };
+  //dynamic event id
+  const { id } = useParams();
 
-  const availableTimeSlots = [
-    "9:00 AM - 10:00 AM",
-    "10:00 AM - 11:00 AM",
-    "1:00 PM - 2:00 PM",
-    // Add more time slots as needed
-  ];
+  useEffect(() => {
+    axios.get(`events//singleEvent/${id}`).then((res) => {
+      if (res.data) {
+        setMeetingDetails(res?.data);
+      }
+    });
+  }, []);
 
   const handleConfirmation = () => {
     console.log("Meeting confirmed or rescheduled.");
@@ -32,8 +31,8 @@ const DynamicMeetingPage = () => {
 
   return (
     <section className="bg-[#FAFAFA]">
-      <div className="max-w-4xl mx-auto mt-2 h-[95vh] bg-white">
-        <header className="bg-primary text-center p-1 text-white">
+      <div className="max-w-4xl mx-auto mt-2 h-[85vh] overflow-hidden p-2 bg-white">
+        <header className="bg-primary text-center p-2 text-white">
           Dynamic page
         </header>
 
@@ -43,7 +42,6 @@ const DynamicMeetingPage = () => {
             className={`transition-opacity ${
               isOrganizerView ? "opacity-100" : "opacity-100"
             } duration-300 ease-in-out`}>
-
             {/* Toggle between Organizer and Participant views */}
             <OrganizerParticipantsToggler
               setIsOrganizerView={setIsOrganizerView}
@@ -59,7 +57,6 @@ const DynamicMeetingPage = () => {
             ) : (
               <ParticipantView
                 meetingDetails={meetingDetails}
-                availableTimeSlots={availableTimeSlots}
                 onAvailabilitySubmit={handleAvailabilitySubmission}
               />
             )}

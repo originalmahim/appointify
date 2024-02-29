@@ -1,71 +1,127 @@
-import React, { useState } from "react";
+import { SelectStartOrEndTime } from "./SelectStartOrEndTime";
+import { GoCopy } from "react-icons/go";
+import { IoIosAddCircle } from "react-icons/io";
+
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Slots from "./Slots";
+import useUserSlots from "../../hooks/useUserSlots";
 
 const Availability = () => {
-  const [availability, setAvailability] = useState({
-    sunday: [{ start: "9:00am", end: "5:00pm" }],
-    monday: [{ start: "9:00am", end: "5:00pm" }],
-    tuesday: [{ start: "9:00am", end: "5:00pm" }],
-    wednesday: [{ start: "9:00am", end: "5:00pm" }],
-    thursday: [{ start: "9:00am", end: "5:00pm" }],
-    friday: [{ start: "9:00am", end: "5:00pm" }],
-    saturday: [{ start: "9:00am", end: "5:00pm" }],
-  });
+  const { availAbleSlots, refetch } = useUserSlots();
 
-  const addSlot = (day) => {
-    const newAvailability = { ...availability };
-    newAvailability[day] = [
-      ...newAvailability[day],
-      { start: "9:00am", end: "5:00pm" },
-    ];
-    setAvailability(newAvailability);
-  };
+  useEffect(() => {}, [availAbleSlots]);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Availability</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse border bg-white border-gray-300">
-          <thead>
-            <tr className="bg-black text-white">
-              <th className="p-2 border">Day</th>
-              <th className="p-2 border">Start Time</th>
-              <th className="p-2 border">End Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.keys(availability).map((day) => (
-              <React.Fragment key={day}>
-                {availability[day].map((slot, index) => (
-                  <tr key={`${day}-${index}`}>
-                    <td className="p-2 border">
-                      {index === 0 ? (
-                        <span
-                          className="cursor-pointer"
-                          onClick={() => addSlot(day)}>
-                          {day.charAt(0).toUpperCase() + day.slice(1)} +
-                        </span>
-                      ) : null}
-                    </td>
-                    <td className="p-2 border">{slot.start}</td>
-                    <td className="p-2 border">{slot.end}</td>
-                  </tr>
-                ))}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div>
+      <h1 className="font-bold text-2xl mb-3">Availability</h1>
 
-      {/* Additional Content */}
-      <div className="mt-8">
-        <h3 className="text-xl font-bold mb-2">Additional Content</h3>
-        <p>
-          This is where you can add more information about your availability or
-          any other relevant content.
-        </p>
+      <div className="lg:grid grid-cols-9 h-[70vh] overflow-auto gap-6 bg-white">
+        {/* col 1 */}
+        <div className="col-span-6 outline outline-[#d6d6d6] p-2 rounded-lg outline-[1px]">
+          {availAbleSlots?.map((day) => (
+            <DaySlotManager key={day?._id} day={day} refetch={refetch} />
+          ))}
+        </div>
+
+        {/* col 2 */}
+        <div className="col-span-3 outline outline-[#d6d6d6] outline-[1px]">
+          2
+        </div>
       </div>
     </div>
   );
 };
 
 export default Availability;
+
+const DaySlotManager = ({ day, refetch }) => {
+  // State variables
+  const [startTime, setStartTime] = useState({});
+  const [endTime, setEndTime] = useState({});
+  const [checkedDays, setCheckedDays] = useState({});
+  const axios = useAxiosPublic(); // Replace with your actual Axios instance
+  const [isAddNewSlot, setIsAddNewSlot] = useState("");
+  const [theDay, setTheDay] = useState("");
+  const checkedDaysArray = Object.keys(checkedDays);
+
+  // Log the current day object to the console
+
+  // Effect for handling time slot updates
+  useEffect(() => {
+    // Check if start time and end time are not undefined
+    if (
+      typeof startTime.val == "undefined" ||
+      typeof endTime.val == "undefined"
+    ) {
+      return;
+    } else {
+      // Create info object with day and slots
+      const info = {
+        day: endTime.day,
+        slots: [{ start_time: startTime?.val, end_time: endTime?.val }],
+      };
+
+      axios
+        .post("/users/availability/shakilahmmed8882@gmail.com", info)
+        .then((res) => console.log(res.data));
+      refetch();
+    }
+
+    // Make an HTTP request to post the availability info
+    // axios.post(`/user/availability/forhadairdrop@gmail.com`, info);
+  }, [startTime, endTime, axios, refetch]);
+
+  // Function to handle checkbox toggling
+  const handleToggleChange = (day) => {
+    setCheckedDays((prevCheckedDays) => ({
+      ...prevCheckedDays,
+      [day]: !prevCheckedDays[day],
+    }));
+  };
+
+  return (
+    <div key={day.day} className="flex gap-2 my-4">
+      {/* Checkbox for selecting the day */}
+      <input
+        type="checkbox"
+        className="toggle toggle-sm"
+        checked={checkedDays[day.day]}
+        onChange={() => {
+          setTheDay(day.day), handleToggleChange(day.day);
+        }}
+      />
+      <span className="w-32"> {day.day}</span>
+
+      {/* Display time selection UI when the day is selected */}
+      {checkedDays[day.day] && (
+        <div>
+          <div className="flex gap-2 itece mb-2">
+            {/* Select start time */}
+            <SelectStartOrEndTime
+              day={day.day}
+              setTime={setStartTime}
+              time={startTime}
+            />
+            {/* Select end time */}
+            <SelectStartOrEndTime
+              day={day?.day}
+              setTime={setEndTime}
+              time={endTime}
+            />
+            <GoCopy />
+            {/* Button to add a new time slot */}
+            <IoIosAddCircle onClick={() => setIsAddNewSlot(day?.day)} />
+          </div>
+
+          {/* Display existing time slots for the selected day */}
+          <div className="grid  max-h-52 my-3 overflow-auto">
+            {day?.slots?.map((slot) => (
+              <Slots key={slot.day} slot={slot} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

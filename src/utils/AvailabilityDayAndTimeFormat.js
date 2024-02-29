@@ -1,8 +1,8 @@
-const AvailabilityDayAndTimeFormat = (selectedDays,startTime,endTime) => {
+const AvailabilityDayAndTimeFormat = (selectedDays,start_time,end_time) => {
   return selectedDays.map((day) => {
     return {
       day,
-      slots: [{startTime,endTime}],
+      slots: [{start_time,end_time}],
     };
   });
 
