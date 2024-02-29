@@ -1,76 +1,25 @@
-import { SelectStartOrEndTime } from "./SelectStartOrEndTime";
-import { GoCopy } from "react-icons/go";
-import { IoIosAddCircle } from "react-icons/io";
-
 import { useEffect, useState } from "react";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import Slots from "./Slots";
-import useUserSlots from "../../hooks/useUserSlots";
+import SelectTime from "./Select";
 
 const Availability = () => {
-  const { availAbleSlots, refetch } = useUserSlots();
-
-  useEffect(() => {}, [availAbleSlots]);
-
-  return (
-    <div>
-      <h1 className="font-bold text-2xl mb-3">Availability</h1>
-
-      <div className="lg:grid grid-cols-9 h-[70vh] overflow-auto gap-6 bg-white">
-        {/* col 1 */}
-        <div className="col-span-6 outline outline-[#d6d6d6] p-2 rounded-lg outline-[1px]">
-          {availAbleSlots?.map((day) => (
-            <DaySlotManager key={day?._id} day={day} refetch={refetch} />
-          ))}
-        </div>
-
-        {/* col 2 */}
-        <div className="col-span-3 outline outline-[#d6d6d6] outline-[1px]">
-          2
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Availability;
-
-const DaySlotManager = ({ day, refetch }) => {
-  // State variables
-  const [startTime, setStartTime] = useState({});
-  const [endTime, setEndTime] = useState({});
   const [checkedDays, setCheckedDays] = useState({});
-  const axios = useAxiosPublic(); // Replace with your actual Axios instance
-  const [isAddNewSlot, setIsAddNewSlot] = useState("");
-  const [theDay, setTheDay] = useState("");
-  const checkedDaysArray = Object.keys(checkedDays);
+  const [availabilityData, setAvailabilityData] = useState([]);
 
-  // Log the current day object to the console
+  // Mock data for demonstration purposes
+  const initialData = [
+    { day: "Monday", slots: [] },
+    { day: "Tuesday", slots: [] },
+    { day: "Wednesday", slots: [] },
+    { day: "Thursday", slots: [] },
+    { day: "Friday", slots: [] },
+    { day: "Saturday", slots: [] },
+    { day: "Sunday", slots: [] },
+  ];
 
-  // Effect for handling time slot updates
   useEffect(() => {
-    // Check if start time and end time are not undefined
-    if (
-      typeof startTime.val == "undefined" ||
-      typeof endTime.val == "undefined"
-    ) {
-      return;
-    } else {
-      // Create info object with day and slots
-      const info = {
-        day: endTime.day,
-        slots: [{ start_time: startTime?.val, end_time: endTime?.val }],
-      };
-
-      axios
-        .post("/users/availability/shakilahmmed8882@gmail.com", info)
-        .then((res) => console.log(res.data));
-      refetch();
-    }
-
-    // Make an HTTP request to post the availability info
-    // axios.post(`/user/availability/forhadairdrop@gmail.com`, info);
-  }, [startTime, endTime, axios, refetch]);
+    // Use the initial data to set up the availabilityData state
+    setAvailabilityData(initialData);
+  }, []);
 
   // Function to handle checkbox toggling
   const handleToggleChange = (day) => {
@@ -78,50 +27,108 @@ const DaySlotManager = ({ day, refetch }) => {
       ...prevCheckedDays,
       [day]: !prevCheckedDays[day],
     }));
+
+    // If the day is toggled, add two new slots (start and end times)
+    if (!checkedDays[day]) {
+      setAvailabilityData((prevData) =>
+        prevData.map((item) =>
+          item.day === day
+            ? {
+                ...item,
+                slots: [
+                  ...item.slots,
+                  { startTime: "New Start Time", endTime: "New End Time" },
+                  // Add another new slot if needed
+                ],
+              }
+            : item
+        )
+      );
+    }
+  };
+
+  // Function to add a new slot under a specific day
+  const handleAddSlot = (day) => {
+    setAvailabilityData((prevData) =>
+      prevData.map((item) =>
+        item.day === day
+          ? {
+              ...item,
+              slots: [
+                ...item.slots,
+                { startTime: "New Start Time", endTime: "New End Time" },
+                // Add another new slot if needed
+              ],
+            }
+          : item
+      )
+    );
+  };
+  // Function to remove the last slot under a specific day
+  const handleRemoveSlot = (day) => {
+    setAvailabilityData((prevData) =>
+      prevData.map((item) =>
+        item.day === day
+          ? {
+              ...item,
+              slots: item.slots.slice(0, -1), // Remove the last slot
+            }
+          : item
+      )
+    );
   };
 
   return (
-    <div key={day.day} className="flex gap-2 my-4">
-      {/* Checkbox for selecting the day */}
-      <input
-        type="checkbox"
-        className="toggle toggle-sm"
-        checked={checkedDays[day.day]}
-        onChange={() => {
-          setTheDay(day.day), handleToggleChange(day.day);
-        }}
-      />
-      <span className="w-32"> {day.day}</span>
+    <div>
+      <h1 className="font-bold text-2xl mb-3">Availability</h1>
 
-      {/* Display time selection UI when the day is selected */}
-      {checkedDays[day.day] && (
-        <div>
-          <div className="flex gap-2 itece mb-2">
-            {/* Select start time */}
-            <SelectStartOrEndTime
-              day={day.day}
-              setTime={setStartTime}
-              time={startTime}
-            />
-            {/* Select end time */}
-            <SelectStartOrEndTime
-              day={day?.day}
-              setTime={setEndTime}
-              time={endTime}
-            />
-            <GoCopy />
-            {/* Button to add a new time slot */}
-            <IoIosAddCircle onClick={() => setIsAddNewSlot(day?.day)} />
+      <div className="h-[70vh] gap-6 bg-white">
+        {availabilityData?.map((dayData, index) => (
+          <div key={index} className="flex gap-1 my-1 p-2">
+            <div className="flex gap-1 w-36 items-center h-16">
+              <input
+                type="checkbox"
+                className="toggle toggle-sm "
+                checked={checkedDays[dayData.day] || false}
+                onChange={() => handleToggleChange(dayData.day)}
+              />{" "}
+              <span className="ml-2">{dayData.day}</span>
+              <button
+                onClick={() => handleAddSlot(dayData.day)}
+                className="ml-2 bg-blue-500 text-white px-2 py-1 rounded">
+                +
+              </button>
+            </div>
+            {checkedDays[dayData.day] && (
+              <div className="grid ">
+                {dayData.slots.map((slot, slotIndex) => (
+                  <div
+                    key={slotIndex}
+                    className="grid my-3 grid-cols-3  gap-2 ml-8">
+                    <SelectTime
+                      label={"Start time"}
+                      index={index + Math.floor(Math.random() * 3)}
+                      value={slot.startTime}
+                    />
+                    <SelectTime
+                      label={"End time"}
+                      index={index + Math.floor(Math.random() * 10)}
+                      value={slot.endTime}
+                    />
+                    <button
+                      onClick={() => handleRemoveSlot(dayData.day)}
+                      className="ml-2  bg-gray-600 text-white px-2 py-1 rounded">
+                      -
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-
-          {/* Display existing time slots for the selected day */}
-          <div className="grid  max-h-52 my-3 overflow-auto">
-            {day?.slots?.map((slot) => (
-              <Slots key={slot.day} slot={slot} />
-            ))}
-          </div>
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 };
+
+export default Availability;
