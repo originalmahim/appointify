@@ -1,28 +1,34 @@
 import toast from "react-hot-toast";
 import Bird from "./Bird";
 import Container from "../../Container/Container";
-import useAuth from "../../../hooks/useAuth";
+// import useAuth from "../../../hooks/useAuth";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const NewsLetter = () => {
-  const { user } = useAuth();
-  const { email, photoURL, displayName } = user;
+  // const { user } = useAuth();
+  // const { email, photoURL, displayName } = user;
   const axiosPublic = useAxiosPublic();
 
   const handleNewsLetter = (e) => {
     e.preventDefault();
     const userInfo = {
-      email,
-      photoURL,
-      displayName,
+      email: e.target.email.value,
       registrationTime: new Date(),
     };
     axiosPublic
       .post("newsletters", userInfo)
       .then((res) => {
-        if (res.data.success) {
+        if (!res.data.isExist) {
           toast.success("Successfully Subscribed!");
           e.target.reset();
+        } else {
+          toast.error("User email already Exists!", {
+            style: {
+              borderRadius: "10px",
+              background: "#ffcccc",
+              color: "black",
+            },
+          });
         }
       })
       .catch((err) => {
@@ -48,7 +54,8 @@ const NewsLetter = () => {
                 <input
                   className="border-2 px-4 h-12 w-full lg:w-4/5 xl:w-11/12 rounded-l-xl"
                   type="email"
-                  placeholder="Email"
+                  name="email"
+                  placeholder="domain@example.com"
                   required
                 />
                 <button
