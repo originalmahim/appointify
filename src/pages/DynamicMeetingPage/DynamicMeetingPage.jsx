@@ -5,7 +5,7 @@ import OrganizerParticipantsToggler from "./OrganizerParticipantsToggler";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
 import Calendar from "./Calendar/Calendar";
-import Slot from "../Availability/Slots";
+import Slots from "./Slots";
 
 const DynamicMeetingPage = () => {
   const [isOrganizerView, setIsOrganizerView] = useState(true);
@@ -30,7 +30,8 @@ const DynamicMeetingPage = () => {
 
   // join or rechedule button handler
   const handleConfirmation = () => {
-    console.log("Meeting confirmed or rescheduled.");
+    console.log("date", selectedDate);
+    console.log(selectedDay);
   };
 
   const handleAvailabilitySubmission = (selectedTimeSlots) => {
@@ -39,8 +40,8 @@ const DynamicMeetingPage = () => {
 
   return (
     <section className="bg-[#FAFAFA]">
-      <div className="max-w-5xl mx-auto mt-2 h-[95vh] overflow-hidden bg-white">
-        <header className="bg-primary text-center p-2 text-white">
+      <div className="max-w-5xl mx-auto mt-2 h-[95vh]  bg-white">
+        <header className="bg-primary sticky z-10 top-0 text-center p-2 text-white">
           Dynamic page
         </header>
 
@@ -49,7 +50,7 @@ const DynamicMeetingPage = () => {
           <div
             className={`transition-opacity col-span-4 ${
               isOrganizerView ? "opacity-100" : "opacity-100"
-            } duration-300 ease-in-out`}>
+            } duration-300 ease-in-out sticky top-0 h-screen`}>
             {/* Toggle between Organizer and Participant views */}
             <OrganizerParticipantsToggler
               setIsOrganizerView={setIsOrganizerView}
@@ -70,32 +71,18 @@ const DynamicMeetingPage = () => {
             )}
           </div>
 
+          {/* Calendar integration */}
           <div className="bg-[#f5f5f5c5] h-[100vh] col-span-4">
             <Calendar
               setSelectedDate={setSelectedDate}
               setSelectedDay={setSelectedDay}
             />
           </div>
-          <div className="col-span-2 overflow-auto">
-            <h1 className="font-semibold py-2">{selectedDay}</h1>
-            {[
-              {
-                day: "wednesday",
-                slots: [
-                  { start_time: "07:30pm", end_time: "83" },
-                  { start_time: "07:30pm", end_time: "83" },
-                  { start_time: "07:30pm", end_time: "83" },
-                  { start_time: "07:30pm", end_time: "83" },
-                  { start_time: "07:30pm", end_time: "83" },
-                ],
-              },
-            ].map((day) => (
-              <div key={day.day} className="">
-                {day.slots?.map((slot) => (
-                  <Slot key={slot.day} slot={slot} />
-                ))}
-              </div>
-            ))}
+          <div className="col-span-2 overflow-auto h-screen">
+            <h1 className="font-semibold sticky top-0 bg-white py-2">
+              {selectedDay ? selectedDay : "Friday"}
+            </h1>
+            <Slots slotDay={selectedDay} />
           </div>
         </div>
       </div>
