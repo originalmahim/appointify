@@ -40,7 +40,7 @@ const DynamicMeetingPage = () => {
 
   return (
     <section className="bg-[#FAFAFA]">
-      <div className="max-w-5xl mx-auto mt-2 h-[95vh]  bg-white">
+      <div className="max-w-5xl mx-auto mt-2 h-[90vh] overflow-hidden bg-white">
         <header className="bg-primary sticky z-10 top-0 text-center p-2 text-white">
           Dynamic page
         </header>
@@ -72,13 +72,13 @@ const DynamicMeetingPage = () => {
           </div>
 
           {/* Calendar integration */}
-          <div className="bg-[#f5f5f5c5] h-[100vh] col-span-4">
+          <div className="bg-[#f5f5f5c5] h-[80vh] col-span-4">
             <Calendar
               setSelectedDate={setSelectedDate}
               setSelectedDay={setSelectedDay}
             />
           </div>
-          <div className="col-span-2 overflow-auto h-screen">
+          <div className="col-span-2 overflow-auto h-[80vh]">
             <h1 className="font-semibold sticky top-0 bg-white py-2">
               {selectedDay ? selectedDay : "Friday"}
             </h1>
