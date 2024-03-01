@@ -23,7 +23,7 @@ import { MdCelebration } from "react-icons/md";
 import BookingConfirmation from "./BookingConfirmation";
 import { SendJoiningMailToParticipants } from "./Email";
 import { FaBowlingBall } from "react-icons/fa";
-import { CiCalendarDate } from "react-icons/ci";
+
 
 const UserHome = () => {
   // use axios for data fetching

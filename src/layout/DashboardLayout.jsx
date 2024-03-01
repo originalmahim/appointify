@@ -10,6 +10,7 @@ import Container from "../components/Container/Container";
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import { DashboardNavbar } from "../components/DashboardNavbar/DashboardNavbar";
 
 const DashboardLayout = () => {
   const [isAdmin] = useAdmin();
@@ -68,7 +69,8 @@ const DashboardLayout = () => {
                 />
               </svg>
             </label>
-            <div className="mt-8 lg:mt-14 mb-20">
+            <div className="">
+              <DashboardNavbar />
               <Container>
                 <Outlet />
               </Container>
@@ -148,6 +150,18 @@ const DashboardLayout = () => {
                         }>
                         <PiUsersThreeFill />
                         All Users
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/availability"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-special md:text-lg font-semibold uppercase"
+                            : "md:text-lg font-medium uppercase"
+                        }>
+                        <PiUsersThreeFill />
+                        Availability
                       </NavLink>
                     </li>
                   </>

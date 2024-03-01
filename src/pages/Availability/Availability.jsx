@@ -78,22 +78,18 @@ const Availability = () => {
   };
 
   return (
-    <div className="bg-white">
-      <h1 className=" text-2xl mb-3 bg-primary p-2 text-white rounded-sm">
+    <div>
+      <h1 className="font-bold text-2xl mb-3 bg-primary p-2 text-white rounded-sm">
         Availability
       </h1>
 
       <div
-        className={`${
+        className={` ${
           Object.values(checkedDays).every((value) => !value)
-            ? "flex justify-between items-start"
-            : ""
+            ? "grid-cols-4"
+            : "grid-cols-1"
         }`}>
-        <div
-          className={`
-        ${Object.values(checkedDays).every((value) => value) ? "w-40" : ""}
-        "h-[70vh]  gap-6 grid-cols-1 bg-white"
-        `}>
+        <div className="h-[70vh] w-full gap-6 grid-cols-1 bg-white">
           <div>
             {availabilityData?.map((dayData, index) => (
               <div key={index} className="flex gap-1 p-2">
@@ -154,26 +150,11 @@ const Availability = () => {
             ))}
           </div>
         </div>
-        <div className="flex items-center">
-          <img
-            className={`${
-              Object.values(checkedDays).every((value) => !value)
-                ? "block"
-                : "hidden"
-            } w-1/2 flex-1 opacity-10 object-cover object-center`}
-            src="https://s3.us-west-2.amazonaws.com/public.notion-static.com/creator-images/andrew-hulterstrom-1707764801213.jpeg"
-            alt=""
-          />
-          <img
-            className={`${
-              Object.values(checkedDays).every((value) => !value)
-                ? "opacity-10"
-                : " opacity-0"
-            } w-1/2 flex-1  object-cover object-center`}
-            src="https://s3.us-west-2.amazonaws.com/public.notion-static.com/creator-images/andrew-hulterstrom-1707764801213.jpeg"
-            alt=""
-          />
-        </div>
+        <img
+          className="grid-cols-3 w-full h-full"
+          src="https://s3.us-west-2.amazonaws.com/public.notion-static.com/creator-images/andrew-hulterstrom-1707764801213.jpeg"
+          alt=""
+        />
       </div>
     </div>
   );
