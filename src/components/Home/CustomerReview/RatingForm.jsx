@@ -3,9 +3,11 @@ import RatingAnimation from "../../../pages/RatingsPage/RatingAnimation";
 
 const RatingForm = ({ handleRating }) => {
   return (
-    <div className="flex flex-col md:flex-row border-2 rounded-xl shadow-lg border-special">
-      <form onSubmit={handleRating} className="flex flex-col flex-1 p-2 md:p-5 justify-center items-center">
-
+    <div className="flex flex-col 2xl:flex-row border-2 rounded-xl shadow-lg border-special">
+      <form
+        onSubmit={handleRating}
+        className="flex flex-col flex-1 p-2 md:p-5 justify-center items-center"
+      >
         <select
           name="rating"
           className="select border-special dark:bg-gray-500 dark:text-gray-300 select-bordered w-full max-w-xs md:max-w-xl text-center"
@@ -27,12 +29,17 @@ const RatingForm = ({ handleRating }) => {
         {/* buttons  */}
         <div className="p-3 mt-4 text-center space-x-4 md:block border-special">
           {/* <p className="btn btn-sm bg-blue-gray-200 md:btn-md">Cancel</p> */}
-          <button type="submit" className="btn bg-special text-white btn-sm md:btn-md">
+          <button
+            type="submit"
+            className="btn bg-special text-white btn-sm md:btn-md"
+          >
             Rate
           </button>
         </div>
       </form>
-      <div className="max-w-lg"><RatingAnimation></RatingAnimation></div>
+      <div className="max-w-lg">
+        <RatingAnimation></RatingAnimation>
+      </div>
     </div>
   );
 };

@@ -43,7 +43,7 @@ const HomePage = () => {
       {/* Render the scroll-to-top button when showScrollButton is true */}
       {isScrollVisible && (
         <button
-          className="fixed z-50 bottom-10 left-10 md:left-20 border bg-special text-white dark:bg-white text-3xl md:text-4xl rounded-full cursor-pointer"
+          className="fixed z-50 bottom-20 right-6 md:right-12 border bg-special text-white dark:bg-white text-3xl md:text-4xl rounded-full cursor-pointer"
           onClick={scrollToTop}
         >
           <FaArrowUp />
