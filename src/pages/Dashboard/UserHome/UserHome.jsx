@@ -22,7 +22,8 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { MdCelebration } from "react-icons/md";
 import BookingConfirmation from "./BookingConfirmation";
 import { SendJoiningMailToParticipants } from "./Email";
-// import { EmailJSResponseStatus } from "@emailjs/browser";
+import { FaBowlingBall } from "react-icons/fa";
+import { CiCalendarDate } from "react-icons/ci";
 
 const UserHome = () => {
   // use axios for data fetching
@@ -110,7 +111,6 @@ const UserHome = () => {
 
   // const link = "http://localhost:5173/dashboard/availability";
 
-  console.log(endTime);
   return (
     <>
       <Helmet>
@@ -141,12 +141,13 @@ const UserHome = () => {
 
         <dialog id="my_modal_3" className="modal">
           {/* Modal content */}
-          <div className="modal-box h-screen rounded-lg pt-7 bg-white">
+          <div className="modal-box h-screen rounded-lg pt-7 bg-white overflow-hidden">
             <h3 className="font-bold mb-3 text-center text-2xl flex items-center gap-1 justify-center">
               {isAddedEvent ? "" : "Set your availability"}
               {isAddedEvent ? (
-                <div className="p-4 bg-gray-50 rounded-full">
-                  <MdCelebration className="text-[#ff7328] text-5xl" />
+                <div className="p-4 bg-gray-50 rounded-full relative">
+                  <FaBowlingBall className="absolute -right-[250px] text-gray-400 opacity-5 top-72 text-[200px]  text" />
+                  <MdCelebration className="text-[#ff7328] text-5xl z-10" />
                 </div>
               ) : (
                 <LuCalendarDays className="text-[#c5c5c5]" />
