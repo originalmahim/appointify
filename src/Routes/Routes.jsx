@@ -19,6 +19,7 @@ import RatingsPage from "../pages/RatingsPage/RatingsPage";
 import AddReview from "../pages/RatingsPage/AddReview";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import Users from "../pages/Dashboard/Users/Users";
+import Subscriptions from "../pages/Dashboard/Subscriptions/Subscriptions";
 
 export const routes = createBrowserRouter([
   {
@@ -85,7 +86,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "users",
-        element: <Users />
+        element: <Users />,
+      },
+      {
+        path: "subscriptions",
+        element: <Subscriptions/>,
       },
       {
         path: "user-home",

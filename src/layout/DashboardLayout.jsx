@@ -5,6 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 import { MdAddTask, MdReviews } from "react-icons/md";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { TbBrandBooking, TbMessage } from "react-icons/tb";
+import { MdSubscriptions } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Container from "../components/Container/Container";
 import useAdmin from "../hooks/useAdmin";
@@ -156,6 +157,19 @@ const DashboardLayout = () => {
                       >
                         <PiUsersThreeFill />
                         Manage Users
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/subscriptions"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-special md:text-lg font-semibold uppercase"
+                            : "md:text-lg font-medium uppercase"
+                        }
+                      >
+                        <MdSubscriptions />
+                        Subscriptions
                       </NavLink>
                     </li>
                   </>
