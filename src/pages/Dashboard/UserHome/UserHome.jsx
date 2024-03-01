@@ -110,6 +110,7 @@ const UserHome = () => {
 
   // const link = "http://localhost:5173/dashboard/availability";
 
+  console.log(endTime);
   return (
     <>
       <Helmet>

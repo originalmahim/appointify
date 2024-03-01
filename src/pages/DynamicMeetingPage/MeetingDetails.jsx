@@ -27,12 +27,12 @@ const MeetingDetails = ({ meetingDetails, onReschedule, onConfirmation }) => {
       <div className="absolute -bottom-40 right-0">
         <button
           onClick={onReschedule}
-          className="outline outline-red-500 outline-[1px] text-black hover:bg-red-500 hover:text-white transition-all duration-300 px-4 py-2 rounded mr-2">
+          className="outline outline-black outline-[1px] text-black hover:bg-red-500 hover:text-white transition-all duration-300 px-4 py-2 rounded mr-2">
           Reschedule
         </button>
         <button
           onClick={onConfirmation}
-          className="outline outline-blue-500 outline-[1px] text-black hover:bg-blue-500 hover:text-white transition-all duration-300 px-4 py-2 rounded mr-2">
+          className="outline outline-black-500 outline-[1px] text-black hover:bg-blue-500 hover:text-white transition-all duration-300 px-4 py-2 rounded mr-2">
           Join now
         </button>
       </div>
