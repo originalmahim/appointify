@@ -64,15 +64,13 @@ const Day = () => {
         ))}
       </div>
       <div className="mx-10">
-        <ConfirmBooking />
+        {/* <ConfirmBook /> */}
       </div>
     </>
   );
 };
 
 export default Day;
-
-
 
 import { Button, Option, Select, Switch } from "@material-tailwind/react";
 import { AiOutlineCopy, AiOutlinePlus } from "react-icons/ai";
@@ -109,24 +107,19 @@ export function TimeSchedule() {
   );
 }
 
-
-
-
-
-export function ConfirmBooking() {
+export function ConfirmBook() {
   const axios = useAxiosPublic();
-  const handleConfirmBooking = async() => {
+  const handleConfirmBooking = async () => {
     try {
-      const logRes =await axios.get('/google')
+      const logRes = await axios.get("/google");
       console.log(logRes);
-      if(logRes.status){
+      if (logRes.status) {
         // window.location.replace(logRes.data)
-const sRes = await axios.get("/schedule_event")
-console.log(sRes);
+        const sRes = await axios.get("/schedule_event");
+        console.log(sRes);
       }
     } catch (err) {
       console.log(err);
-      
     }
   };
   return (

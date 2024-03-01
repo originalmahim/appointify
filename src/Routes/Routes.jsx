@@ -17,6 +17,10 @@ import AdminRoute from "./AdminRoute";
 import Inbox from "../pages/Dashboard/Inbox/Inbox";
 import RatingsPage from "../pages/RatingsPage/RatingsPage";
 import AddReview from "../pages/RatingsPage/AddReview";
+import BookingConfirm from "../pages/Day/BookingConfirm";
+import BookingForm from "../pages/Day/BookingForm";
+
+
 
 export const routes = createBrowserRouter([
   {
@@ -54,6 +58,14 @@ export const routes = createBrowserRouter([
         path: "/contact",
         element: <ContactPage />,
       },
+      {
+        path:'/bookingConfirm',
+        element:<BookingConfirm/>
+      },
+      {
+        path:'/bookingFrom',
+        element:<BookingForm/>
+      }
     ],
   },
   {

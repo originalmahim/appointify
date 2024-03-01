@@ -13,8 +13,8 @@ import LatestAchievementsCards from "../../components/Home/LatestAchievement/Lat
 import TrustedCompanies from "../../components/Home/TrustedCompaniesSection/TrustedCompanies";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import { FaArrowUp } from "react-icons/fa";
-import Day from "../Day/Day";
-import BookingForm from "../Day/ConfirmBooking";
+import Schedule from "../Day/Schedule";
+
 
 const HomePage = () => {
   const [showChatbot, toggleChatbot] = useState(false);
@@ -25,8 +25,7 @@ const HomePage = () => {
         <title>Appointify | Home</title>
       </Helmet>
       <section>
-        <Day/>
-        <BookingForm/>
+        <Schedule/>
         <Banner />
         <FeatureOverview />
         <UserReviews />
