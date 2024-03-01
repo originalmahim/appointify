@@ -1,18 +1,33 @@
 import toast from "react-hot-toast";
 import Bird from "./Bird";
 import Container from "../../Container/Container";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const NewsLetter = () => {
+  const { user } = useAuth();
+  const { email, photoURL, displayName } = user;
+  const axiosPublic = useAxiosPublic();
+
   const handleNewsLetter = (e) => {
     e.preventDefault();
-    toast.success("Successfully Subscribed!", {
-      style: {
-        borderRadius: "8px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-    e.target.reset();
+    const userInfo = {
+      email,
+      photoURL,
+      displayName,
+      registrationTime: new Date(),
+    };
+    axiosPublic
+      .post("newsletters", userInfo)
+      .then((res) => {
+        if (res.data.success) {
+          toast.success("Successfully Subscribed!");
+          e.target.reset();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
