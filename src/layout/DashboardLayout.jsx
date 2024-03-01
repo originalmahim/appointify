@@ -109,6 +109,19 @@ const DashboardLayout = () => {
                     </li>
                     <li>
                       <NavLink
+                        to="/dashboard/profile"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-special md:text-lg font-semibold uppercase"
+                            : "md:text-lg font-medium uppercase"
+                        }
+                      >
+                        <FaUser />
+                        Profile
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
                         to="/dashboard/add-blog"
                         className={({ isActive }) =>
                           isActive
