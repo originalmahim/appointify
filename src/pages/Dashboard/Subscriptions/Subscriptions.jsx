@@ -4,6 +4,17 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 
 const TABLE_HEAD = ["Email", "Registration Time"];
+const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return date.toLocaleString("en-US", options);
+  };
 
 const Subscriptions = () => {
   const [users, setUsers] = useState([]);
@@ -15,7 +26,7 @@ const Subscriptions = () => {
       const response = await axiosSecure("/newsletters");
       setUsers(response.data.result);
       setLoading(false);
-      console.log(response.data.result);
+    //   console.log(response.data.result);
     };
     fetchUsers();
   }, [axiosSecure]);
@@ -63,7 +74,7 @@ const Subscriptions = () => {
                     </td>
                     <td className="border-b border-gray-300 p-4">
                       <Typography variant="small" color="blue-gray">
-                        {user.registrationTime}
+                        {formatTimestamp(user.registrationTime)}
                       </Typography>
                     </td>
                   </tr>
