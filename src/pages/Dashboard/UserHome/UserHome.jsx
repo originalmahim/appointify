@@ -141,7 +141,9 @@ const UserHome = () => {
 
         <dialog id="my_modal_3" className="modal">
           {/* Modal content */}
-          <div className="modal-box h-screen rounded-lg pt-7 bg-white overflow-hidden">
+          <div
+            className={`modal-box h-screen rounded-lg pt-7 bg-white overflow-x-hidden "overflow-auto"
+            }`}>
             <h3 className="font-bold mb-3 text-center text-2xl flex items-center gap-1 justify-center">
               {isAddedEvent ? "" : "Set your availability"}
               {isAddedEvent ? (
