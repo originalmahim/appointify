@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom class for animation delay */
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
 input[type="time"] {
   border: none;
   color: #2a2c2d;
@@ -27,28 +37,6 @@ input[type="time"]::-webkit-datetime-edit-text {
 /* The naming convention for the hour, minute, second, and am/pm field is
   `-webkit-datetime-edit-{field}-field` */
 
-/* Hour */
-input[type="time"]::-webkit-datetime-edit-hour-field {
-  background-color: #acc3ce;
-  border-radius: 15%;
-  padding: 19px 13px;
-}
-
-/* Minute */
-input[type="time"]::-webkit-datetime-edit-minute-field {
-  background-color: #acc3ce;
-  border-radius: 15%;
-  padding: 19px 13px;
-}
-
-/* AM/PM */
-input[type="time"]::-webkit-datetime-edit-ampm-field {
-  background-color: #7155d3;
-  border-radius: 15%;
-  color: #fff;
-  padding: 19px 13px;
-}
-
 /* 'X' button for resetting/clearing time */
 input[type="time"]::-webkit-clear-button {
   display: none;
@@ -57,4 +45,53 @@ input[type="time"]::-webkit-clear-button {
 /* Up/Down arrows for incrementing/decrementing the value */
 input[type="time"]::-webkit-inner-spin-button {
   display: none;
+}
+
+/* This style is for making scroll bar smooth & slim */
+.container {
+  /*   background: gray; */
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Remove all default style */
+.all-unset {
+  all: unset !important;
+}
+
+/* Remove the default style of the time slot */
+input[type="time"]::-webkit-datetime-edit-hour-field,
+input[type="time"]::-webkit-datetime-edit-minute-field,
+input[type="time"]::-webkit-datetime-edit-ampm-field {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  color: black;
+  background-color: white;
 }

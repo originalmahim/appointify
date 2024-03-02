@@ -1,15 +1,17 @@
-import toast from "react-hot-toast";
+ import toast from "react-hot-toast";
 import { AiFillHome } from "react-icons/ai";
-import { FaCalendarAlt, FaListUl } from "react-icons/fa";
+import { FaCalendarAlt, FaListUl, FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { MdAddTask, MdReviews } from "react-icons/md";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { TbBrandBooking, TbMessage } from "react-icons/tb";
+import { MdSubscriptions } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Container from "../components/Container/Container";
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import { DashboardNavbar } from "../components/DashboardNavbar/DashboardNavbar";
 
 const DashboardLayout = () => {
   const [isAdmin] = useAdmin();
@@ -49,19 +51,17 @@ const DashboardLayout = () => {
       <section>
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content bg-gray-50 min-h-screen">
+          <div className="drawer-content bg-[#F8FAFC] min-h-screen">
             {/* Page content here */}
             <label
               htmlFor="my-drawer-2"
-              className="btn btn-ghost drawer-button lg:hidden flex justify-end mr-4 mt-2"
-            >
+              className="btn btn-ghost drawer-button lg:hidden flex justify-end mr-4 mt-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+                stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -70,24 +70,24 @@ const DashboardLayout = () => {
                 />
               </svg>
             </label>
-            <div className="mt-8 lg:mt-14 mb-20">
+            <div className="">
+              <DashboardNavbar />
               <Container>
                 <Outlet />
               </Container>
             </div>
           </div>
-          <div className="drawer-side">
+          <div className="drawer-side ">
             <label
               htmlFor="my-drawer-2"
               aria-label="close sidebar"
-              className="drawer-overlay"
-            ></label>
+              className="drawer-overlay"></label>
             {/* sidebar content here */}
-            <div className="w-64 min-h-screen bg-cardBG py-10 lg:py-12">
-              <p className="text-2xl font-play font-black uppercase ml-6">
+            <div className="w-52 min-h-screen py-10 lg:py-12">
+              <p className="text-1xl font-play font-black uppercase ml-6">
                 Appointify
               </p>
-              <p className="text-lg font-medium uppercase tracking-[3px] ml-6">
+              <p className=" font-medium uppercase tracking-[3px] ml-6">
                 Schedule Now
               </p>
               <ul className="menu mt-16">
@@ -104,6 +104,19 @@ const DashboardLayout = () => {
                       >
                         <AiFillHome />
                         Admin Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/profile"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-special md:text-lg font-semibold uppercase"
+                            : "md:text-lg font-medium uppercase"
+                        }
+                      >
+                        <FaUser />
+                        Profile
                       </NavLink>
                     </li>
                     <li>
@@ -155,7 +168,20 @@ const DashboardLayout = () => {
                         }
                       >
                         <PiUsersThreeFill />
-                        All Users
+                        Manage Users
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/subscriptions"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-special md:text-lg font-semibold uppercase"
+                            : "md:text-lg font-medium uppercase"
+                        }
+                      >
+                        <MdSubscriptions />
+                        Subscriptions
                       </NavLink>
                     </li>
                   </>
@@ -172,6 +198,19 @@ const DashboardLayout = () => {
                       >
                         <AiFillHome />
                         User Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/profile"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-special md:text-lg font-semibold uppercase"
+                            : "md:text-lg font-medium uppercase"
+                        }
+                      >
+                        <FaUser />
+                        Profile
                       </NavLink>
                     </li>
                     <li>

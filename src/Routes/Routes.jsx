@@ -17,10 +17,11 @@ import AdminRoute from "./AdminRoute";
 import Inbox from "../pages/Dashboard/Inbox/Inbox";
 import RatingsPage from "../pages/RatingsPage/RatingsPage";
 import AddReview from "../pages/RatingsPage/AddReview";
-import BookingConfirm from "../pages/Day/BookingConfirm";
-import BookingForm from "../pages/Day/BookingForm";
-
-
+import Profile from "../pages/Dashboard/Profile/Profile";
+import Users from "../pages/Dashboard/Users/Users";
+import Subscriptions from "../pages/Dashboard/Subscriptions/Subscriptions";
+import Availability from "../pages/Availability/Availability";
+import DynamicMeetingPage from "../pages/DynamicMeetingPage/DynamicMeetingPage";
 
 export const routes = createBrowserRouter([
   {
@@ -94,12 +95,29 @@ export const routes = createBrowserRouter([
         ),
       },
       {
+        path: "users",
+        element: <Users />,
+      },
+      {
+        path: "subscriptions",
+        element: <Subscriptions/>,
+      },
+      {
         path: "user-home",
         element: <UserHome />,
       },
       {
         path: "add-review",
         element: <AddReview />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      
+      { 
+        path: "availability",
+        element: <Availability />,
       },
     ],
   },
@@ -110,5 +128,9 @@ export const routes = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/meeting/:email/:id",
+    element: <DynamicMeetingPage />,
   },
 ]);
