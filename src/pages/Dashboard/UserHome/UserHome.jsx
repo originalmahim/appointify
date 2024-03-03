@@ -24,6 +24,7 @@ import BookingConfirmation from "./BookingConfirmation";
 import { FaBowlingBall } from "react-icons/fa";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
+
 const UserHome = () => {
   // use axios for data fetching
   const { user } = useContext(AuthContext);
@@ -109,6 +110,7 @@ const UserHome = () => {
       <Helmet>
         <title>Dashboard | User Home</title>
       </Helmet>
+
 
       {/* Section for creating and managing bookings */}
       <section className="flex items-center container sticky top-0 z-50 bg-white mb-2 p-2 justify-between">

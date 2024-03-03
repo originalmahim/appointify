@@ -76,10 +76,9 @@ const DynamicMeetingPage = () => {
         <div className="md:grid grid-cols-12 gap-5 p-2">
           {/* Content based on Organizer or Participant view */}
           <div
-            className={`transition-opacity col-span-6 ${
+            className={`transition-opacity col-span-5 ${
               isOrganizerView ? "opacity-100" : "opacity-100"
-            } duration-300 ease-in-out sticky top-0 h-screen`}
-          >
+            } duration-300 ease-in-out sticky top-0 h-screen`}>
             {/* Toggle between Organizer and Participant views */}
             <OrganizerParticipantsToggler
               setIsOrganizerView={setIsOrganizerView}
@@ -100,13 +99,14 @@ const DynamicMeetingPage = () => {
             )}
           </div>
           {/* Calendar integration */}
-          <div className="bg-[#f5f5f5c5] h-[80vh] col-span-4">
+          <div className="bg-[#f5f5f5c5] h-[80vh] col-span-5">
             <Calendar
+              type={""}
               setSelectedDate={setSelectedDate}
               setSelectedDay={setSelectedDay}
             />
           </div>
-          <div className="col-span-2 overflow-auto h-[80vh]">
+          <div className=" col-span-2  overflow-auto h-[80vh]">
             <h1 className="font-semibold sticky top-0 bg-white py-2">
               {selectedDay ? selectedDay : "Friday"}
             </h1>
