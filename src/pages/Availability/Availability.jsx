@@ -127,7 +127,6 @@ const Availability = () => {
   //   );
   // };
 
-  console.log(userSlots);
 
   return (
     <div>
