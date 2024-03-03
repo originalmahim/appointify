@@ -1,6 +1,7 @@
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 
 const MeetingDetails = ({ meetingDetails, onReschedule, onConfirmation }) => {
+  console.log(meetingDetails);
   return (
     <div className="relative">
       <h1 className="text-[22px] mb-1 text-left font-semibold">

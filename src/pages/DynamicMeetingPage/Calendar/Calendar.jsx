@@ -23,7 +23,7 @@ export default function Calendar({ setSelectedDay, setSelectedDate }) {
     // date in IOS format
     const formattedDay = getFormattedDay(selectedDate);
     const iosFormattedDate = getIOSFormattedDate(selectedDate);
-
+console.log(selectedDate);
     // storing to the state coming from top component
     setSelectedDate(iosFormattedDate);
     setSelectedDay(formattedDay);
