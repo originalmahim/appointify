@@ -123,9 +123,9 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
   };
 
   return (
-    <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full md:w-[80%]  min-h-[100vh] overflow-hidden pb-8">
+    <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full lg:w-[90%]  md:min-h-[100vh] overflow-hidden pb-8">
       <Card
-        className="p-5 pt-16  mb-2 bg-white md:w-[500px] max-h-[600px] sm:mx-4"
+        className="p-5 md:pt-16  mb-2 bg-white md:w-[500px] md:max-h-[550px] "
         color="transparent"
         shadow={false}>
         <div className="flex flex-col  gap-5 ">
@@ -195,24 +195,21 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             )}
           </div>
 
-          <div className="flex justify-between gap-2 pt-6 mt-6">
-            <Button
-              onClick={handleBack}
-              className="w-1/2 bg-transparent lg:bg-black lg:text-white text-black shadow-none  hover:shadow-none  ">
+          <div className="md:flex md:space-y-0 space-y-3 md:flex-col items-center lg:flex-row justify-between gap-2 pt-6 mt-6">
+            <button onClick={handleBack} className=" btn w-full lg:w-1/2">
               Back
-            </Button>
+            </button>
 
-            <Button
+            <button
               type="submit"
-              className="w-1/2 text-[13px] md:text-[14px] lg:text-[16px]  bg-transparent shadow-none text-primary"
-              fullWidth
-              disabled={!isValid}>
+              disabled={!isValid}
+              className="btn bg-primary text-white w-full hover:bg-primaryHover lg:w-1/2">
               Confirm
-            </Button>
+            </button>
           </div>
         </form>
       </Card>
-      <div className="bg-[#f6f6f6] h-screen lg:w-80 sm:p-4 max-h-[600px]">
+      <div className=" mb-6 md:mb-0 lg:w-80 sm:p-4 md:max-h-[600px]">
         <MeetingDetailsCard />
       </div>
     </div>
