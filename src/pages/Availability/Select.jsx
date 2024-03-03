@@ -1,7 +1,7 @@
 import { Option, Select } from "@material-tailwind/react";
 import { generateTimeSlots } from "../../utils/GenerateTimeSlot";
 
-const SelectTime = ({ label, index}) => {
+const SelectTime = ({ label, index, value }) => {
   const slots = generateTimeSlots(30);
 
   return (
