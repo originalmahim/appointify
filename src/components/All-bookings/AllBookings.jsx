@@ -8,16 +8,16 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const AllBookings = () => {
   const axios = useAxiosPublic();
   const [allEvents, setAllEvents] = useState([]);
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   // Fetching events data on component mount
   useEffect(() => {
-    axios.get(`/events/${user&&user?.email}`).then((res) => {
+    axios.get(`/events/${user && user?.email}`).then((res) => {
       if (res?.data.length > 0) {
         setAllEvents(res?.data);
       }
     });
-  }, [axios,user]);
+  }, [axios, user]);
 
   return (
     // Main grid layout with 7 columns and a gap
