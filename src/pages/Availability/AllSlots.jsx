@@ -13,8 +13,6 @@ const AllSlots = ({ slotDay, slotIndex, dayData, handleRemoveSlot }) => {
     id: "",
   });
 
-  console.log(slotInfo);
-
   const axios = useAxiosPublic();
   const { user } = useAuth();
   const slots = generateTimeSlots(30);
