@@ -22,6 +22,7 @@ import Users from "../pages/Dashboard/Users/Users";
 import Subscriptions from "../pages/Dashboard/Subscriptions/Subscriptions";
 import Availability from "../pages/Availability/Availability";
 import DynamicMeetingPage from "../pages/DynamicMeetingPage/DynamicMeetingPage";
+import BookingForm from "../pages/BookingForm/BookingForm";
 
 export const routes = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ export const routes = createBrowserRouter([
         path: "/contact",
         element: <ContactPage />,
       },
+      // {
+      //   path:'/bookingConfirm',
+      //   element:<BookingConfirm/>
+      // },
     ],
   },
   {
@@ -92,7 +97,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "subscriptions",
-        element: <Subscriptions/>,
+        element: <Subscriptions />,
       },
       {
         path: "user-home",
@@ -106,8 +111,8 @@ export const routes = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
-      
-      { 
+
+      {
         path: "availability",
         element: <Availability />,
       },
@@ -124,5 +129,9 @@ export const routes = createBrowserRouter([
   {
     path: "/meeting/:email/:id",
     element: <DynamicMeetingPage />,
+  },
+  {
+    path: "/bookingFrom",
+    element: <BookingForm />,
   },
 ]);

@@ -17,7 +17,7 @@ const AllBookings = () => {
         setAllEvents(res?.data);
       }
     });
-  }, [axios]);
+  }, [axios,user]);
 
   return (
     // Main grid layout with 7 columns and a gap

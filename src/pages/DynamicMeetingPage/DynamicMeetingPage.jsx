@@ -6,37 +6,65 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
 import Calendar from "./Calendar/Calendar";
 import Slots from "./Slots";
+import BookingForm from "../BookingForm/BookingForm";
+import useTransTackData from "../../hooks/useTransTackData";
 
 
 const DynamicMeetingPage = () => {
   const [isOrganizerView, setIsOrganizerView] = useState(true);
   const [meetingDetails, setMeetingDetails] = useState({});
-  const axios = useAxiosPublic();
-
-  // calendar day select state
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
-
-  //dynamic event id
+  const [accessToken, setAccessToken] = useState(null);
   const { id } = useParams();
+  const axios = useAxiosPublic();
 
-  // fetch event document by that id
+  // Fetch event document by that id
   useEffect(() => {
-    axios.get(`events//singleEvent/${id}`).then((res) => {
-      if (res.data) {
-        setMeetingDetails(res?.data);
+    const fetchMeetingDetails = async () => {
+      try {
+        const res = await axios.get(`/events/singleEvent/${id}`);
+        if (res.data) {
+          setMeetingDetails(res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching meeting details:", error);
       }
-    });
+    };
+    fetchMeetingDetails();
   }, [axios, id]);
 
-  // join or rechedule button handler
+  // Fetch access token on component mount
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access-token");
+    setAccessToken(accessToken);
+  }, []);
+
+  // Handle confirmation button click
   const handleConfirmation = () => {
-    console.log("date", selectedDate);
-    console.log(selectedDay);
+    console.log("Selected date:", selectedDate);
+    console.log("Selected day:", selectedDay);
+
+    // Generate Google Calendar token
+    generateToken();
   };
 
+  // Handle availability submission
   const handleAvailabilitySubmission = (selectedTimeSlots) => {
     console.log("Selected time slots:", selectedTimeSlots);
+  };
+
+  // Function to generate Google Calendar token
+  const generateToken = async () => {
+    try {
+      const logRes = await axios.get("/google");
+      if (logRes.status) {
+        window.location.replace(logRes.data);
+        localStorage.setItem("eventId", id);
+      }
+    } catch (error) {
+      console.error("Error generating Google Calendar token:", error);
+    }
   };
 
   return (
@@ -46,12 +74,13 @@ const DynamicMeetingPage = () => {
           Dynamic page
         </header>
 
-        <div className="md:grid grid-cols-10 gap-2 p-2">
+        <div className="md:grid grid-cols-12 gap-5 p-2">
           {/* Content based on Organizer or Participant view */}
           <div
-            className={`transition-opacity col-span-4 ${
+            className={`transition-opacity col-span-6 ${
               isOrganizerView ? "opacity-100" : "opacity-100"
-            } duration-300 ease-in-out sticky top-0 h-screen`}>
+            } duration-300 ease-in-out sticky top-0 h-screen`}
+          >
             {/* Toggle between Organizer and Participant views */}
             <OrganizerParticipantsToggler
               setIsOrganizerView={setIsOrganizerView}
@@ -71,7 +100,6 @@ const DynamicMeetingPage = () => {
               />
             )}
           </div>
-
           {/* Calendar integration */}
           <div className="bg-[#f5f5f5c5] h-[80vh] col-span-4">
             <Calendar

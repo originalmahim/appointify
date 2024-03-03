@@ -14,6 +14,7 @@ import TrustedCompanies from "../../components/Home/TrustedCompaniesSection/Trus
 import useScrollToTop from "../../hooks/useScrollToTop";
 import { FaArrowUp } from "react-icons/fa";
 
+
 const HomePage = () => {
   const [showChatbot, toggleChatbot] = useState(false);
   const { isScrollVisible, scrollToTop } = useScrollToTop(200);
