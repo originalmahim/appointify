@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import Calendar from "./Calendar/Calendar";
 import Slots from "./Slots";
 
+
 const DynamicMeetingPage = () => {
   const [isOrganizerView, setIsOrganizerView] = useState(true);
   const [meetingDetails, setMeetingDetails] = useState({});

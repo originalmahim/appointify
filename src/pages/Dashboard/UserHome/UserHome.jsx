@@ -23,6 +23,7 @@ import { MdCelebration } from "react-icons/md";
 import BookingConfirmation from "./BookingConfirmation";
 import { FaBowlingBall } from "react-icons/fa";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import TimeZoneContainer from "../../../components/TimeZone/TimeZoneContainer";
 
 const UserHome = () => {
   // use axios for data fetching
@@ -109,6 +110,8 @@ const UserHome = () => {
       <Helmet>
         <title>Dashboard | User Home</title>
       </Helmet>
+
+      <TimeZoneContainer />
 
       {/* Section for creating and managing bookings */}
       <section className="flex items-center container sticky top-0 z-50 bg-white mb-2 p-2 justify-between">
