@@ -19,6 +19,10 @@ import RatingsPage from "../pages/RatingsPage/RatingsPage";
 import AddReview from "../pages/RatingsPage/AddReview";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import Users from "../pages/Dashboard/Users/Users";
+import Subscriptions from "../pages/Dashboard/Subscriptions/Subscriptions";
+import Availability from "../pages/Availability/Availability";
+import DynamicMeetingPage from "../pages/DynamicMeetingPage/DynamicMeetingPage";
+import BookingForm from "../pages/BookingForm/BookingForm";
 
 export const routes = createBrowserRouter([
   {
@@ -56,6 +60,10 @@ export const routes = createBrowserRouter([
         path: "/contact",
         element: <ContactPage />,
       },
+      // {
+      //   path:'/bookingConfirm',
+      //   element:<BookingConfirm/>
+      // },
     ],
   },
   {
@@ -85,7 +93,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "users",
-        element: <Users />
+        element: <Users />,
+      },
+      {
+        path: "subscriptions",
+        element: <Subscriptions />,
       },
       {
         path: "user-home",
@@ -99,6 +111,11 @@ export const routes = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
+
+      {
+        path: "availability",
+        element: <Availability />,
+      },
     ],
   },
   {
@@ -108,5 +125,13 @@ export const routes = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/meeting/:email/:id",
+    element: <DynamicMeetingPage />,
+  },
+  {
+    path: "/bookingFrom",
+    element: <BookingForm />,
   },
 ]);
