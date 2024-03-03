@@ -10,7 +10,7 @@ const AllBookings = () => {
 
   // Fetching events data on component mount
   useEffect(() => {
-    axios.get("/events/shakilahmmed8882@gmail.com").then((res) => {
+    axios.get("/events/forhadairdrop@gmail.com").then((res) => {
       if (res?.data.length > 0) {
         setAllEvents(res?.data);
       }
