@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Booking } from "./Booking";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { BiSolidSelectMultiple } from "react-icons/bi";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 // Component to display bookings and additional information
 const AllBookings = () => {
   const axios = useAxiosPublic();
   const [allEvents, setAllEvents] = useState([]);
+  const {user} = useContext(AuthContext)
 
   // Fetching events data on component mount
   useEffect(() => {
-    axios.get("/events/shakilahmmed8882@gmail.com").then((res) => {
+    axios.get(`/events/${user&&user?.email}`).then((res) => {
       if (res?.data.length > 0) {
         setAllEvents(res?.data);
       }
