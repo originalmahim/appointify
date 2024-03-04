@@ -9,6 +9,7 @@ const MeetingDetailsCard = () => {
         <div className="">
           <div className="mt-3 pt-6 md:pt-3 flex items-center gap-3 ">
             <SingleAvatar
+              usedIn={"bookingForm"}
               img={
                 "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
               }

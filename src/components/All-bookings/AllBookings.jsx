@@ -3,6 +3,7 @@ import { Booking } from "./Booking";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { BiSolidSelectMultiple } from "react-icons/bi";
 import { AuthContext } from "../../Provider/AuthProvider";
+import MeetingConfirmed from "../Modal/MeetingConfirmed";
 
 // Component to display bookings and additional information
 const AllBookings = () => {
@@ -28,6 +29,8 @@ const AllBookings = () => {
           <Booking key={event?._id} meeting={event} />
         ))}
       </div>
+
+      <MeetingConfirmed/>
 
       {/* Right side with a sticky sidebar */}
       <div className="col-span-2 bg-white p-2">
