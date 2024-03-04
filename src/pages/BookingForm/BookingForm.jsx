@@ -2,10 +2,14 @@ import { useForm } from "react-hook-form";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import { Await, Form, useNavigate } from "react-router-dom";
+import { Await, Form, useLocation, useNavigate } from "react-router-dom";
 import useTransTackData from "../../hooks/useTransTackData";
 import { useEffect, useState } from "react";
 import OrganizerView from "../DynamicMeetingPage/OrganizerView";
+import SingleAvatar from "../../components/Avatar/SingleAvatar";
+import { CiCalendarDate } from "react-icons/ci";
+import MeetingDetailsCard from "./MeetingDetailsCard";
+
 export default function BookingForm() {
   const axios = useAxiosPublic();
   const navigate = useNavigate();
@@ -23,12 +27,10 @@ export default function BookingForm() {
     }
   }, []);
 
-
   if (isLoading) <p>isLoading....</p>;
-console.log(data?._id);
-//this fun for create google event
+  console.log(data?._id);
+  //this fun for create google event
   async function createGoogleEvent(email) {
-
     const event = {
       title: data?.type,
       duration: data?.duration,
@@ -36,7 +38,7 @@ console.log(data?._id);
       scheduled_time: data?.scheduled_time,
       description: data?.description,
       buffer_time: data?.buffer_time,
-      participant:[{email:data?.user},{email}]
+      participant: [{ email: data?.user }, { email }],
     };
 
     try {
@@ -51,24 +53,26 @@ console.log(data?._id);
     }
   }
 
-// func for post participant data
+  // func for post participant data
 
-async function saveParticipant(participantData){
-  const participant = {
-    name: participantData.firstName + " " + participantData.lastName,
-    email:participantData.email,
-    message:'fdfdfd',
-    image: 'fdfdfdfrs'
+  async function saveParticipant(participantData) {
+    const participant = {
+      name: participantData.firstName + " " + participantData.lastName,
+      email: participantData.email,
+      message: "fdfdfd",
+      image: "fdfdfdfrs",
+    };
+    console.log(participant);
+    try {
+      const res = await axios.post(
+        `/events/addParticipants/${data?._id}`,
+        participant
+      );
+      console.log(res);
+    } catch (err) {
+      console.error("There is something error to save error");
+    }
   }
-  console.log(participant);
-try {
-  const res =await axios.post(`/events/addParticipants/${data?._id}`,participant);
-  console.log(res);
-} catch (err) {
-  console.error("There is something error to save error");
-  
-}
-}
 
   const handleBack = () => {
     localStorage.removeItem("access-token");
@@ -86,11 +90,6 @@ try {
   );
 }
 
-
-
-
-
-
 function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
   const {
     register,
@@ -98,89 +97,121 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
     formState: { errors, isValid },
   } = useForm();
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     console.log(data);
 
     // fun for create google meet event
-   await createGoogleEvent(data?.email);
-   await saveParticipant(data)
+    await createGoogleEvent(data?.email);
+    await saveParticipant(data);
+  };
+
+  // conditional body background change for this booking confirm page
+  const { pathname } = useLocation();
+
+  if (pathname === "/bookingFrom") {
+    document.body.style.backgroundColor = "#EAEAEA";
+  }
+
+  const data = {
+    type: "Meeting",
+    duration: 60,
+    location: "Virtual",
+    scheduled_time: "2024-03-03 15:30",
+    description: "A brief description of the event",
+    buffer_time: 10,
+    user: "john@example.com",
   };
 
   return (
-    <Card
-      className="mt-8 mb-2 max-w-max mx-auto"
-      color="transparent"
-      shadow={false}
-    >
-      <div className="flex  items-center gap-5 ">
-        <Button onClick={handleBack}>Back</Button>
-        <Typography variant="h6" color="blue-gray">
-          Confirm Bookings
-        </Typography>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-1 flex flex-col gap-6">
-          {/* First Name */}
-          <Typography variant="h6" color="blue-gray" className="-mb-3">
-            First Name <small>(Require)</small>
+    <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full lg:w-[90%]  md:min-h-[100vh] overflow-hidden pb-8">
+      <Card
+        className="p-5 md:pt-16  mb-2 bg-white md:w-[500px] md:max-h-[550px] "
+        color="transparent"
+        shadow={false}>
+        <div className="flex flex-col  gap-5 ">
+          <Typography
+            variant="h6"
+            className="text-[20px] md:text-2xl lg:text-3xl font-normal text-left mb-6"
+            color="blue-gray">
+            Confirm Booking
           </Typography>
-          <Input
-            size="lg"
-            placeholder="Enter your first name"
-            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-            {...register("firstName", { required: true })} // Register input with useForm
-          />
-          {errors.firstName && (
-            <span className="text-red-500 text-sm">
-              {errors.firstName.message}
-            </span>
-          )}
-
-          {/* Last Name */}
-          <Typography variant="h6" color="blue-gray" className="-mb-3">
-            Last Name
-          </Typography>
-          <Input
-            size="lg"
-            placeholder="Enter your last name"
-            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-            {...register("lastName")} // Register input with useForm
-          />
-
-          {/* Email */}
-          <Typography variant="h6" color="blue-gray" className="-mb-3">
-            Email <small>(Require)</small>
-          </Typography>
-          <Input
-            size="lg"
-            placeholder="Enter your email address"
-            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-            {...register("email", { required: true })} // Register input with useForm
-          />
-          {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email.message}</span>
-          )}
         </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-1 flex flex-col gap-6">
+            {/* First Name */}
+            <Typography
+              variant="p"
+              color="blue-gray"
+              className="-mb-6 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within">
+              first Name
+            </Typography>
+            <Input
+              size="lg"
+              variant="standard"
+              placeholder="Enter your first name"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              {...register("firstName", { required: true })} // Register input with useForm
+            />
+            {errors.firstName && (
+              <span className="text-red-500 text-sm">
+                {errors.firstName.message}
+              </span>
+            )}
 
-        <Button type="submit" className="mt-6" fullWidth disabled={!isValid}>
-          Confirm Booking
-        </Button>
-        <Typography
-          color="gray"
-          variant="small"
-          className="mt-4 text-center font-normal"
-        >
-          This form is protected by reCAPTCHA and the Google{" "}
-          <a href="#" className="font-medium text-gray-900">
-            Privacy Policy
-          </a>
-          and{" "}
-          <a href="#" className="font-medium text-gray-900">
-            Terms of Service
-          </a>{" "}
-          apply
-        </Typography>
-      </form>
-    </Card>
+            {/* Last Name */}
+            <Typography
+              variant="p"
+              color="blue-gray"
+              className="-mb-8 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within">
+              Last Name
+            </Typography>
+            <Input
+              size="lg"
+              variant="standard"
+              placeholder="Enter your last name"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              {...register("lastName")} // Register input with useForm
+            />
+
+            {/* Email */}
+            {/* First Name */}
+            <Typography
+              variant="p"
+              color="blue-gray"
+              className="-mb-7 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within:border-none">
+              Email
+            </Typography>
+            <Input
+              size="lg"
+              variant="standard"
+              placeholder="Enter your email address"
+              className=" !border-t-blue-gray-100 focus:!border-t-gray-900"
+              {...register("email", { required: true })} // Register input with useForm
+            />
+            {errors.email && (
+              <span className="text-red-500 text-sm">
+                {errors.email.message}
+              </span>
+            )}
+          </div>
+
+          <div className="md:flex md:space-y-0 space-y-3 md:flex-col items-center lg:flex-row justify-between gap-2 pt-6 mt-6">
+            <button onClick={handleBack} className=" btn w-full lg:w-1/2">
+              Back
+            </button>
+
+            <button
+              type="submit"
+              disabled={!isValid}
+              className="btn bg-primary text-white w-full hover:bg-primaryHover lg:w-1/2">
+              Confirm
+            </button>
+          </div>
+        </form>
+      </Card>
+      <div className=" mb-6 md:mb-0 lg:w-80 sm:p-4 md:max-h-[600px]">
+        <MeetingDetailsCard />
+      </div>
+    </div>
   );
 }

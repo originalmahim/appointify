@@ -93,6 +93,7 @@ const DynamicMeetingPage = () => {
           {/* Calendar integration */}
           <div className="bg-[#f5f5f5c5]  col-span-6">
             <Calendar
+              type={""}
               setSelectedDate={setSelectedDate}
               setSelectedDay={setSelectedDay}
             />

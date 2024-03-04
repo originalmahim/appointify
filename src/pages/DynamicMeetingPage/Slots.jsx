@@ -15,7 +15,7 @@ const Slots = ({ slotDay }) => {
   }, [axios]);
 
   return (
-    <div>
+    <div className="pr-4">
       {/* Show only the slot based on selected day on calendar */}
       {userSlots
         .filter((day) => day.day === slotDay)
