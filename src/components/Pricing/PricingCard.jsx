@@ -1,5 +1,6 @@
 import { FaCircleCheck } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import PayButton from "../../bkash/PayButton";
 
 const PricingCard = ({ plan, index, monthlyBill }) => {
   return (
@@ -29,17 +30,17 @@ const PricingCard = ({ plan, index, monthlyBill }) => {
           year
         </p>
       )}
-      <button className="w-full h-12 text-white font-semibold bg-gradient-blue rounded-lg hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95">
-        Start {plan.plan}
-      </button>
+      <div className="w-full h-12 text-white font-semibold bg-gradient-blue rounded-lg hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95">
+        <PayButton>Get Started</PayButton>
+      </div>
       <div className="mt-5 flex flex-col gap-2">
         {plan?.facilities?.map((service) => (
-          <p className="inline-flex" key={service}>
+          <div className="inline-flex" key={service}>
             <div className="mt-1">
               <FaCircleCheck size={20} className="text-head" />
             </div>
             <span className="pl-2">{service}</span>
-          </p>
+          </div>
         ))}
       </div>
     </div>
