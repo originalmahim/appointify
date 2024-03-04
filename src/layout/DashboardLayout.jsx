@@ -1,8 +1,8 @@
- import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import { AiFillHome } from "react-icons/ai";
 import { FaCalendarAlt, FaListUl, FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
-import { MdAddTask, MdReviews } from "react-icons/md";
+import { MdAddTask, MdOutlineSubscriptions, MdReviews } from "react-icons/md";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { TbBrandBooking, TbMessage } from "react-icons/tb";
 import { MdSubscriptions } from "react-icons/md";
@@ -13,9 +13,15 @@ import useAuth from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import { DashboardNavbar } from "../components/DashboardNavbar/DashboardNavbar";
 
+import { AiOutlineDashboard } from "react-icons/ai";
+import { CiHome, CiUser } from "react-icons/ci";
+import { FcManager } from "react-icons/fc";
+import SingleAvatar from "../components/Avatar/SingleAvatar";
+import { SlArrowDown } from "react-icons/sl";
+
 const DashboardLayout = () => {
   const [isAdmin] = useAdmin();
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
 
   const handleLogout = () => {
     const toastId = toast.loading("Logging Out...");
@@ -83,51 +89,40 @@ const DashboardLayout = () => {
               aria-label="close sidebar"
               className="drawer-overlay"></label>
             {/* sidebar content here */}
-            <div className="w-52 min-h-screen py-10 lg:py-12">
-              <p className="text-1xl font-play font-black uppercase ml-6">
+
+            <div className="w-52 min-h-screen flex flex-col py-3 relative z-50">
+              {/* <div className="bg-[#fffbf974] h-[50vh]  w-32 filter blur-3xl absolute left-0  top-0"></div> */}
+
+              <p className=" text-2xl font-bold pl-5 sticky top-0 bg-white z-50 flex items-center gap-2 text-primary">
                 Appointify
               </p>
-              <p className=" font-medium uppercase tracking-[3px] ml-6">
-                Schedule Now
-              </p>
-              <ul className="menu mt-16">
+              <p className="text-light-gray pl-5 italic">Schedule Now</p>
+
+              <ul className="menu mt-3 space-y-1">
                 {isAdmin ? (
                   <>
                     <li>
                       <NavLink
                         to="/dashboard/admin-home"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
-                        <AiFillHome />
+                        className={` text-[16px]`}>
+                        <CiHome />
                         Admin Home
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         to="/dashboard/profile"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
-                        <FaUser />
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                        <CiUser />
                         Profile
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         to="/dashboard/add-blog"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
                         <MdAddTask />
                         Add Blog
                       </NavLink>
@@ -135,12 +130,8 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         to="/dashboard/manage-blog"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
                         <FaListUl />
                         Manage Blog
                       </NavLink>
@@ -148,12 +139,8 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         to="/dashboard/inbox"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
                         <TbMessage />
                         Inbox
                       </NavLink>
@@ -161,26 +148,18 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         to="/dashboard/users"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
-                        <PiUsersThreeFill />
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                        <FcManager />
                         Manage Users
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         to="/dashboard/subscriptions"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
-                        <MdSubscriptions />
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                        <MdOutlineSubscriptions />
                         Subscriptions
                       </NavLink>
                     </li>
@@ -189,26 +168,9 @@ const DashboardLayout = () => {
                   <>
                     <li>
                       <NavLink
-                        to="/dashboard/user-home"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
-                        <AiFillHome />
-                        User Home
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
                         to="/dashboard/profile"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
                         <FaUser />
                         Profile
                       </NavLink>
@@ -216,12 +178,8 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         to="/dashboard/manage-booking"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
                         <FaCalendarAlt />
                         Manage Booking
                       </NavLink>
@@ -232,8 +190,8 @@ const DashboardLayout = () => {
                         to="/dashboard/payment-history"
                         className={({ isActive }) =>
                           isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
+                            ? ""
+                            
                         }
                       >
                         <BiSolidWalletAlt />
@@ -245,8 +203,8 @@ const DashboardLayout = () => {
                         to="/dashboard/cart"
                         className={({ isActive }) =>
                           isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
+                            ? ""
+                            
                         }
                       >
                         <IoMdCart />
@@ -257,12 +215,8 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         to="/dashboard/bookings"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
                         <TbBrandBooking />
                         My Bookings
                       </NavLink>
@@ -270,12 +224,8 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         to="/dashboard/add-review"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-special md:text-lg font-semibold uppercase"
-                            : "md:text-lg font-medium uppercase"
-                        }
-                      >
+                        className={`${({ isActive }) =>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
                         <MdReviews />
                         Add Review
                       </NavLink>
@@ -283,28 +233,35 @@ const DashboardLayout = () => {
                   </>
                 )}
               </ul>
-              <div className="divider px-5"></div>
+              <div className="divider py-0"></div>
               <ul className="menu">
                 <li>
                   <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-special md:text-lg font-semibold uppercase"
-                        : "md:text-lg font-medium uppercase"
-                    }
-                  >
+                    to="/dashboard/user-home"
+                    className={`${({ isActive }) =>
+                      isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
                     <AiFillHome />
+                    User Home
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/"
+                    className={`${({ isActive }) =>
+                      isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                    <CiHome />
                     Home
                   </NavLink>
                 </li>
+
                 {/* <li>
                 <NavLink
                   to="/blogs"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-special md:text-lg font-semibold uppercase"
-                      : "md:text-lg font-medium uppercase"
+                      ? ""
+                      
                   }
                 >
                   <IoBookmarksSharp />
@@ -316,8 +273,8 @@ const DashboardLayout = () => {
                   to="/pricing"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-special md:text-lg font-semibold uppercase"
-                      : "md:text-lg font-medium uppercase"
+                      ? ""
+                      
                   }
                 >
                   <MdOutlinePriceChange />
@@ -329,8 +286,8 @@ const DashboardLayout = () => {
                   to="/contact"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-special md:text-lg font-semibold uppercase"
-                      : "md:text-lg font-medium uppercase"
+                      ? ""
+                      
                   }
                 >
                   <BiSolidContact />
@@ -342,8 +299,8 @@ const DashboardLayout = () => {
                   to="/about-us"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-special md:text-lg font-semibold uppercase"
-                      : "md:text-lg font-medium uppercase"
+                      ? ""
+                      
                   }
                 >
                   <IoInformationCircleSharp />
@@ -351,15 +308,31 @@ const DashboardLayout = () => {
                 </NavLink>
               </li> */}
                 <li>
-                  <Link
-                    onClick={handleLogout}
-                    className="md:text-lg font-medium uppercase"
-                  >
-                    <FiLogOut />
+                  <Link onClick={handleLogout} className="">
+                    <FiLogOut className="text-light-gray" />
                     Logout
                   </Link>
                 </li>
               </ul>
+
+              <div className=" flex  flex-col mt-auto  justify-end pl-4 cursor-pointer">
+                <div className="flex gap-2">
+                  <div>
+                    <SingleAvatar img={user && user.photoURL} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center">
+                      <h6 className="font-semibold">
+                        {user && user.displayName}
+                      </h6>
+                      <SlArrowDown className="text-[12px]" />
+                    </div>
+                    <p className="text-light-gray">
+                      {user && `${user.email.slice(0, 5)}....@gmail.com`}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
