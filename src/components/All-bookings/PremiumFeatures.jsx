@@ -17,28 +17,28 @@ const PremimumFeatures = () => {
               <img className="" src={premiumIcon} alt="" />
             </div>
           </div>
-          <h1 className="font-bold text-black mb-1 text-center text-[20px] pt-6">
+          <h1 className="font-bold text-black mb-3 text-center text-[20px] pt-6">
             Explore Beta Features
           </h1>
           {/* from-[#ff5c10] to-[#ff9900e3] */}
           <ul className="list-disc list-inside text-sm ">
             {/* List of beta features for users to explore */}
-            <li className="list-none flex gap-1 items-center text-[15px] md:text-[16px]  mt-1">
+            <li className="list-none flex gap-1 items-center  text-[15px] md:text-[15px] mt-1">
               {" "}
               <FaCheckCircle className="text-active mt-2" /> Smart Meeting
               Scheduler
             </li>
-            <li className="list-none flex gap-1 items-center text-[15px] md:text-[16px]  mt-1">
+            <li className="list-none flex gap-1 items-center  text-[15px] md:text-[15px] mt-1">
               {" "}
               <FaCheckCircle className="text-active mt-2" /> Intelligent
               Agenda Planning
             </li>
-            <li className="list-none flex gap-1 items-center  text-[15px] md:text-[16px] mt-1">
+            <li className="list-none flex gap-1 items-center  text-[15px] md:text-[15px] mt-1">
               {" "}
               <FaCheckCircle className="text-active mt-2" /> Language
               Preference Settings
             </li>
-            <button className="bg-primary btn btn-block mt-5 text-white">
+            <button className="bg-primary btn btn-block mt-8 text-white">
               Get beta now
             </button>
           </ul>

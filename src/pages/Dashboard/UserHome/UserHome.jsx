@@ -335,6 +335,7 @@ const UserHome = () => {
 
       {/* Display all booking pages */}
       <AllBookings 
+      setAllSearchedEvents={setAllSearchedEvents}
       searchQuery={searchQuery}
       searchedEvents={allSearchedEvents} />
     </>
