@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Slot from "../Availability/Slots";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useTransTackData from "../../hooks/useTransTackData";
+import Loading from "../../components/common/Loading/Loading";
 
-const Slots = ({ slotDay, eventId }) => {
+const Slots = ({ slotDay, eventId,handleSlotSubmit }) => {
   const axios = useAxiosSecure();
   const [availableSlots, setAvailableSlots] = useState([]);
   const [slotsInterval, setSlotsInterval] = useState('');
@@ -13,8 +13,7 @@ const Slots = ({ slotDay, eventId }) => {
     slotDay
   );
 
-
-  if (isLoading) ;
+  if (isLoading) <Loading/>;
   useEffect(() => {
     if (data) {
       setAvailableSlots(data?.eventSpecificDaySlots);
@@ -33,23 +32,7 @@ const Slots = ({ slotDay, eventId }) => {
     AvailableTimeSlots();
   }, [availableSlots,slotsInterval]);
 
-  const handleSlotSubmit = (slot) => {
-    // Generate Google Calendar token
-    generateToken();
-  };
 
-  // Function to generate Google Calendar token
-  const generateToken = async () => {
-    try {
-      const logRes = await axios.get("/google");
-      if (logRes.status) {
-        window.location.replace(logRes.data);
-        localStorage.setItem("eventId", id);
-      }
-    } catch (error) {
-      console.error("Error generating Google Calendar token:", error);
-    }
-  };
   return (
     <div className="w-full">
       {timeSlots?.map((timeSlot, index) => (

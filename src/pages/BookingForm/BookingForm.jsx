@@ -2,12 +2,11 @@ import { useForm } from "react-hook-form";
 import { Card, Input, Button, Typography, Spinner } from "@material-tailwind/react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import { Await, Form, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useTransTackData from "../../hooks/useTransTackData";
 import { useEffect, useState } from "react";
-import OrganizerView from "../DynamicMeetingPage/OrganizerView";
-import SingleAvatar from "../../components/Avatar/SingleAvatar";
-import { CiCalendarDate } from "react-icons/ci";
+import MeetingDetailsCard from "./MeetingDetailsCard";
+
 
 export default function BookingForm() {
   const axios = useAxiosPublic();
@@ -19,6 +18,7 @@ export default function BookingForm() {
     eventId
   );
 
+  console.log(data);
   useEffect(() => {
     const id = localStorage.getItem("eventId");
     if (id) {
@@ -73,6 +73,8 @@ export default function BookingForm() {
     }
   }
 
+
+
   const handleBack = () => {
     localStorage.removeItem("access-token");
   };
@@ -111,15 +113,15 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
     document.body.style.backgroundColor = "#EAEAEA";
   }
 
-  const data = {
-    type: "Meeting",
-    duration: 60,
-    location: "Virtual",
-    scheduled_time: "2024-03-03 15:30",
-    description: "A brief description of the event",
-    buffer_time: 10,
-    user: "john@example.com",
-  };
+  // const data = {
+  //   type: "Meeting",
+  //   duration: 60,
+  //   location: "Virtual",
+  //   scheduled_time: "2024-03-03 15:30",
+  //   description: "A brief description of the event",
+  //   buffer_time: 10,
+  //   user: "john@example.com",
+  // };
 
   return (
     <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full lg:w-[90%]  md:min-h-[100vh] overflow-hidden pb-8">
@@ -209,6 +211,7 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
         </form>
       </Card>
       <div className=" mb-6 md:mb-0 lg:w-80 sm:p-4 md:max-h-[600px]">
+        {/* <MeetingDetailsCard/> */}
       </div>
     </div>
   );

@@ -2,24 +2,20 @@ import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import useTransTackData from "../../../hooks/useTransTackData";
-import getDayNameFromDate from "../../../utils/getDayNameFromDate";
 
-export default function Calendar({ date, setDate,allowedDays }) {
+export default function Calendar({ date, setDate, allowedDays }) {
   const { data, isLoading } = useTransTackData(
     `/users/availability/forhadairdrop@gmail.com`
   );
 
-
-
-
-  // Function to determine if a date is not enable
-const isNotEnabledDay = (day) => {
-  const dayName = day.toLocaleString("en-US", { weekday: "long" });
-  return !allowedDays?.includes(dayName);
-};
+  // Function to determine if a date is not enabled
+  const isNotEnabledDay = (day) => {
+    const dayName = day.toLocaleString("en-US", { weekday: "long" });
+    return !allowedDays?.includes(dayName);
+  };
 
   return (
-    <div className=" flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <div className="max-w-lg">
         <DayPicker
           mode="single"
@@ -28,19 +24,18 @@ const isNotEnabledDay = (day) => {
           showOutsideDays
           className="border-4"
           modifiers={{
-            disabled: isNotEnabledDay, // Disable all days that are not
+            disabled: isNotEnabledDay,
           }}
-          // modifiersStyles={}
-
           classNames={{
-            caption: "flex justify-center py-2 mb-4 relative items-center",
-            caption_label: "text-sm font-medium text-gray-900",
+            caption:
+              "flex justify-center py-2 mb-4 relative items-center text-sm font-medium text-gray-900",
             nav: "flex items-center",
             nav_button:
-              "h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300",
+              "h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500", // Added focus styles
             nav_button_previous: "absolute left-1.5",
             nav_button_next: "absolute right-1.5",
-            table: "w-full border-collapse",
+            table:
+              "w-full border-collapse md:max-w-md lg:max-w-lg xl:max-w-2xl", // Adjust max-width for different screen sizes
             head_row: "flex font-medium text-gray-900",
             head_cell: "m-0.5 w-14 font-normal text-sm",
             row: "flex w-full mt-2",
