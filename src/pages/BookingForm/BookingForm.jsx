@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Card, Input, Button, Typography } from "@material-tailwind/react";
+import { Card, Input, Button, Typography, Spinner } from "@material-tailwind/react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { Await, Form, useLocation, useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import OrganizerView from "../DynamicMeetingPage/OrganizerView";
 import SingleAvatar from "../../components/Avatar/SingleAvatar";
 import { CiCalendarDate } from "react-icons/ci";
-import MeetingDetailsCard from "./MeetingDetailsCard";
 
 export default function BookingForm() {
   const axios = useAxiosPublic();
@@ -27,8 +26,8 @@ export default function BookingForm() {
     }
   }, []);
 
-  if (isLoading) <p>isLoading....</p>;
-  console.log(data?._id);
+  if (isLoading) <Spinner/>
+
   //this fun for create google event
   async function createGoogleEvent(email) {
     const event = {
@@ -102,7 +101,7 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
 
     // fun for create google meet event
     await createGoogleEvent(data?.email);
-    await saveParticipant(data);
+    // await saveParticipant(data);
   };
 
   // conditional body background change for this booking confirm page
@@ -210,7 +209,6 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
         </form>
       </Card>
       <div className=" mb-6 md:mb-0 lg:w-80 sm:p-4 md:max-h-[600px]">
-        <MeetingDetailsCard />
       </div>
     </div>
   );

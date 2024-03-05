@@ -1,5 +1,5 @@
 import { useTimezoneSelect, allTimezones } from "react-timezone-select";
-// import Select from "react-select";
+import Select from "react-select";
 
 import PropTypes from "prop-types";
 
@@ -10,12 +10,13 @@ const Timezone = ({ onChange }) => {
     "Europe/Berlin": "Frankfurt",
   };
 
+
   const { options, parseTimezone } = useTimezoneSelect({
     labelStyle,
     timezones,
     isSearchable:true,
   });
-  console.log(options);
+
 
   const handleTimezoneChange = (e) => {
     const selectedTimezone = parseTimezone(e.currentTarget.value);
@@ -23,17 +24,24 @@ const Timezone = ({ onChange }) => {
   };
 
   return (
-    <select
-      className="text-sm border-1 p-2"
-      onChange={handleTimezoneChange}
+    <>
+      {/* <div className="text-sm w-full md:min-w-10">
+        <Select
+          options={options.map((option) => option.value)}
+          value={options.values}
+          defaultInputValue={options.map((option) => option.value)}
+          onChange={handleTimezoneChange}
+        />
+      </div> */}
+      <select className="text-sm border-1 max-w-28 p-2" onChange={handleTimezoneChange}>
 
-    >
-      {options.map((option) => (
-        <option value={option.value} key={option.value}>
-          {option.value}
-        </option>
-      ))}
-    </select>
+        {options.map((option) => (
+          <option value={option.value} key={option.value}>
+            {option.value}
+          </option>
+        ))}
+      </select>
+    </>
   );
 };
 
