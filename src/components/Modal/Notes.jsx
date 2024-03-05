@@ -45,14 +45,14 @@ const Notes = ({ onSave }) => {
 
       {isInputVisible && (
         <div className="absolute w-full min-w-[200px] top-11">
+
           <textarea
-          style={{backgroundColor:"white",zIndex:999}}
-            className="peer h-full min-h-[100px] w-full resize-none rounded-[5px] border bg-white z-50  overflow-auto px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-400  focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
-            placeholder="What do you think.."
+            className="h-full min-h-[100px] relative w-full placeholder:text-[white] text-white resize-none border-none rounded-[5px] bg-[#7EDA4A] shadow-lg z-50  overflow-auto px-3 py-2.5 font-sans text-sm font-normal focus-within:outline-none   "
+            placeholder="point:1"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             
-          ></textarea>
+          ><span></span></textarea>
        
         
         </div>

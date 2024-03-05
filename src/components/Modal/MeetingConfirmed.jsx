@@ -9,8 +9,17 @@ import Remaindar from "./Remaindar";
 import Notes from "./Notes";
 import Feedback from "./Feedback";
 import Gradient from "../Gradient/Gradient";
+import { useState } from "react";
 
 const MeetingConfirmed = () => {
+  
+  
+  
+  
+  //Remaindar state 
+  const [remaindar,setRemaindar] = useState(0)
+  
+  
   // participant and organizer photo url
   const organizerImg =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Stephen_tWitch_Boss_at_Dizzy_Feet_Gala_2014.jpg/220px-Stephen_tWitch_Boss_at_Dizzy_Feet_Gala_2014.jpg";
@@ -50,7 +59,9 @@ const MeetingConfirmed = () => {
               </div>
               {/* Meeting link, Remaindar and Notes */}
               <MeetLink url={"/link/"} />
-              <Remaindar />
+              <Remaindar 
+              remaindar={remaindar}
+              setRemaindar={setRemaindar}/>
               <Notes content={"Point your notes"} />
             </div>
           </div>

@@ -3,34 +3,33 @@ import { Booking } from "./Booking";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { BiSolidSelectMultiple } from "react-icons/bi";
 import { AuthContext } from "../../Provider/AuthProvider";
-import MeetingConfirmed from "../Modal/MeetingConfirmed";
 
 // Component to display bookings and additional information
 const AllBookings = () => {
   const axios = useAxiosPublic();
   const [allEvents, setAllEvents] = useState([]);
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   // Fetching events data on component mount
   useEffect(() => {
-    axios.get(`/events/${user&&user?.email}`).then((res) => {
+    axios.get(`/events/${user && user?.email}`).then((res) => {
       if (res?.data.length > 0) {
         setAllEvents(res?.data);
       }
     });
-  }, [axios,user]);
+  }, [axios, user]);
 
   return (
     // Main grid layout with 7 columns and a gap
-    <div className="md:grid grid-cols-7 gap-2">
+    <div className="md:grid grid-cols-6 gap-5">
+      
+
       {/* Left side with bookings grid */}
-      <div className="col-span-5 grid lg:grid-cols-2 gap-4">
+      <div className="col-span-4 grid  gap-5">
         {allEvents?.map((event) => (
           <Booking key={event?._id} meeting={event} />
         ))}
       </div>
-
-      <MeetingConfirmed/>
 
       {/* Right side with a sticky sidebar */}
       <div className="col-span-2 bg-white p-2">

@@ -11,7 +11,6 @@ import Container from "../components/Container/Container";
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
-import { DashboardNavbar } from "../components/DashboardNavbar/DashboardNavbar";
 
 import { AiOutlineDashboard } from "react-icons/ai";
 import { CiHome, CiUser } from "react-icons/ci";
@@ -61,7 +60,7 @@ const DashboardLayout = () => {
             {/* Page content here */}
             <label
               htmlFor="my-drawer-2"
-              className="btn btn-ghost drawer-button lg:hidden flex justify-end mr-4 mt-2">
+              className="btn btn-ghost bg-white drawer-button lg:hidden flex justify-end mr-4 mt-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -77,7 +76,6 @@ const DashboardLayout = () => {
               </svg>
             </label>
             <div className="">
-              <DashboardNavbar />
               <Container>
                 <Outlet />
               </Container>
@@ -90,7 +88,7 @@ const DashboardLayout = () => {
               className="drawer-overlay"></label>
             {/* sidebar content here */}
 
-            <div className="w-52 min-h-screen flex flex-col py-3 relative z-50">
+            <div style={{zIndex:9999}} className="w-52 min-h-screen flex flex-col py-3 bg-[white] relative z-50">
               {/* <div className="bg-[#fffbf974] h-[50vh]  w-32 filter blur-3xl absolute left-0  top-0"></div> */}
 
               <p className=" text-2xl font-bold pl-5 sticky top-0 bg-white z-50 flex items-center gap-2 text-primary">

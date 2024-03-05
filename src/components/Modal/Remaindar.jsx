@@ -3,7 +3,10 @@ import { Option, Select } from "@material-tailwind/react";
 import React from "react";
 import remaindarIcon from "../../assets/icons/remaindar.png";
 
-const Remaindar = () => {
+const Remaindar = ({remaindar,setRemaindar}) => {
+
+
+  console.log(remaindar)
   return (
     <div className="flex gap-2 items-center">
       <div className="">
@@ -14,8 +17,16 @@ const Remaindar = () => {
         </div>
       </div>
 
-      <Select variant="standard" arrow={false} className="text-[14px] md:text-[16px]" label="Set Remaindar">
-        <Option className="flex items-center gap-2">
+      <Select
+      // onChange={(e) => setRemaindar()}
+      variant="standard"
+      value={remaindar}
+      arrow={false}
+      className="text-[14px] md:text-[16px]" label="Set Remaindar"
+      >
+        <Option 
+        value={15}
+        className="flex items-center gap-2">
           <svg
             width="16"
             height="17"
@@ -33,7 +44,9 @@ const Remaindar = () => {
           15 minutes ago
         </Option>
         {/* remaindar time 2  */}
-        <Option className="flex items-center gap-2">
+        <Option 
+        value={30}
+        className="flex items-center gap-2">
           <svg
             width="16"
             height="17"
@@ -51,7 +64,9 @@ const Remaindar = () => {
           30 minutes ago
         </Option>
         {/* remaindar time 2  */}
-        <Option className="flex items-center gap-2">
+        <Option
+        value={60}
+        className="flex items-center gap-2">
           <svg
             width="16"
             height="17"

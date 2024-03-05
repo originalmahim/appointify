@@ -23,7 +23,7 @@ import { MdCelebration } from "react-icons/md";
 import BookingConfirmation from "./BookingConfirmation";
 import { FaBowlingBall } from "react-icons/fa";
 import { AuthContext } from "../../../Provider/AuthProvider";
-
+import Search from "../../../components/Search/Search";
 
 const UserHome = () => {
   // use axios for data fetching
@@ -105,39 +105,50 @@ const UserHome = () => {
     }
   };
 
+  // Search handler
+  const handleSearchSubmit = (query) => {
+    console.log("Search query:", query);
+    // Perform search or any other action
+  };
+
   return (
     <>
       <Helmet>
         <title>Dashboard | User Home</title>
       </Helmet>
 
-
       {/* Section for creating and managing bookings */}
-      <section className="flex items-center container sticky top-0 z-50 bg-white mb-2 p-2 justify-between">
-        <h2 className="text-2xl flex gap-2 items-center mb-3 font-bold sm:text-2xl">
-          <SlCalender />
-          All Booking pages
-        </h2>
-
-        {/* Button for creating a new booking */}
-        <h2
-          onMouseEnter={() => setIsCreateBookingHover(true)}
-          onMouseLeave={() => setIsCreateBookingHover(false)}
-          onClick={() => document.getElementById("my_modal_3").showModal()}
-          className="rounded-full bg-primary text-white hover:bg-[#ff5e00] p-2 transition-all duration-300 inline-flex items-center cursor-pointer relative">
-          <FaPlusCircle className="ml-1" />
-          <PopOver
-            text={"Create booking page"}
-            isHover={isCreateBookingHover}
+      <section className="flex items-center bg-white z-50 mt-4 mb-5 p-2 justify-between">
+        <div className="flex justify-between w-[100%] items-center">
+          <div className="flex gap-2 items-center sticky top-0">
+            <h2 className="md:text-[22px] font-semibold flex gap-2 items-center my-3  sm:text-2xl">
+              All Bookings
+              <SlCalender className="text-[18px]" />
+            </h2>
+          </div>
+          {/* Search all off your booking and other stuff */}
+          <Search
+            onChange={handleSearchSubmit}
+            placeholder="Custom Placeholder"
           />
-        </h2>
-
+          {/* Button for creating a new booking */}
+          <h2
+            onMouseEnter={() => setIsCreateBookingHover(true)}
+            onMouseLeave={() => setIsCreateBookingHover(false)}
+            onClick={() => document.getElementById("my_modal_3").showModal()}
+            className="rounded-full w-9 h-9 justify-center bg-primary  text-white hover:bg-[#ff5e00] transition-all duration-300 inline-flex items-center cursor-pointer relative"
+          >
+            <FaPlusCircle />
+            <PopOver text={"Book"} isHover={isCreateBookingHover} />
+          </h2>
+        </div>
         {/* Modal for creating a new booking */}
         <dialog id="my_modal_3" className="modal">
           {/* Modal content */}
           <div
             className={`modal-box h-screen rounded-lg pt-7 bg-white overflow-x-hidden "overflow-auto"
-            }`}>
+            }`}
+          >
             <h3 className="font-bold mb-3 text-center text-2xl flex items-center gap-1 justify-center">
               {isAddedEvent ? "" : "Set your availability"}
               {isAddedEvent ? (
@@ -169,7 +180,7 @@ const UserHome = () => {
                   {/* Title input */}
                   <Input
                     variant="static"
-                    defaultValue={"Shakil space 1 "}
+                    defaultValue={"space 1 "}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"
                   />
@@ -189,7 +200,8 @@ const UserHome = () => {
                       <label
                         onClick={() => setOnDaysToggle(!onDaysToggle)}
                         defaultChecked
-                        className="flex gap-1 items-center text-[14px] cursor-pointer text-gray-600">
+                        className="flex gap-1 items-center text-[14px] cursor-pointer text-gray-600"
+                      >
                         <LiaCalendarWeekSolid className="text-[14px]" />
                         Available Days:
                       </label>
@@ -208,7 +220,8 @@ const UserHome = () => {
                         onClick={() =>
                           setIsOpenParticipants(!isOpenParticipants)
                         }
-                        className="flex gap-1 items-center text-[14px] cursor-pointer text-gray-600">
+                        className="flex gap-1 items-center text-[14px] cursor-pointer text-gray-600"
+                      >
                         <LuUsers2 className="text-[14px]" /> Participants
                       </p>
 
@@ -239,7 +252,8 @@ const UserHome = () => {
                       <Select
                         label="Location"
                         variant="standard"
-                        onChange={setLocation}>
+                        onChange={setLocation}
+                      >
                         <Option value="Physical">Physical</Option>
                         <Option value="Virtual">Virtual</Option>
                       </Select>
@@ -254,15 +268,18 @@ const UserHome = () => {
                         label="Platform"
                         style={{ display: "flex" }}
                         variant="standard"
-                        onChange={setPlatform}>
+                        onChange={setPlatform}
+                      >
                         <Option
                           value="zoom"
-                          className="flex items-center gap-2">
+                          className="flex items-center gap-2"
+                        >
                           <BiLogoZoom className="text-xl text-[blue]" /> Zoom
                         </Option>
                         <Option
                           value="google-meet"
-                          className="flex items-center gap-2">
+                          className="flex items-center gap-2"
+                        >
                           <SiGooglemeet className="text-[#00A745]" />
                           Google Meet
                         </Option>
@@ -291,7 +308,8 @@ const UserHome = () => {
                   <div className="flex ">
                     <button
                       type="submit"
-                      className="mt-10 bg-primary font-normal px-8 py-1 rounded-sm text-white  hover:bg-[#ff5900] hover:rounded-none transition-all duration-200">
+                      className="mt-10 bg-primary font-normal px-8 py-1 rounded-sm text-white  hover:bg-[#ff5900] hover:rounded-none transition-all duration-200"
+                    >
                       Confirm
                     </button>
                   </div>
