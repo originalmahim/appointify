@@ -11,7 +11,7 @@ const Search = ({ onChange, placeholder }) => {
         <input
           type="text"
           name="q"
-          className="w-full outline-[2px] placeholder:text-[11px] md:placeholder:text-[14px] lg:placeholder:text-[16px] focus-within:outline-none h-12 shadow p-4 rounded-full"
+          className="w-full outline-[2px] placeholder:text-[#a1a1a1] bg-gradient-to-r from-[#fbfeff] to-transparent md:placeholder:text-[11px] lg:placeholder:text-[14px] focus-within:outline-none h-12 shadow p-4 rounded-full"
           placeholder={placeholder || "Search"}
           onChange={handleChange}
         />

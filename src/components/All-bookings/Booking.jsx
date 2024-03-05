@@ -1,14 +1,11 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-
 // Importing necessary components and icons
 import {
-  Card,
   CardBody,
   CardFooter,
   Typography,
 } from "@material-tailwind/react";
-import AvatarStack from "../common/Avatar/Avatar";
 import { SiGooglemeet } from "react-icons/si";
 import { BiLogoZoom } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -28,7 +25,7 @@ export function Booking({ meeting }) {
 
   return (
     // Card container with some styling
-    <div className=" p-1 relative flex  items-center justify-between overflow-hidden bg-white shadow-sm rounded-lg">
+    <div className="mt-5 p-1 relative flex h-[90px]  items-center justify-between overflow-hidden bg-white shadow-sm rounded-lg">
       {/* Card body section */}
       <CardBody className="p-0">
         {/* Title and platform icon */}
@@ -61,17 +58,12 @@ export function Booking({ meeting }) {
               >
                 <span className="hidden md:block">{link}</span>
                 <span className="block md:hidden">appointify.com</span>
-                
               </Link>
             </CardFooter>
           </Typography>
         </div>
       </CardBody>
-
-      {/* Background circle for visual effect */}
-      {/* <div className="absolute top-0 -right-32 w-96 h-96 bg-[rgba(255,250,254,0.74)] animation-delay-2000 rounded-full filter blur-[80px] mix-blend-multiply"></div> */}
-
-      <BsThreeDotsVertical/>
+      <BsThreeDotsVertical className="mr-3"/>
     </div>
   );
 }

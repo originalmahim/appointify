@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaPlusCircle } from "react-icons/fa";
 import { LiaCalendarWeekSolid } from "react-icons/lia";
@@ -57,8 +57,14 @@ const UserHome = () => {
   //Posted event
   const [newAddedEvent, setNewlyAddedEvent] = useState({});
   const [isAddedEvent, setIsAddedEvent] = useState(false);
-  // Example usage in your handleDayToggle function
 
+  // all events by search results
+  const [allSearchedEvents,setAllSearchedEvents] = useState([])
+  const [searchQuery,setSearchQuery] = useState("")
+
+  
+  
+  // Example usage in your handleDayToggle function
   const handleDayToggle = (day) => {
     setAvailableDays((prevAvailableDays) => {
       // Push unchecked days to the state
@@ -106,9 +112,16 @@ const UserHome = () => {
   };
 
   // Search handler
-  const handleSearchSubmit = (query) => {
-    console.log("Search query:", query);
-    // Perform search or any other action
+  const handleSearchSubmit = async(query) => {
+
+    setSearchQuery(query)
+    const allSearchEvents = await axios.get(`/events/${user&&user?.email}/${query}`)
+    if(allSearchEvents?.data?.length > 0){
+      setAllSearchedEvents(allSearchEvents.data)
+    } else{
+      setAllSearchedEvents([])
+    }
+    
   };
 
   return (
@@ -129,7 +142,7 @@ const UserHome = () => {
           {/* Search all off your booking and other stuff */}
           <Search
             onChange={handleSearchSubmit}
-            placeholder="Custom Placeholder"
+            placeholder="Search your events.."
           />
           {/* Button for creating a new booking */}
           <h2
@@ -321,7 +334,9 @@ const UserHome = () => {
       </section>
 
       {/* Display all booking pages */}
-      <AllBookings />
+      <AllBookings 
+      searchQuery={searchQuery}
+      searchedEvents={allSearchedEvents} />
     </>
   );
 };
