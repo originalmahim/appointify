@@ -30,7 +30,7 @@ const PricingCard = ({ plan, index, monthlyBill }) => {
           year
         </p>
       )}
-      <div className="w-full h-12 text-white font-semibold bg-gradient-blue rounded-lg hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95">
+      <div>
         <PayButton>Get Started</PayButton>
       </div>
       <div className="mt-5 flex flex-col gap-2">
