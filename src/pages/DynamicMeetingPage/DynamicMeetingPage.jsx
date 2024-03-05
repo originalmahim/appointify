@@ -15,11 +15,13 @@ import Calendar from "./Calendar/Calendar";
 import getDayNameFromDate from "../../utils/getDayNameFromDate";
 import Loading from "../../components/common/Loading/Loading";
 import { convertTo24HourFormat } from "../../utils/convertTo24HourFormat";
+import { calculateNewScheduled } from "../../utils/calculateNewScheduled";
 
 const DynamicMeetingPage = () => {
   const { id } = useParams();
   const axios = useAxiosPublic();
-  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null); // Store selected date
+  const [date, setDate] = useState(new Date()); // Initial date for display
   const selectedDay = getDayNameFromDate(date);
   const [allowDays, setAllowDays] = useState([]);
   const [meetingDetails, setMeetingDetails] = useState({});
@@ -36,21 +38,24 @@ const DynamicMeetingPage = () => {
 
   useEffect(() => {
     const getDays = async () => {
-      const res = await axios.get(
-        `events/dayAvailability/${id}/allDays`
-      );
+      const res = await axios.get(`events/dayAvailability/${id}/allDays`);
       setAllowDays(res.data.dayNames);
     };
 
     getDays();
-  }, [axios,id]);
+  }, [axios, id]);
 
-console.log(date);
-  const handleSlotSubmit = (slot) => {
-    const s = convertTo24HourFormat(slot)
-    console.log(s);
-    // Generate Google Calendar token
-    // generateToken();
+  const handleSlotSubmit = async (slot) => {
+    const dateString = date.toISOString();
+    try {
+      // Generate Google Calendar token
+      // generateToken();
+
+      // func for scheduleTime post
+      await scheduleTimePost(dateString, slot);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   // Function to generate Google Calendar token
@@ -60,30 +65,28 @@ console.log(date);
       if (logRes.status) {
         window.location.replace(logRes.data);
         localStorage.setItem("eventId", id);
-  
       }
     } catch (error) {
       console.error("Error generating Google Calendar token:", error);
     }
   };
 
-//post event schedule time
+  //post event schedule time
 
-async function scheduleTimePost(){
-  try {
-    const res = axios.put(`/events/updateEvent/${id}`);
-    console.log(res);
-  } catch (err) {
-    console.error("Error post schedule time");
-    
+  async function scheduleTimePost(dateString, slot) {
+    try {
+      const convertedTime = convertTo24HourFormat(slot);
+      const scheduled_time = calculateNewScheduled(dateString, convertedTime);
+      console.log(scheduled_time);
+      //post data
+      const res = await axios.put(`/events/updateEvent/${id}`, {
+        scheduled_time,
+      });
+      console.log(res);
+    } catch (err) {
+      console.error("Error post schedule time");
+    }
   }
-}
-
-
-
-
-
-
 
   return (
     <section className="bg-[#FAFAFA]">
@@ -116,7 +119,11 @@ async function scheduleTimePost(){
               <div className="top-0 bg-white py-2 ">
                 <h1 className="font-semibold">{selectedDay}</h1>
               </div>
-              <Slots eventId={id} slotDay={selectedDay} handleSlotSubmit={handleSlotSubmit} />
+              <Slots
+                eventId={id}
+                slotDay={selectedDay}
+                handleSlotSubmit={handleSlotSubmit}
+              />
             </div>
           </main>
         </div>
@@ -151,47 +158,3 @@ function EventInfo({ meetingDetails }) {
     </>
   );
 }
-function getNewScheduledDate(dateString, scheduleTime) {
-  // Validate date and time formats for robustness
-  const datePattern1 = /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD
-  const datePattern2 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/; // YYYY-MM-DDTHH:MM:SS.sssZ (including milliseconds and timezone)
-
-  // Check both date patterns and throw an error if neither match
-  if (!dateString.match(datePattern1) && !dateString.match(datePattern2)) {
-    throw new Error(
-      "Invalid date format. Expected either YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS.sssZ."
-    );
-  }
-
-  // Parse the date and time strings into Date objects
-  let date;
-  if (dateString.match(datePattern1)) {
-    // Handle YYYY-MM-DD format
-    date = new Date(dateString);
-  } else {
-    // Handle YYYY-MM-DDTHH:MM:SS.sssZ format
-    // Create a new Date object without timezone information
-    date = new Date(dateString.slice(0, -1));
-  }
-
-  const hours = parseInt(scheduleTime.split(":")[0], 10);
-  const minutes = parseInt(scheduleTime.split(":")[1], 10);
-
-  // Set the hours and minutes of the date to the scheduled time, without modifying the timezone
-  date.setUTCHours(hours, minutes, 0, 0); // Use setUTCHours to preserve timezone
-
-  // Return the newly scheduled date as an ISO string, including the timezone
-  return date.toISOString();
-}
-
-// Example usage:
-const dateString = "2024-03-05T12:08:20.000Z"; // Your input date
-const scheduleTime = "11:40";
-
-try {
-  const newScheduledDate = getNewScheduledDate(dateString, scheduleTime);
-  console.log(newScheduledDate); // Output: "2024-03-05T11:40:00.000Z"
-} catch (error) {
-  console.error(error.message);
-}
-

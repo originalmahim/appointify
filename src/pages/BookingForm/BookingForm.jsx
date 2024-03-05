@@ -211,7 +211,7 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
         </form>
       </Card>
       <div className=" mb-6 md:mb-0 lg:w-80 sm:p-4 md:max-h-[600px]">
-        {/* <MeetingDetailsCard/> */}
+        <MeetingDetailsCard/>
       </div>
     </div>
   );

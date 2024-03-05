@@ -13,7 +13,6 @@ import LatestAchievementsCards from "../../components/Home/LatestAchievement/Lat
 import TrustedCompanies from "../../components/Home/TrustedCompaniesSection/TrustedCompanies";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import { FaArrowUp } from "react-icons/fa";
-import BookingForm from "../BookingForm/BookingForm";
 
 
 const HomePage = () => {
@@ -25,7 +24,6 @@ const HomePage = () => {
         <title>Appointify | Home</title>
       </Helmet>
       <section>
-        <BookingForm/>
         <Banner />
         <FeatureOverview />
         <UserReviews />
