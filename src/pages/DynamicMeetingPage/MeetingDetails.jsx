@@ -5,7 +5,7 @@ const MeetingDetails = ({ meetingDetails, onReschedule, onConfirmation }) => {
   return (
     <div className="relative">
       <h1 className="text-[22px] mb-1 text-left font-semibold">
-        {meetingDetails.type}
+        {meetingDetails.type?meetingDetails.type:"Meeting title"} 
       </h1>
       <p className="text-light-gray text-[15px] mb-6">
         Notes:{" "}
@@ -20,7 +20,8 @@ const MeetingDetails = ({ meetingDetails, onReschedule, onConfirmation }) => {
           {meetingDetails.location}
         </p>
         <p className="flex  items-center gap-1 outline p-1 px-3 outline-[1px] rounded-full outline-gray-300">
-          <CiTimer /> {meetingDetails.duration + "m"}
+          <CiTimer /> 
+          {meetingDetails.type?meetingDetails.type + "m":"30m"} 
         </p>
       </div>
 

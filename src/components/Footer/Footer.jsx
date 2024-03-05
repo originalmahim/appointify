@@ -1,6 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/icons/date.png"
 import Container from "../Container/Container";
 
 const Footer = () => {
