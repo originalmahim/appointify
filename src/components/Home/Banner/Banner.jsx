@@ -11,9 +11,9 @@ const Banner = () => {
   };
 
   return (
-    <section className="bg-cardBG min-h-[100vh] flex items-center py-24">
+    <section className=" min-h-[100vh] flex items-center py-24">
       <Container>
-        <div className="flex flex-col md:flex-row gap-10 items-center px-2 2xl:px-3">
+        <div className="flex flex-col-reverse lg:flex-row gap-10 items-center px-2 2xl:px-3">
           <div
             data-aos="fade-in"
             data-aos-offset="200"
@@ -23,22 +23,23 @@ const Banner = () => {
             data-aos-mirror="true"
             data-aos-once="true"
           >
-            <h1 className="text-black text-5xl font-play font-semibold leading-[60px]">
+            <h1 className="text-black text-3xl md:text-4xl lg:text-5xl font-semibold  md:leading-[45px] lg:leading-[60px]">
               Empower Your Day with
-              <br />
+              <br className="hidden md:block"/>
               Appointify
-              <span style={gradientTextStyle} className="text-6xl">
-                .
-              </span>
             </h1>
 
-            <p className="text-sub-head 2xl:text-lg font-medium leading-7 mt-6 mb-10">
+            <div className="absolute -z-10 rotate-45 -left-32
+             -top-32 rounded-[50px] bg-gradient-to-r from-[#fffafe]
+              to-[#ffffff] w-[800px] h-[900px]"></div>
+
+            <p className="  text-gray-600 lg:text-lg leading-7 md:mt-6 lg:mt-4  mb-7">
               Effortlessly organize appointments, meetings, and tasks in one
               intuitive platform, empowering you to elevate productivity and
               reclaim control over your daily routine.
             </p>
 
-            <button className="px-4 h-12 text-white font-semibold bg-gradient-blue rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95">
+            <button className="px-4 h-12 text-white bg-primary rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95">
               Create a Schedule
             </button>
           </div>
