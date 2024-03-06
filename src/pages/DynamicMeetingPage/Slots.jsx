@@ -1,31 +1,51 @@
 import { useEffect, useState } from "react";
-import Slot from "../Availability/Slots";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useTransTackData from "../../hooks/useTransTackData";
+import Loading from "../../components/common/Loading/Loading";
+import { calculateTimeSlots } from "../../utils/calculateTimeSlots";
 
-const Slots = ({ slotDay }) => {
-  const axios = useAxiosSecure();
-  const [userSlots, setUserSlots] = useState([]);
+const Slots = ({ slotDay, eventId, handleSlotSubmit }) => {
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [slotsInterval, setSlotsInterval] = useState("");
+  const [timeSlots, setTimeSlots] = useState([]);
+  const { data, isLoading } = useTransTackData(
+    `/events/eventAvailability/${eventId}/${slotDay}`,
+    slotDay
+  );
+
+  if (isLoading) <Loading />;
+  useEffect(() => {
+    if (data) {
+      setAvailableSlots(data?.eventSpecificDaySlots);
+      setSlotsInterval(data?.eventDuration);
+    }
+  }, [data]);
 
   useEffect(() => {
-    axios.get("/users/availability/shakilahmmed8882@gmail.com").then((res) => {
-      if (res?.data?.length > 0) {
-        setUserSlots(res.data);
-      }
-    });
-  }, [axios]);
+    const AvailableTimeSlots = () => {
+      availableSlots?.map(({ start_time, end_time }) => {
+        const timeSlot = calculateTimeSlots(
+          start_time,
+          end_time,
+          slotsInterval
+        );
+        setTimeSlots(timeSlot);
+      });
+    };
+
+    AvailableTimeSlots();
+  }, [availableSlots, slotsInterval]);
 
   return (
-    <div className="pr-4">
-      {/* Show only the slot based on selected day on calendar */}
-      {userSlots
-        .filter((day) => day.day === slotDay)
-        .map((day) => (
-          <div key={day.day} className="">
-            {day.slots?.map((slot, index) => (
-              <Slot key={`${day.day}-${index}`} slot={slot} />
-            ))}
-          </div>
-        ))}
+    <div className="w-full">
+      {timeSlots?.map((timeSlot) => (
+        <div
+          onClick={() => handleSlotSubmit(timeSlot)}
+          className="border-2 mb-2 text-center py-2 cursor-pointer hover:bg-gray-300 hover:text-black"
+          key={timeSlot}
+        >
+          <p className="">{timeSlot}</p>
+        </div>
+      ))}
     </div>
   );
 };

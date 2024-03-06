@@ -1,56 +1,60 @@
 import { useEffect, useState } from "react";
-import OrganizerView from "./OrganizerView";
-import ParticipantView from "./ParticipantView";
-import OrganizerParticipantsToggler from "./OrganizerParticipantsToggler";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
-import Calendar from "./Calendar/Calendar";
+
 import Slots from "./Slots";
-import BookingForm from "../BookingForm/BookingForm";
 import useTransTackData from "../../hooks/useTransTackData";
+import {
+  ClockIcon,
+  GlobeAltIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
+import { SiGooglemeet } from "react-icons/si";
+import Timezone from "../../components/Timezone/Timezone";
+import Calendar from "./Calendar/Calendar";
+import getDayNameFromDate from "../../utils/getDayNameFromDate";
+import Loading from "../../components/common/Loading/Loading";
+import { convertTo24HourFormat } from "../../utils/convertTo24HourFormat";
+import { calculateNewScheduled } from "../../utils/calculateNewScheduled";
 
 const DynamicMeetingPage = () => {
-  const [isOrganizerView, setIsOrganizerView] = useState(true);
-  const [meetingDetails, setMeetingDetails] = useState({});
-  const [selectedDay, setSelectedDay] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
-  const [accessToken, setAccessToken] = useState(null);
   const { id } = useParams();
   const axios = useAxiosPublic();
+  const [selectedDate, setSelectedDate] = useState(null); // Store selected date
+  const [date, setDate] = useState(new Date()); // Initial date for display
+  const selectedDay = getDayNameFromDate(date);
+  const [allowDays, setAllowDays] = useState([]);
+  const [meetingDetails, setMeetingDetails] = useState({});
+  const { data, isLoading } = useTransTackData(`/events/singleEvent/${id}`, id);
 
+  //loading
+  if (isLoading) <Loading />;
   // Fetch event document by that id
   useEffect(() => {
-    const fetchMeetingDetails = async () => {
-      try {
-        const res = await axios.get(`/events/singleEvent/${id}`);
-        if (res.data) {
-          setMeetingDetails(res.data);
-        }
-      } catch (error) {
-        console.error("Error fetching meeting details:", error);
-      }
+    if (data) {
+      setMeetingDetails(data);
+    }
+  }, [data]);
+  useEffect(() => {
+    const getDays = async () => {
+      const res = await axios.get(`events/dayAvailability/${id}/allDays`);
+      setAllowDays(res.data.dayNames);
     };
-    fetchMeetingDetails();
+
+    getDays();
   }, [axios, id]);
 
-  // Fetch access token on component mount
-  useEffect(() => {
-    const accessToken = localStorage.getItem("access-token");
-    setAccessToken(accessToken);
-  }, []);
+  const handleSlotSubmit = async (slot) => {
+    const dateString = date.toISOString();
+    try {
+      // Generate Google Calendar token
+      generateToken();
 
-  // Handle confirmation button click
-  const handleConfirmation = () => {
-    console.log("Selected date:", selectedDate);
-    console.log("Selected day:", selectedDay);
-
-    // Generate Google Calendar token
-    generateToken();
-  };
-
-  // Handle availability submission
-  const handleAvailabilitySubmission = (selectedTimeSlots) => {
-    console.log("Selected time slots:", selectedTimeSlots);
+      // func for scheduleTime post
+      await scheduleTimePost(dateString, slot);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   // Function to generate Google Calendar token
@@ -66,52 +70,61 @@ const DynamicMeetingPage = () => {
     }
   };
 
+  //post event schedule time
+
+  async function scheduleTimePost(dateString, slot) {
+    try {
+      const convertedTime = convertTo24HourFormat(slot);
+      const scheduled_time = calculateNewScheduled(dateString, convertedTime);
+      console.log(scheduled_time);
+      //post data
+      const res = await axios.put(`/events/updateEvent/${id}`, {
+        scheduled_time,
+      });
+      console.log(res);
+    } catch (err) {
+      console.error("Error post schedule time");
+    }
+  }
+
   return (
     <section className="bg-[#FAFAFA]">
-      <div className="max-w-5xl mx-auto mt-2 h-[90vh] overflow-hidden bg-white">
-        <header className="bg-primary sticky z-10 top-0 text-center p-2 text-white">
-          Dynamic page
-        </header>
+      <div className="max-w-5xl mt-20 mx-5 md:mx-auto">
+        <div className="md:h-[500px]  shadow-orange-700 shadow rounded bg-white">
+          <header>{/* Your header content */}</header>
 
-        <div className="md:grid grid-cols-12 gap-5 p-2">
-          {/* Content based on Organizer or Participant view */}
-          <div
-            className={`transition-opacity col-span-5 ${
-              isOrganizerView ? "opacity-100" : "opacity-100"
-            } duration-300 ease-in-out sticky top-0 h-screen`}>
-            {/* Toggle between Organizer and Participant views */}
-            <OrganizerParticipantsToggler
-              setIsOrganizerView={setIsOrganizerView}
-              isOrganizerView={isOrganizerView}
-            />
+          <p className="bg-primary p-2 rounded-t text-white">
+            Set your booking
+          </p>
 
-            {isOrganizerView ? (
-              <OrganizerView
-                meetingDetails={meetingDetails}
-                onConfirmation={handleConfirmation}
-                onReschedule={() => console.log("Reschedule clicked")}
+          <main className="grid grid-cols-1 md:grid-cols-12 gap-5 p-2 mt-4">
+            {/* Content based on Organizer or Participant view */}
+            <div className="md:col-span-3 space-y-2">
+              <EventInfo meetingDetails={meetingDetails} />
+            </div>
+
+            {/* Calendar integration */}
+            <div className="md:border-x-2 md:border-gray-900 md:col-span-6">
+              <Calendar
+                date={date}
+                setDate={setDate}
+                selectedDate={selectedDay}
+                allowedDays={allowDays}
               />
-            ) : (
-              <ParticipantView
-                meetingDetails={meetingDetails}
-                onAvailabilitySubmit={handleAvailabilitySubmission}
+            </div>
+
+            <div className="md:col-span-3">
+              {/* Slots content */}
+              <div className="top-0 bg-white py-2 ">
+                <h1 className="font-semibold">{selectedDay}</h1>
+              </div>
+              <Slots
+                eventId={id}
+                slotDay={selectedDay}
+                handleSlotSubmit={handleSlotSubmit}
               />
-            )}
-          </div>
-          {/* Calendar integration */}
-          <div className="bg-[#f5f5f5c5] h-[80vh] col-span-5">
-            <Calendar
-              type={""}
-              setSelectedDate={setSelectedDate}
-              setSelectedDay={setSelectedDay}
-            />
-          </div>
-          <div className=" col-span-2  overflow-auto h-[80vh]">
-            <h1 className="font-semibold sticky top-0 bg-white py-2">
-              {selectedDay ? selectedDay : "Friday"}
-            </h1>
-            <Slots slotDay={selectedDay} />
-          </div>
+            </div>
+          </main>
         </div>
       </div>
     </section>
@@ -119,3 +132,28 @@ const DynamicMeetingPage = () => {
 };
 
 export default DynamicMeetingPage;
+
+function EventInfo({ meetingDetails }) {
+  return (
+    <>
+      <div>
+        <UserCircleIcon className="h-6 w-6" />
+        <p className="text-md">Forhad Hossain</p>
+      </div>
+      <h2 className="text-2xlb font-bold">{meetingDetails.type}</h2>
+      <div className="flex gap-2 text-md">
+        {" "}
+        <ClockIcon className="h-6 w-6" />
+        {meetingDetails?.duration} mins
+      </div>
+      <div className="flex items-center gap-2">
+        <SiGooglemeet className="text-green-500 h-6 w-6" />{" "}
+        {meetingDetails?.platform}
+      </div>
+      <div className="flex items-center">
+        <GlobeAltIcon className="h-6 w-6" />
+        <Timezone />
+      </div>
+    </>
+  );
+}
