@@ -1,220 +1,175 @@
-import { useEffect, useState } from "react";
-import InitialStartAndEndTime from "./InitialStartAndEndTime";
-import { useAvailabilityContext } from "../../hooks/useAvailabilityContext";
-import useGetUserSlots from "../../hooks/useGetUserSlots";
-import AllSlots from "./AllSlots";
+import { Button, Option, Select, Switch } from "@material-tailwind/react";
+import { AiOutlineCopy, AiOutlinePlus } from "react-icons/ai";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { generate12HourTimeArray } from "../../utils/generate12HourTimeArray";
+import { useState } from "react";
 
 const Availability = () => {
-  // State to track checked days and availability data
-  const [checkedDays, setCheckedDays] = useState({});
-  const [availabilityData, setAvailabilityData] = useState([]);
-  const {
-    start_time,
-    end_time,
-    // setIsAddedNewSlot, isAddedNewSlot
-  } = useAvailabilityContext();
-
-  const { userSlots, refetch } = useGetUserSlots();
-
-  // Mock data for days
-  const initialData = [
-    { day: "Monday", slots: [] },
-    { day: "Tuesday", slots: [] },
-    { day: "Wednesday", slots: [] },
-    { day: "Thursday", slots: [] },
-    { day: "Friday", slots: [] },
-    { day: "Saturday", slots: [] },
-    { day: "Sunday", slots: [] },
+  const days = [
+    {
+      day: "Tuesday",
+      slots: [
+        {
+          start_time: "06:00",
+          end_time: "11:00",
+          _id: "65df04bf336126e3277c982b",
+        },
+        {
+          start_time: "06:00",
+          end_time: "11:00",
+          _id: "65df04cc336126e3277c983c",
+        },
+      ],
+      _id: "65df04bf336126e3277c982a",
+    },
+    {
+      day: "Sunday",
+      slots: [
+        {
+          start_time: "07:00",
+          end_time: "11:00",
+          _id: "65df55ac660fea1ede848d7e",
+        },
+        {
+          start_time: "09:00",
+          end_time: "04:00",
+          _id: "65df563f660fea1ede848d86",
+        },
+        {
+          start_time: "02:00",
+          end_time: "04:00",
+          _id: "65df56fea942815b3e13dc2c",
+        },
+      ],
+      _id: "65df55ac660fea1ede848d7d",
+    },
   ];
 
-  useEffect(() => {
-    // Set up initial availability data when the component mounts
-    setAvailabilityData(initialData);
-  }, []);
 
-  // Function to handle checkbox toggling
-  const handleToggleChange = (day) => {
-    setCheckedDays((prevCheckedDays) => ({
-      ...prevCheckedDays,
-      [day]: !prevCheckedDays[day],
-    }));
 
-    // If the day is toggled, add new slots (start and end times)
-    if (!checkedDays[day]) {
-      setAvailabilityData((prevData) =>
-        prevData.map((item) =>
-          item.day === day
-            ? {
-                ...item,
-                slots: [{ start_time, end_time }],
-              }
-            : item
-        )
-      );
-    } else {
-      // If the day is untoggled, remove all slots
-      setAvailabilityData((prevData) =>
-        prevData.map((item) =>
-          item.day === day ? { ...item, slots: [] } : item
-        )
-      );
-    }
-  };
-
-  // ==================================================
-
-  var data = {
-    Monday: [
-      { start_time: "10:00 AM", end_time: "12:00 PM" },
-      { start_time: "02:00 PM", end_time: "04:00 PM" },
-      // Add more slots if needed
-    ],
-    Tuesday: [
-      { start_time: "11:00 AM", end_time: "01:00 PM" },
-      { start_time: "03:00 PM", end_time: "05:00 PM" },
-      // Add more slots if needed
-    ],
-    Wednesday: [
-      { start_time: "01:00 PM", end_time: "03:00 PM" },
-      { start_time: "04:00 PM", end_time: "06:00 PM" },
-      // Add more slots if needed
-    ],
-    Thursday: [
-      { start_time: "09:00 AM", end_time: "11:00 AM" },
-      { start_time: "01:00 PM", end_time: "03:00 PM" },
-      // Add more slots if needed
-    ],
-    Friday: [
-      { start_time: "02:30 PM", end_time: "04:30 PM" },
-      // Add more slots if needed
-    ],
-    Saturday: [
-      { start_time: "12:00 PM", end_time: "02:00 PM" },
-      { start_time: "03:30 PM", end_time: "05:30 PM" },
-      // Add more slots if needed
-    ],
-    Sunday: [
-      { start_time: "10:30 AM", end_time: "12:30 PM" },
-      { start_time: "04:00 PM", end_time: "06:00 PM" },
-      // Add more slots if needed
-    ],
-  };
-
-  // ==================================================
-
-  // Function to add a new slot under a specific day
-  // const handleAddSlot = (day) => {
-  //   setIsAddedNewSlot(!isAddedNewSlot);
-
-  //   setAvailabilityData((prevData) =>
-  //     prevData.map((item) =>
-  //       item.day === day
-  //         ? {
-  //             ...item,
-  //             slots: [...item.slots, { startTime: start_time, end_time }],
-  //           }
-  //         : item
-  //     )
-  //   );
-  // };
-
-  // Function to remove the last slot under a specific day
-  // const handleRemoveSlot = (day) => {
-  //   setAvailabilityData((prevData) =>
-  //     prevData.map((item) =>
-  //       item.day === day ? { ...item, slots: item.slots.slice(0, -1) } : item
-  //     )
-  //   );
-  // };
 
 
   return (
-    <div>
-      {/* Render the title */}
-      <h1 className="font-bold text-2xl mb-3 bg-primary p-2 text-white rounded-sm">
-        Availability
-      </h1>
-
-      {/* Render the days */}
-      <div
-        className={` ${
-          Object.values(checkedDays).every((value) => !value)
-            ? "grid-cols-4"
-            : "grid-cols-1"
-        }`}>
-        <div className="w-full gap-6 grid-cols-1 bg-white">
-          <div>
-            {availabilityData?.map((dayData, index) => (
-              <div key={index} className="flex gap-1 p-2">
-                {/* Render the checkbox and day */}
-                <div className="flex gap-1 w-48 items-center h-8">
-                  <input
-                    type="checkbox"
-                    className="toggle toggle-sm "
-                    checked={checkedDays[dayData.day] || false}
-                    onChange={() => handleToggleChange(dayData?.day)}
-                  />
-                  <span
-                    className={`${
-                      checkedDays[dayData.day]
-                        ? "text-[black]"
-                        : "text-light-gray"
-                    }`}>
-                    {dayData.day}
-                  </span>
-                  <div
-                    className={` h-5 w-5 ${
-                      checkedDays[dayData.day] ? "bg-black" : "bg-gray-400"
-                    } flex justify-center items-center rounded-full`}>
-                    {/* Render the button to add a slot */}
-                    <button
-                      // onClick={() => handleAddSlot(dayData.day)}
-                      className="text-white">
-                      +
-                    </button>
-                  </div>
-                </div>
-
-                {/* Render the slots if the day is checked */}
-                {checkedDays[dayData.day] && (
-                  <div className="grid ">
-                    {dayData.slots.map((slot, slotIndex) => (
-                      // Render the component for initial start and end time
-                      <InitialStartAndEndTime
-                        key={slotIndex}
-                        slot={slot}
-                        slotIndex={slotIndex}
-                        dayData={dayData}
-                        index={index}
-                      />
-                    ))}
-
-                    {userSlots.map((a,index) => (
-                      <AllSlots key={a}
-                      slotDay={a}
-                      slotIndex={index}
-                      dayData={dayData}
-                      index={index}
-                      
-                      
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Render an image */}
-        <img
-          className="grid-cols-3 w-full h-full"
-          src="https://s3.us-west-2.amazonaws.com/public.notion-static.com/creator-images/andrew-hulterstrom-1707764801213.jpeg"
-          alt=""
-        />
+    <>
+      {/* <div className="">
+        {days.map((day) => (
+          <DaySchedule key={day._id} day={day} />
+        ))}
+      </div> */}
+      <div className="mx-10 mt-20 ">
+        <Days />
       </div>
-    </div>
+    </>
   );
 };
 
 export default Availability;
+
+  const Days = () => {
+    const [isDayOn,setIsDayOn] = useState(false)
+    const dayName = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+  const handleDaySubmit =()=>{
+    console.log('ok');
+  }
+    return (
+      <div>
+        {dayName.map((name, idx) => (
+          <div key={name} className="flex gap-3 items">
+            <div className="flex gap-3 items-center w-40">
+              <div className="flex">
+                <Switch onClick={handleDaySubmit} />
+                <p>{name}</p>
+              </div>
+            </div>
+            {/* <Select label="Select Version">
+              <Option>Material Tailwind HTML</Option>
+              <Option>Material Tailwind React</Option>
+              <Option>Material Tailwind Vue</Option>
+              <Option>Material Tailwind Angular</Option>
+              <Option>Material Tailwind Svelte</Option>
+            </Select> */}
+            {/* <TimeInput /> */}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+export function TimeInput() {
+  const [selectSlots, setSelectedSlots] = useState("");
+
+  const handleSlotSubmit = (time) => {
+    console.log(time);
+    setSelectedSlots(time);
+  };
+
+  return (
+    <div className="flex items-center gap-5">
+      <div className="flex gap-5 mb-3">
+        {/* {[1, 2, 3].map(idx=>)} */}
+        <SlotTimes
+          handleSlotSubmit={handleSlotSubmit}
+          selectSlots={selectSlots}
+          label="Start Time"
+        />
+        <SlotTimes handleSlotSubmit={handleSlotSubmit} label="End Time" />
+      </div>
+      <div className="flex gap-5">
+        <button>
+          <AiOutlinePlus />
+        </button>
+        <button>
+          <AiOutlineCopy />
+        </button>
+        <button></button>
+      </div>
+    </div>
+  );
+}
+
+export function SlotTimes({ handleSlotSubmit, selectSlots, label }) {
+  const slots = generate12HourTimeArray(15);
+  return (
+    <Select label={label}>
+      {slots?.map((time) => (
+        <Option onClick={() => handleSlotSubmit(time)} key={time}>
+          {time}
+        </Option>
+      ))}
+    </Select>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+const DaySchedule = ({ day }) => {
+  return (
+    <div className="bg-gray-100 p-4 rounded-md flex gap-5">
+      <h2 className="text-lg font-semibold">{day.day}</h2>
+      <ul className="list-disc ml-4">
+        {day.slots.map((slot) => (
+          <li key={slot._id}>
+            {slot.start_time} - {slot.end_time}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};

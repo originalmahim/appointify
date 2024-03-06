@@ -83,10 +83,9 @@ export default function BookingForm() {
   async function eventLinkPost(eventLink) {
     try {
       //post data
-      const res = await axios.put(`/events/updateEvent/${eventId}`, {
+       await axios.put(`/events/updateEvent/${eventId}`, {
         eventLink,
       });
-      console.log(res);
     } catch (err) {
       console.error("Error post event link");
     }

@@ -60,13 +60,15 @@ const DashboardLayout = () => {
             {/* Page content here */}
             <label
               htmlFor="my-drawer-2"
-              className="btn btn-ghost bg-white drawer-button lg:hidden flex justify-end mr-4 mt-2">
+              className="btn btn-ghost bg-white drawer-button lg:hidden flex justify-end mr-4 mt-2"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -85,10 +87,14 @@ const DashboardLayout = () => {
             <label
               htmlFor="my-drawer-2"
               aria-label="close sidebar"
-              className="drawer-overlay"></label>
+              className="drawer-overlay"
+            ></label>
             {/* sidebar content here */}
 
-            <div style={{zIndex:9999}} className="w-52 min-h-screen flex flex-col py-3 bg-[white] relative z-50">
+            <div
+              style={{ zIndex: 9999 }}
+              className="w-52 min-h-screen flex flex-col py-3 bg-[white] relative z-50"
+            >
               {/* <div className="bg-[#fffbf974] h-[50vh]  w-32 filter blur-3xl absolute left-0  top-0"></div> */}
 
               <p className=" text-2xl font-bold pl-5 sticky top-0 bg-white z-50 flex items-center gap-2 text-primary">
@@ -102,7 +108,8 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         to="/dashboard/admin-home"
-                        className={` text-[16px]`}>
+                        className={` text-[16px]`}
+                      >
                         <CiHome />
                         Admin Home
                       </NavLink>
@@ -111,7 +118,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/profile"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <CiUser />
                         Profile
                       </NavLink>
@@ -120,7 +128,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/add-blog"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <MdAddTask />
                         Add Blog
                       </NavLink>
@@ -129,7 +138,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/manage-blog"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <FaListUl />
                         Manage Blog
                       </NavLink>
@@ -138,7 +148,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/inbox"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <TbMessage />
                         Inbox
                       </NavLink>
@@ -147,7 +158,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/users"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <FcManager />
                         Manage Users
                       </NavLink>
@@ -156,7 +168,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/subscriptions"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <MdOutlineSubscriptions />
                         Subscriptions
                       </NavLink>
@@ -168,7 +181,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/profile"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <FaUser />
                         Profile
                       </NavLink>
@@ -177,7 +191,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/manage-booking"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <FaCalendarAlt />
                         Manage Booking
                       </NavLink>
@@ -214,7 +229,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/bookings"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <TbBrandBooking />
                         My Bookings
                       </NavLink>
@@ -223,7 +239,8 @@ const DashboardLayout = () => {
                       <NavLink
                         to="/dashboard/add-review"
                         className={`${({ isActive }) =>
-                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                          isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      >
                         <MdReviews />
                         Add Review
                       </NavLink>
@@ -237,7 +254,8 @@ const DashboardLayout = () => {
                   <NavLink
                     to="/dashboard/user-home"
                     className={`${({ isActive }) =>
-                      isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                      isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                  >
                     <AiFillHome />
                     User Home
                   </NavLink>
@@ -245,9 +263,20 @@ const DashboardLayout = () => {
 
                 <li>
                   <NavLink
+                    to="/dashboard/availability"
+                    className={`${({ isActive }) =>
+                      isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                  >
+                    <CiHome />
+                    Availability
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to="/"
                     className={`${({ isActive }) =>
-                      isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}>
+                      isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                  >
                     <CiHome />
                     Home
                   </NavLink>
