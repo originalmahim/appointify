@@ -35,7 +35,6 @@ const DynamicMeetingPage = () => {
       setMeetingDetails(data);
     }
   }, [data]);
-
   useEffect(() => {
     const getDays = async () => {
       const res = await axios.get(`events/dayAvailability/${id}/allDays`);
@@ -49,7 +48,7 @@ const DynamicMeetingPage = () => {
     const dateString = date.toISOString();
     try {
       // Generate Google Calendar token
-      // generateToken();
+      generateToken();
 
       // func for scheduleTime post
       await scheduleTimePost(dateString, slot);
@@ -149,7 +148,7 @@ function EventInfo({ meetingDetails }) {
       </div>
       <div className="flex items-center gap-2">
         <SiGooglemeet className="text-green-500 h-6 w-6" />{" "}
-        {meetingDetails?.location}
+        {meetingDetails?.platform}
       </div>
       <div className="flex items-center">
         <GlobeAltIcon className="h-6 w-6" />
