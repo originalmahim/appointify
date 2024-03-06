@@ -138,10 +138,10 @@ const NavBar = () => {
     <div className="fixed z-50 w-screen">
       <nav
         className={`${
-          isScrolled ? "bg-gray-50 transition duration-1000" : "bg-cardBG"
+          isScrolled ? "bg-gray-50 transition duration-1000" : ""
         }`}
       >
-        <div className="h-[75px] bg-gradient-to-r from-[#fffcff] to-[#F8FAFC]">
+        <div className="h-[75px] bg-[#ffffff4f]">
         <Container>
           <div className="navbar">
             <div className="navbar-start">
