@@ -1,5 +1,8 @@
 import Container from "../../Container/Container";
-
+import api from "../../../assets/images/api.png";
+import recordScheduling from "../../../assets/images/recordScheduling.png";
+import location from "../../../assets/images/location.png";
+import TitleAndDescription from "../../TiteleAndDescription/TitleAndDescription";
 
 const achievementsData = [
   {
@@ -19,29 +22,49 @@ const achievementsData = [
   },
 ];
 
+// Define achievement images with icon and background color
+const achievementImages = [
+  { icon: api, bg: "[#fff4cf]" },
+  { icon: recordScheduling, bg: "[#cefaff]" },
+  { icon: location, bg: "[#cbe7ff]" },
+];
+
 const LatestAchievements = () => {
   return (
-    <section className="bg-[#FFE4ED]">
+    <section className="bg-[#fff4ef] py-11">
       <Container>
         <section className="">
-          <h1 className="text-center text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold mb-4 md:mb-6 lg:mb-8 dark:text-slate-300">
-            Latest Achievements
-          </h1>
-          <p className="text-center antialiased text-xl leading-relaxed text-inherit mt-2">
-            Read about our latest achievements and milestones.
-          </p>
+          {/* Title and description section */}
+          <div className="text-center">
+            <TitleAndDescription
+              title={"Latest Achievements"}
+              description={"Read about our latest achievements and milestones."}
+            />
+          </div>
+
+          {/* Achievements grid section */}
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3">
             {achievementsData.map((achievement, index) => (
               <article
                 key={index}
-                className="bg-white"
+                className="bg-white relative z-10 text-center md:text-left rounded-lg p-4 sm:p-6"
               >
+                {/* Achievement icon section */}
+                <div
+                  className={`text-center bg-${achievementImages[index].bg}  p-1 mb-7 md:mb-5  mx-auto md:mx-0 h-16 w-16 lg:h-20 lg:w-20 rounded-full flex justify-center items-center`}
+                >
+                  <img
+                    className="mx-auto my-3 mt-5"
+                    src={achievementImages[index].icon}
+                    alt=""
+                  />
+                </div>
+
+                {/* Achievement details section */}
                 <div className="">
-                  <div className="p-4 sm:p-6">
-                    <h3 className="mt-0.5 text-xl">
-                      {achievement.title}
-                    </h3>
-                    <p className="mt-2 line-clamp-3 text-sm/relaxed text-light-gray">
+                  <div className="">
+                    <h3 className="mt-0.5 text-[16px] sm:text-[19px] md:text-xl">{achievement.title}</h3>
+                    <p className="mt-2 line-clamp-3 text-[14px] md:text-sm/relaxed text-light-gray">
                       {achievement.description}
                     </p>
                   </div>
