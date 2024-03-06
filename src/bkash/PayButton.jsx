@@ -8,7 +8,8 @@ const PayButton = ({ children }) => {
         { amount: 50, orderId: 1 },
         { withCredentials: true }
       );
-      console.log(data);
+    //   console.log(data);
+    window.location.href = data.bkashURL;
     } catch (error) {
       console.log(error.response.data);
     }
