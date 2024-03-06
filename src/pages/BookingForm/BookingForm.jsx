@@ -1,12 +1,17 @@
 import { useForm } from "react-hook-form";
-import { Card, Input, Button, Typography, Spinner } from "@material-tailwind/react";
+import {
+  Card,
+  Input,
+  Button,
+  Typography,
+  Spinner,
+} from "@material-tailwind/react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTransTackData from "../../hooks/useTransTackData";
 import { useEffect, useState } from "react";
 import MeetingDetailsCard from "./MeetingDetailsCard";
-
 
 export default function BookingForm() {
   const axios = useAxiosPublic();
@@ -17,8 +22,6 @@ export default function BookingForm() {
     `/events/singleEvent/${eventId}`,
     eventId
   );
-
-  console.log(data);
   useEffect(() => {
     const id = localStorage.getItem("eventId");
     if (id) {
@@ -26,7 +29,7 @@ export default function BookingForm() {
     }
   }, []);
 
-  if (isLoading) <Spinner/>
+  if (isLoading) <Spinner />;
 
   //this fun for create google event
   async function createGoogleEvent(email) {
@@ -44,6 +47,10 @@ export default function BookingForm() {
       const accessToken = localStorage.getItem("access-token");
       if (accessToken) {
         const eventRes = await axios.post("/schedule_event", event);
+        if (eventRes?.data?.meetLink) {
+          //post meeting link to database
+          await eventLinkPost(eventRes?.data?.meetLink);
+        }
         // navigate("/bookingConfirm");
         toast.success(eventRes.data.message);
       }
@@ -56,12 +63,11 @@ export default function BookingForm() {
 
   async function saveParticipant(participantData) {
     const participant = {
-      name: participantData.firstName + " " + participantData.lastName,
-      email: participantData.email,
-      message: "fdfdfd",
-      image: "fdfdfdfrs",
+      name: participantData?.firstName + " " + participantData?.lastName,
+      email: participantData?.email,
+      // message: "",
+      // image: "",
     };
-    console.log(participant);
     try {
       const res = await axios.post(
         `/events/addParticipants/${data?._id}`,
@@ -73,7 +79,18 @@ export default function BookingForm() {
     }
   }
 
-
+  // eventLink
+  async function eventLinkPost(eventLink) {
+    try {
+      //post data
+      const res = await axios.put(`/events/updateEvent/${eventId}`, {
+        eventLink,
+      });
+      console.log(res);
+    } catch (err) {
+      console.error("Error post event link");
+    }
+  }
 
   const handleBack = () => {
     localStorage.removeItem("access-token");
@@ -99,11 +116,10 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     // fun for create google meet event
     await createGoogleEvent(data?.email);
-    // await saveParticipant(data);
+    //save participant after creating event
+    await saveParticipant(data);
   };
 
   // conditional body background change for this booking confirm page
@@ -128,12 +144,14 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
       <Card
         className="p-5 md:pt-16  mb-2 bg-white md:w-[500px] md:max-h-[550px] "
         color="transparent"
-        shadow={false}>
+        shadow={false}
+      >
         <div className="flex flex-col  gap-5 ">
           <Typography
             variant="h6"
             className="text-[20px] md:text-2xl lg:text-3xl font-normal text-left mb-6"
-            color="blue-gray">
+            color="blue-gray"
+          >
             Confirm Booking
           </Typography>
         </div>
@@ -143,7 +161,8 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             <Typography
               variant="p"
               color="blue-gray"
-              className="-mb-6 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within">
+              className="-mb-6 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within"
+            >
               first Name
             </Typography>
             <Input
@@ -163,7 +182,8 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             <Typography
               variant="p"
               color="blue-gray"
-              className="-mb-8 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within">
+              className="-mb-8 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within"
+            >
               Last Name
             </Typography>
             <Input
@@ -179,7 +199,8 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             <Typography
               variant="p"
               color="blue-gray"
-              className="-mb-7 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within:border-none">
+              className="-mb-7 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within:border-none"
+            >
               Email
             </Typography>
             <Input
@@ -204,14 +225,15 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             <button
               type="submit"
               disabled={!isValid}
-              className="btn bg-primary text-white w-full hover:bg-primaryHover lg:w-1/2">
+              className="btn bg-primary text-white w-full hover:bg-primaryHover lg:w-1/2"
+            >
               Confirm
             </button>
           </div>
         </form>
       </Card>
       <div className=" mb-6 md:mb-0 lg:w-80 sm:p-4 md:max-h-[600px]">
-        <MeetingDetailsCard/>
+        <MeetingDetailsCard />
       </div>
     </div>
   );

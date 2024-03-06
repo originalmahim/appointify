@@ -14,15 +14,24 @@ export default function Calendar({ date, setDate, allowedDays }) {
     return !allowedDays?.includes(dayName);
   };
 
+  // Function to handle date selection
+  const handleDateSelect = (selectedDate) => {
+    // Check if the selected date is enabled
+    if (!isNotEnabledDay(selectedDate)) {
+      // Set the date only if it's enabled
+      setDate(selectedDate);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center">
-      <div className="max-w-lg">
+      <div>
         <DayPicker
           mode="single"
           selected={date}
           onSelect={setDate}
           showOutsideDays
-          className="border-4"
+          className="max-w-xs md:w-full lg:max-w-lg"
           modifiers={{
             disabled: isNotEnabledDay,
           }}
@@ -35,7 +44,7 @@ export default function Calendar({ date, setDate, allowedDays }) {
             nav_button_previous: "absolute left-1.5",
             nav_button_next: "absolute right-1.5",
             table:
-              "w-full border-collapse md:max-w-md lg:max-w-lg xl:max-w-2xl", // Adjust max-width for different screen sizes
+              "w-full border-collapse md:max-w-md lg:max-w-[40px] xl:max-w-2xl", // Adjust max-width for different screen sizes
             head_row: "flex font-medium text-gray-900",
             head_cell: "m-0.5 w-14 font-normal text-sm",
             row: "flex w-full mt-2",

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useTransTackData from "../../hooks/useTransTackData";
 import Loading from "../../components/common/Loading/Loading";
 import { calculateTimeSlots } from "../../utils/calculateTimeSlots";
 
 const Slots = ({ slotDay, eventId, handleSlotSubmit }) => {
-  const axios = useAxiosSecure();
   const [availableSlots, setAvailableSlots] = useState([]);
   const [slotsInterval, setSlotsInterval] = useState("");
   const [timeSlots, setTimeSlots] = useState([]);
@@ -39,7 +37,7 @@ const Slots = ({ slotDay, eventId, handleSlotSubmit }) => {
 
   return (
     <div className="w-full">
-      {timeSlots?.map((timeSlot, index) => (
+      {timeSlots?.map((timeSlot) => (
         <div
           onClick={() => handleSlotSubmit(timeSlot)}
           className="border-2 mb-2 text-center py-2 cursor-pointer hover:bg-gray-300 hover:text-black"

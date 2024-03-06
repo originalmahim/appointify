@@ -89,8 +89,8 @@ const DynamicMeetingPage = () => {
 
   return (
     <section className="bg-[#FAFAFA]">
-      <div className="max-w-5xl mt-20 mx-auto">
-        <div className="h-[500px]  shadow-orange-700 shadow rounded bg-white">
+      <div className="max-w-5xl mt-20 mx-5 md:mx-auto">
+        <div className="md:h-[500px]  shadow-orange-700 shadow rounded bg-white">
           <header>{/* Your header content */}</header>
 
           <p className="bg-primary p-2 rounded-t text-white">
