@@ -1,15 +1,16 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 
-const PayButton = ({ children }) => {
+const PayButton = ({ bill, children }) => {
   const pay = async () => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/bkash/payment/create",
-        { amount: 50, orderId: 1 },
-        { withCredentials: true }
-      );
-    //   console.log(data);
-    window.location.href = data.bkashURL;
+        const orderId = Math.floor(Math.random() * 1000000) + Date.now(); // Generate random order ID
+        const { data } = await axios.post(
+          "http://localhost:5000/bkash/payment/create",
+          { amount: bill, orderId },
+          { withCredentials: true }
+        );
+      window.location.href = data.bkashURL;
     } catch (error) {
       console.log(error.response.data);
     }
