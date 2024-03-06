@@ -28,9 +28,7 @@ const FeatureOverview = () => {
 
         {/* Gradient shade */}
 
-        <GradientShed
-          position={"-top-[200px] -right-[1400px] w-[2000px] h-[2000px]"}
-        />
+        
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {/* Zoom and Google */}
@@ -93,9 +91,6 @@ const FeatureOverview = () => {
             <div className="">
               <div className="pl-4 sm:pl-0">
                 <img
-                  data-aos="zoom-in"
-                  data-aos-easing="linear"
-                  data-aos-duration="1500"
                   className="object-cover object-top md:object-center h-40  md:h-52 lg:h-72 w-full rounded-lg"
                   src="https://cdn.dribbble.com/userupload/3234396/file/original-afbe9420bc45b933609ccb0d58412752.png?resize=400x300&vertical=center"
                   alt=""
@@ -114,7 +109,13 @@ const FeatureOverview = () => {
           </div>
 
           {/* Collaboration  */}
-          <div className="bg-white shadow-lg lg:col-span-2 rounded-lg">
+          <div className="bg-white shadow-lg lg:col-span-2 rounded-lg"
+             data-aos="fade-up-right"
+            data-aos-easing="linear"
+            data-aos-duration="800"
+          
+          
+          >
             <div className="pl-4 sm:pl-0">
               <img
                 data-aos="zoom-in"

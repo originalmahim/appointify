@@ -39,13 +39,10 @@ const Banner = () => {
               Create a Schedule <MdArrowRightAlt/>
             </button>
           
-          <div
-              className="absolute -z-10 rotate-45 right-64
-             -top-80 rounded-[50px] bg-gradient-to-r from-[#fffbf9]
-              to-[#ffffff] w-[1400px] h-[1200px]"
-            ></div>
+       
           </div>
 
+    <img className=" w-full h-full absolute object-cover  top-0 right-0 -z-10 bg-blend-multiply opacity-5" src="https://img.freepik.com/premium-vector/abstract-pink-background-blend-spiral-background_653490-12.jpg?size=338&ext=jpg&ga=GA1.1.1448711260.1706659200&semt=ais" alt=""/>
 
           <div className="w-full h-full bg-white p-3 hidden lg:block rounded-lg">
             <img src={bannerDemo} alt="" className="h-full w-full" />

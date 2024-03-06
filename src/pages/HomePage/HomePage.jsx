@@ -53,7 +53,7 @@ const HomePage = () => {
 
       {/* chatbot */}
       <button
-        className="app-chatbot-button"
+        className="app-chatbot-button "
         onClick={() => toggleChatbot((prev) => !prev)}
       >
         {/* <img

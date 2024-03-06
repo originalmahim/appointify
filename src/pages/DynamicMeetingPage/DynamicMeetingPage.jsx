@@ -10,7 +10,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { SiGooglemeet } from "react-icons/si";
-import Timezone from "../../components/Timezone/Timezone";
+// import Timezone from "../../components/Timezone/Timezone";
 import Calendar from "./Calendar/Calendar";
 import getDayNameFromDate from "../../utils/getDayNameFromDate";
 import Loading from "../../components/common/Loading/Loading";
@@ -152,7 +152,7 @@ function EventInfo({ meetingDetails }) {
       </div>
       <div className="flex items-center">
         <GlobeAltIcon className="h-6 w-6" />
-        <Timezone />
+        {/* <Timezone /> */}
       </div>
     </>
   );
