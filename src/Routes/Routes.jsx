@@ -24,6 +24,7 @@ import Availability from "../pages/Availability/Availability";
 import DynamicMeetingPage from "../pages/DynamicMeetingPage/DynamicMeetingPage";
 import BookingForm from "../pages/BookingForm/BookingForm";
 import ErrorPay from "../bkash/ErrorPay";
+import Success from "../bkash/Success";
 
 export const routes = createBrowserRouter([
   {
@@ -138,5 +139,9 @@ export const routes = createBrowserRouter([
   {
     path: "/errorpayment",
     element: <ErrorPay/>,//error for bkash payment
+  },
+  {
+    path: "/successpayment",
+    element: <Success/>,//success for bkash payment
   },
 ]);
