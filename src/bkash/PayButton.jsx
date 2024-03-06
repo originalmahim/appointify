@@ -11,6 +11,8 @@ const PayButton = ({ bill, children }) => {
       if (user) {
         // Check if user object exists
         email = user.email; // Destructure email only if user exists
+        console.log(email);
+        console.log(`${import.meta.env.VITE_SERVER_URL}/bkash/payment/create`);
       }
       const { data } = await axios.post(
         `${process.env.VITE_SERVER_URL}/bkash/payment/create`,
@@ -19,7 +21,7 @@ const PayButton = ({ bill, children }) => {
       );
       window.location.href = data.bkashURL;
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error?.response?.data);
     }
   };
 
