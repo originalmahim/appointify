@@ -32,7 +32,7 @@ const PricingCard = ({ plan, index, monthlyBill }) => {
         </p>
       )}
       <div>
-        <PayButton bill={bill}>Get Started</PayButton>
+        <PayButton bill={bill} plan={plan.plan}>Get Started</PayButton>
       </div>
       <div className="mt-5 flex flex-col gap-2">
         {plan?.facilities?.map((service) => (

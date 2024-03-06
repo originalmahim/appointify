@@ -2,7 +2,7 @@
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 
-const PayButton = ({ bill, children }) => {
+const PayButton = ({ bill, plan, children }) => {
   const { user, loading } = useAuth();
   const pay = async () => {
     try {
@@ -14,7 +14,7 @@ const PayButton = ({ bill, children }) => {
       }
       const { data } = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/bkash/payment/create`,
-        { amount: bill, orderId, email },
+        { amount: bill, orderId, email, status: plan },
         { withCredentials: true }
       );
       window.location.href = data.bkashURL;
