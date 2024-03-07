@@ -7,21 +7,25 @@ import {
   Spinner,
 } from "@material-tailwind/react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTransTackData from "../../hooks/useTransTackData";
 import { useEffect, useState } from "react";
 import MeetingDetailsCard from "./MeetingDetailsCard";
+import MeetingConfirmed from "../../components/Modal/MeetingConfirmed";
 
 export default function BookingForm() {
   const axios = useAxiosPublic();
   const navigate = useNavigate();
   const [eventId, setEventId] = useState(null);
+  const [showSuccessConfirmation, setSuccessConfirmation] = useState(false);
+  const [meetingLink, setMeetingLink] = useState("https://meet.google.com/cqm-fvfh-nzw");
+  const [sheculeDate, setSheduleDate] = useState("5/3/2024");
 
   const { data, isLoading } = useTransTackData(
     `/events/singleEvent/${eventId}`,
     eventId
   );
+
   useEffect(() => {
     const id = localStorage.getItem("eventId");
     if (id) {
@@ -52,7 +56,8 @@ export default function BookingForm() {
           await eventLinkPost(eventRes?.data?.meetLink);
         }
         // navigate("/bookingConfirm");
-        toast.success(eventRes.data.message);
+        setSuccessConfirmation(true);
+        setSheduleDate(data?.scheduled_time);
       }
     } catch (err) {
       console.log(err);
@@ -86,7 +91,7 @@ export default function BookingForm() {
       const res = await axios.put(`/events/updateEvent/${eventId}`, {
         eventLink,
       });
-      console.log(res);
+      setMeetingLink(eventLink)
     } catch (err) {
       console.error("Error post event link");
     }
@@ -96,19 +101,30 @@ export default function BookingForm() {
     localStorage.removeItem("access-token");
   };
 
+
+  const handleGoBackHome = () => {
+    navigate("/dashboard/user-home")
+    setSuccessConfirmation(false)
+  }
   return (
     <div className="flex">
       {/* <OrganizerView/> */}
       <InputForm
+        sheculeDate={sheculeDate}
         handleBack={handleBack}
         createGoogleEvent={createGoogleEvent}
         saveParticipant={saveParticipant}
       />
+      {showSuccessConfirmation && <MeetingConfirmed 
+      eventLink={meetingLink}
+       handleGoBackHome={handleGoBackHome}
+       sheculeDate={sheculeDate}
+       />}
     </div>
   );
 }
 
-function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
+function InputForm({ handleBack, createGoogleEvent, saveParticipant,sheculeDate }) {
   const {
     register,
     handleSubmit,
@@ -128,16 +144,6 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
   if (pathname === "/bookingFrom") {
     document.body.style.backgroundColor = "#EAEAEA";
   }
-
-  // const data = {
-  //   type: "Meeting",
-  //   duration: 60,
-  //   location: "Virtual",
-  //   scheduled_time: "2024-03-03 15:30",
-  //   description: "A brief description of the event",
-  //   buffer_time: 10,
-  //   user: "john@example.com",
-  // };
 
   return (
     <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full lg:w-[90%]  md:min-h-[100vh] overflow-hidden pb-8">
@@ -233,7 +239,7 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
         </form>
       </Card>
       <div className=" mb-6 md:mb-0 lg:w-80 sm:p-4 md:max-h-[600px]">
-        <MeetingDetailsCard />
+        <MeetingDetailsCard sheculeDate={sheculeDate}/>
       </div>
     </div>
   );

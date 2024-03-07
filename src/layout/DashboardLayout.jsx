@@ -19,7 +19,8 @@ import SingleAvatar from "../components/Avatar/SingleAvatar";
 import { SlArrowDown } from "react-icons/sl";
 
 const DashboardLayout = () => {
-  const [isAdmin] = useAdmin();
+  // const [isAdmin] = useAdmin();
+  const isAdmin = false
   const { logOut, user } = useAuth();
 
   const handleLogout = () => {
@@ -173,7 +174,7 @@ const DashboardLayout = () => {
                         Profile
                       </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                       <NavLink
                         to="/dashboard/manage-booking"
                         className={`${({ isActive }) =>
@@ -181,7 +182,7 @@ const DashboardLayout = () => {
                         <FaCalendarAlt />
                         Manage Booking
                       </NavLink>
-                    </li>
+                    </li> */}
 
                     {/* <li>
                       <NavLink
@@ -210,7 +211,7 @@ const DashboardLayout = () => {
                       </NavLink>
                     </li> */}
 
-                    <li>
+                    {/* <li>
                       <NavLink
                         to="/dashboard/bookings"
                         className={`${({ isActive }) =>
@@ -227,7 +228,7 @@ const DashboardLayout = () => {
                         <MdReviews />
                         Add Review
                       </NavLink>
-                    </li>
+                    </li> */}
                   </>
                 )}
               </ul>

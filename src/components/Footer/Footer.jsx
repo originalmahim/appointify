@@ -26,7 +26,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gray-50 mt-28 md:mt-32 lg:mt-36 xl:mt-40">
+    <footer className="relative bg-[black] mt-28 md:mt-32 lg:mt-36 xl:mt-40">
       <Container>
         <div className="px-3 pt-20 2xl:px-4">
           <div className="grid grid-cols-1 justify-between gap-4 lg:grid-cols-2">
