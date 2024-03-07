@@ -5,7 +5,7 @@ import { WiTime1 } from "react-icons/wi";
 const MeetingDetailsCard = () => {
   return (
     <div>
-      <div className="card  bg-base-100 shadow-sm p-3 ">
+      <div className="card overflow-hidden  bg-base-100 shadow-sm p-3 ">
         <div className="">
           <div className="mt-3 pt-6 md:pt-3 flex items-center gap-3 ">
             <SingleAvatar
@@ -30,7 +30,7 @@ const MeetingDetailsCard = () => {
           </div>
         </div>
 
-        <Calendar type={"confirm-form"} />
+        <Calendar />
       </div>
     </div>
   );

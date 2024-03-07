@@ -3,13 +3,10 @@ import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import useTransTackData from "../../../hooks/useTransTackData";
 
-export default function Calendar({ date, setDate, allowedDays,usedIn }) {
+export default function Calendar({ date, setDate, allowedDays }) {
   const { data, isLoading } = useTransTackData(
     `/users/availability/forhadairdrop@gmail.com`
   );
-
-
-  const isUsedInConfirmBookingPage = usedIn == "confirm-form"
 
   // Function to determine if a date is not enabled
   const isNotEnabledDay = (day) => {
@@ -40,14 +37,14 @@ export default function Calendar({ date, setDate, allowedDays,usedIn }) {
           }}
           classNames={{
             caption:
-              `flex justify-center py-2 ${isUsedInConfirmBookingPage?"mb-3":"mb-3"} relative items-center text-sm font-medium text-gray-900`,
+              "flex justify-center py-2 mb-4 relative items-center text-sm font-medium text-gray-900",
             nav: "flex items-center",
             nav_button:
               "h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500", // Added focus styles
-            nav_button_previous: "",
-            nav_button_next: "",
+            nav_button_previous: "absolute left-1.5",
+            nav_button_next: "absolute right-1.5",
             table:
-              "w-full border-collapse md:max-w-md lg:max-w-[40px] xl:max-w-2xl",
+              "w-full border-collapse md:max-w-md lg:max-w-[40px] xl:max-w-2xl", // Adjust max-width for different screen sizes
             head_row: "flex font-medium text-gray-900",
             head_cell: "m-0.5 w-14 font-normal text-sm",
             row: "flex w-full mt-2",
