@@ -1,6 +1,7 @@
 import SingleAvatar from "../../components/Avatar/SingleAvatar";
 import Calendar from "../DynamicMeetingPage/Calendar/Calendar";
 import { WiTime1 } from "react-icons/wi";
+import BookingFormCalendar from "./BookingFormCalendar";
 
 const MeetingDetailsCard = () => {
   return (
@@ -30,7 +31,7 @@ const MeetingDetailsCard = () => {
           </div>
         </div>
 
-        <Calendar />
+        <BookingFormCalendar type={"confirm-form"} />
       </div>
     </div>
   );

@@ -10,8 +10,10 @@ import Notes from "./Notes";
 import Feedback from "./Feedback";
 import Gradient from "../Gradient/Gradient";
 import { useState } from "react";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
-const MeetingConfirmed = () => {
+
+const MeetingConfirmed = ({handleGoBackHome}) => {
   
   
   
@@ -65,9 +67,8 @@ const MeetingConfirmed = () => {
               <Notes content={"Point your notes"} />
             </div>
           </div>
-
           <Feedback />
-          {/*  */}
+          <div onClick={()=> handleGoBackHome()} className="lg:p-3 mx-auto mt-8 text-left md:bg-gray-200 lg:w-16 lg:h-16 flex items-center rounded-full"><button className=" text-white  mx-auto text-left bg-primary md:w-24 md:h-24 lg:w-11 lg:h-11 rounded-full flex  items-center justify-center"><IoIosArrowRoundBack className=" lg:text-3xl"/></button></div>
         </div>
       </div>
     </div>

@@ -7,16 +7,17 @@ import {
   Spinner,
 } from "@material-tailwind/react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTransTackData from "../../hooks/useTransTackData";
 import { useEffect, useState } from "react";
 import MeetingDetailsCard from "./MeetingDetailsCard";
+import MeetingConfirmed from "../../components/Modal/MeetingConfirmed";
 
 export default function BookingForm() {
   const axios = useAxiosPublic();
   const navigate = useNavigate();
   const [eventId, setEventId] = useState(null);
+  const [showSuccessConfirmation, setSuccessConfirmation] = useState(false);
 
   const { data, isLoading } = useTransTackData(
     `/events/singleEvent/${eventId}`,
@@ -52,7 +53,7 @@ export default function BookingForm() {
           await eventLinkPost(eventRes?.data?.meetLink);
         }
         // navigate("/bookingConfirm");
-        toast.success(eventRes.data.message);
+        setSuccessConfirmation(true);
       }
     } catch (err) {
       console.log(err);
@@ -96,6 +97,11 @@ export default function BookingForm() {
     localStorage.removeItem("access-token");
   };
 
+
+  const handleGoBackHome = () => {
+    navigate("/dashboard/user-home")
+    setSuccessConfirmation(false)
+  }
   return (
     <div className="flex">
       {/* <OrganizerView/> */}
@@ -104,6 +110,8 @@ export default function BookingForm() {
         createGoogleEvent={createGoogleEvent}
         saveParticipant={saveParticipant}
       />
+
+      {showSuccessConfirmation && <MeetingConfirmed handleGoBackHome={handleGoBackHome}/>}
     </div>
   );
 }
