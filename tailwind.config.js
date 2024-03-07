@@ -14,6 +14,7 @@ module.exports = withMT({
         special: "#5E4E77",
         active: "#7EDA4A",
         "light-gray": "#9E9E9E",
+        lightBlue:"#F0F4F9",
         head: "#4977b4",
         "sub-head": "#333333",
         details: "#888888",

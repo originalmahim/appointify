@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export function calculateTimeSlots(startTime, endTime, interval) {
   // Convert time strings to Date objects
   const startDate = new Date(`01 Jan 1970 ${startTime}:00`);
@@ -5,7 +7,7 @@ export function calculateTimeSlots(startTime, endTime, interval) {
 
   // Check for invalid input (start time after end time)
   if (startDate >= endDate) {
-    throw new Error("Start time cannot be after end time");
+     toast.error("Start time cannot be after end time");
   }
 
   // Calculate the time difference in milliseconds

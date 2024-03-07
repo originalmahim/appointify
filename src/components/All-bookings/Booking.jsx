@@ -53,7 +53,8 @@ export function Booking({ meeting }) {
               <FaUnlink className="sm:text-[11px] md:text-[14px] text-gray-500" />
 
               <Link
-                to={`/meeting/shakil/${meeting?._id}`}
+                ///meeting/shakilahmmed8882/65e08b12a1bde1a44f3ef77f
+                to={`/meeting/${user&&user?.email.split("@")[0]}/${meeting?._id}`}
                 className=" text-[12px] sm:text-[14px] text-primary  z-20 relative"
               >
                 <span className="hidden md:block">{link}</span>

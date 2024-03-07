@@ -10,12 +10,13 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { SiGooglemeet } from "react-icons/si";
-import Timezone from "../../components/Timezone/Timezone";
+// import Timezone from "../../components/Timezone/Timezone";
 import Calendar from "./Calendar/Calendar";
 import getDayNameFromDate from "../../utils/getDayNameFromDate";
 import Loading from "../../components/common/Loading/Loading";
 import { convertTo24HourFormat } from "../../utils/convertTo24HourFormat";
 import { calculateNewScheduled } from "../../utils/calculateNewScheduled";
+import Timezone from "../../components/Timezone/Timezone";
 
 const DynamicMeetingPage = () => {
   const { id } = useParams();

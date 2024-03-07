@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Search = ({ onChange, placeholder }) => {
+  const [searchValue, setSearchValue] = useState("");
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    // Auto-focus the input when the component mounts
+    inputRef.current.focus();
+  }, []);
+
   const handleChange = (e) => {
+    setSearchValue(e.target.value);
     onChange(e.target.value);
   };
+
 
   return (
     <form className="md:max-w-[480px] w-full lg:px-4 hidden md:block">
       <div className="relative">
         <input
+          ref={inputRef}
           type="text"
           name="q"
-          className="w-full outline-[2px] placeholder:text-[#a1a1a1] bg-gradient-to-r from-[#fbfeff] to-transparent md:placeholder:text-[11px] lg:placeholder:text-[14px] focus-within:outline-none h-12 shadow p-4 rounded-full"
+          className="w-full outline-[2px] placeholder:text-[#a1a1a1] focus-within:bg-white bg-gradient-to-r from-[#fbfeff] to-transparent md:placeholder:text-[11px] lg:placeholder:text-[14px] focus-within:outline-none h-12 shadow p-4 rounded-full"
           placeholder={placeholder || "Search"}
           onChange={handleChange}
         />

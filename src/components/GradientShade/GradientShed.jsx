@@ -3,7 +3,7 @@ const GradientShed = ({position}) => {
 
         <div
           className={`absolute -z-10 rotate-45 
-          ${position} rounded-[50px] bg-gradient-to-r from-[#fff9fe]
+          ${position} hidden md:block rounded-[50px] bg-gradient-to-r from-[#fff9fe]
            to-[#ffffff] `}
         ></div>
 
