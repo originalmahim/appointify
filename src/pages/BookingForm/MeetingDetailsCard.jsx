@@ -3,7 +3,7 @@ import Calendar from "../DynamicMeetingPage/Calendar/Calendar";
 import { WiTime1 } from "react-icons/wi";
 import BookingFormCalendar from "./BookingFormCalendar";
 
-const MeetingDetailsCard = () => {
+const MeetingDetailsCard = ({sheculeDate}) => {
   return (
     <div>
       <div className="card overflow-hidden  bg-base-100 shadow-sm p-3 ">
@@ -31,7 +31,7 @@ const MeetingDetailsCard = () => {
           </div>
         </div>
 
-        <BookingFormCalendar type={"confirm-form"} />
+        <BookingFormCalendar sheculeDate={sheculeDate} type={"confirm-form"} />
       </div>
     </div>
   );

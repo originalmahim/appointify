@@ -3,8 +3,15 @@ import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 
-export default function BookingFormCalendar({ setSelectedDay, setSelectedDate, type }) {
+export default function BookingFormCalendar({
+  sheculeDate,
+  setSelectedDay,
+  setSelectedDate,
+  type,
+}) {
   const [date, setDate] = useState(new Date());
+
+  console.log(date);
 
   // Function to get the formatted day of the week
   const getFormattedDay = (selectedDate) => {
@@ -37,6 +44,7 @@ export default function BookingFormCalendar({ setSelectedDay, setSelectedDate, t
       <DayPicker
         mode="single"
         selected={date}
+        // selected={"Thu Mar 07 2024 17:10:18 GMT+0600 (Bangladesh Standard Time)"}
         onSelect={handleDaySelect}
         showOutsideDays
         className={`${
