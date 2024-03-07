@@ -9,6 +9,7 @@ import tesla from "../../../assets/logos/tesla.svg";
 import apple from "../../../assets/logos/apple.svg";
 import uber from "../../../assets/logos/uber.svg";
 import microsoft from "../../../assets/logos/microsoft.svg";
+import TitleAndDescription from "../../TiteleAndDescription/TitleAndDescription";
 
 const companyLogos = [
   { name: "Google", logo: google },
@@ -24,35 +25,40 @@ const companyLogos = [
 ];
 const TrustedCompanies = () => {
   return (
-    <Container>
-      <section className="mt-28">
-        <div>
-          <h1 className="text-center text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold mb-4 md:mb-6 lg:mb-8 dark:text-slate-300">
-            Our Partners
-          </h1>
-          <p className="text-center antialiased text-xl leading-relaxed text-inherit mt-2 mb-10 md:mb-16">
-            Meet our partners and top contributors worldwide.
-          </p>
-        </div>
-        {/* logos  */}
-        <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-7 gap-6 p-5">
-          {companyLogos.map((item, index) => (
-            <div
-              key={index}
-              className="group p-4 bg-white hover:bg-gradient-blue hover:!text-white shadow-lg rounded-lg text-center 
-              transition transform hover:-translate-y-1 hover:shadow-xl"
-            >
-              <img
-                src={item.logo}
-                alt={item.name}
-                className="w-16 h-16 mx-auto mb-2"
-              />
-              <div className="text-lg">{item.name}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </Container>
+    <section className="relative p-3">
+      <img
+        className="w-full absolute opacity-15 -z-10 left-0 h-full"
+        src="https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg"
+        alt=""
+      />
+      <Container>
+        <section className="mt-28">
+          <div className="text-center">
+            <TitleAndDescription
+              title={"Our Partners"}
+              description={"Meet our partners and top contributors worldwide."}
+            />
+          </div>
+          {/* logos  */}
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:p-5">
+            {companyLogos.map((item, index) => (
+              <div
+                key={index}
+                className="group p-4 bg-white transition-all shadow-sm 
+                duration-300 ease-in-out transform md:hover:-translate-y-3 hover:shadow-xl md:hover:text-white hover:shadow-[#fff2ed] rounded-lg text-center"
+              >
+                <img
+                  src={item.logo}
+                  alt={item.name}
+                  className="w-16 h-16 mx-auto mb-2"
+                />
+                <div className="text-lg">{item.name}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </Container>
+    </section>
   );
 };
 

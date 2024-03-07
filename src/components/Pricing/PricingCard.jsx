@@ -1,7 +1,9 @@
 import { FaCircleCheck } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import PayButton from "../../bkash/PayButton";
 
 const PricingCard = ({ plan, index, monthlyBill }) => {
+  const bill = monthlyBill ? plan.monthlyFee : plan.annualFee;
   return (
     <div
       className={`bg-cardBG mt-5 md:hover:scale-110 hover:z-30 hover:shadow-lg transition duration-300 p-5 rounded-lg relative ${
@@ -18,28 +20,28 @@ const PricingCard = ({ plan, index, monthlyBill }) => {
       <h2 className="text-3xl font-semibold font-play mb-4">{plan.plan}</h2>
       {monthlyBill ? (
         <p className="text-sm">
-          <span className="text-xl font-semibold">$ {plan.monthlyFee}</span>
+          <span className="text-xl font-semibold">৳ {plan.monthlyFee}</span>
           <span className="text-2xl">/</span>
           month
         </p>
       ) : (
         <p className="text-sm">
-          <span className="text-xl font-semibold">$ {plan.annualFee}</span>
+          <span className="text-xl font-semibold">৳ {plan.annualFee}</span>
           <span className="text-2xl">/</span>
           year
         </p>
       )}
-      <button className="w-full h-12 text-white font-semibold bg-gradient-blue rounded-lg hover:bg-gradient-to-r hover:from-special hover:to-head active:scale-95">
-        Start {plan.plan}
-      </button>
+      <div>
+        <PayButton bill={bill} plan={plan.plan}>Get Started</PayButton>
+      </div>
       <div className="mt-5 flex flex-col gap-2">
         {plan?.facilities?.map((service) => (
-          <p className="inline-flex" key={service}>
+          <div className="inline-flex" key={service}>
             <div className="mt-1">
               <FaCircleCheck size={20} className="text-head" />
             </div>
             <span className="pl-2">{service}</span>
-          </p>
+          </div>
         ))}
       </div>
     </div>

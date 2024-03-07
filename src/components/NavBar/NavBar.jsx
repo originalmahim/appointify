@@ -3,9 +3,9 @@ import toast from "react-hot-toast";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-import logo from "../../assets/images/logo.png";
 import useUserData from "../../hooks/useUserData";
 import Container from "../Container/Container";
+import logo from "../../assets/icons/date.png"
 
 const NavBar = () => {
   const { logOut } = useContext(AuthContext);
@@ -138,9 +138,10 @@ const NavBar = () => {
     <div className="fixed z-50 w-screen">
       <nav
         className={`${
-          isScrolled ? "bg-gray-50 transition duration-1000" : "bg-cardBG"
+          isScrolled ? "bg-gray-50 transition duration-1000" : ""
         }`}
       >
+        <div className="h-[75px] bg-[#ffffff4f]">
         <Container>
           <div className="navbar">
             <div className="navbar-start">
@@ -156,15 +157,15 @@ const NavBar = () => {
                 </ul>
               </div>
               {/* logo & name */}
-              <div className="flex justify-center items-center gap-2 md:gap-4">
+              <div className="flex items-center gap-2">
                 <img
-                  className="w-8 md:w-10 lg:w-12 xl:w-14 2xl:16"
+                  className="w-8 md:w-10 "
                   src={logo}
                   alt="logo-img"
                 />
                 <Link
                   to="/"
-                  className="text-head text-2xl md:text-3xl xl:text-4xl font-play font-bold italic"
+                  className="text-primary text-2xl md:text-3xl lg:text-3xl font-play font-bold italic"
                 >
                   Appointify
                 </Link>
@@ -238,6 +239,8 @@ const NavBar = () => {
             </div>
           </div>
         </Container>
+
+        </div>
       </nav>
     </div>
   );

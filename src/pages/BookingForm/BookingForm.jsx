@@ -1,19 +1,25 @@
 import { useForm } from "react-hook-form";
-import { Card, Input, Button, Typography } from "@material-tailwind/react";
+import {
+  Card,
+  Input,
+  Button,
+  Typography,
+  Spinner,
+} from "@material-tailwind/react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import toast from "react-hot-toast";
-import { Await, Form, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useTransTackData from "../../hooks/useTransTackData";
 import { useEffect, useState } from "react";
-import OrganizerView from "../DynamicMeetingPage/OrganizerView";
-import SingleAvatar from "../../components/Avatar/SingleAvatar";
-import { CiCalendarDate } from "react-icons/ci";
 import MeetingDetailsCard from "./MeetingDetailsCard";
+import MeetingConfirmed from "../../components/Modal/MeetingConfirmed";
 
 export default function BookingForm() {
   const axios = useAxiosPublic();
   const navigate = useNavigate();
   const [eventId, setEventId] = useState(null);
+  const [showSuccessConfirmation, setSuccessConfirmation] = useState(false);
+  const [meetingLink, setMeetingLink] = useState("https://meet.google.com/cqm-fvfh-nzw");
+  const [sheculeDate, setSheduleDate] = useState("5/3/2024");
 
   const { data, isLoading } = useTransTackData(
     `/events/singleEvent/${eventId}`,
@@ -27,8 +33,8 @@ export default function BookingForm() {
     }
   }, []);
 
-  if (isLoading) <p>isLoading....</p>;
-  console.log(data?._id);
+  if (isLoading) <Spinner />;
+
   //this fun for create google event
   async function createGoogleEvent(email) {
     const event = {
@@ -45,8 +51,13 @@ export default function BookingForm() {
       const accessToken = localStorage.getItem("access-token");
       if (accessToken) {
         const eventRes = await axios.post("/schedule_event", event);
+        if (eventRes?.data?.meetLink) {
+          //post meeting link to database
+          await eventLinkPost(eventRes?.data?.meetLink);
+        }
         // navigate("/bookingConfirm");
-        toast.success(eventRes.data.message);
+        setSuccessConfirmation(true);
+        setSheduleDate(data?.scheduled_time);
       }
     } catch (err) {
       console.log(err);
@@ -57,12 +68,11 @@ export default function BookingForm() {
 
   async function saveParticipant(participantData) {
     const participant = {
-      name: participantData.firstName + " " + participantData.lastName,
-      email: participantData.email,
-      message: "fdfdfd",
-      image: "fdfdfdfrs",
+      name: participantData?.firstName + " " + participantData?.lastName,
+      email: participantData?.email,
+      // message: "",
+      // image: "",
     };
-    console.log(participant);
     try {
       const res = await axios.post(
         `/events/addParticipants/${data?._id}`,
@@ -74,23 +84,47 @@ export default function BookingForm() {
     }
   }
 
+  // eventLink
+  async function eventLinkPost(eventLink) {
+    try {
+      //post data
+      const res = await axios.put(`/events/updateEvent/${eventId}`, {
+        eventLink,
+      });
+      setMeetingLink(eventLink)
+    } catch (err) {
+      console.error("Error post event link");
+    }
+  }
+
   const handleBack = () => {
     localStorage.removeItem("access-token");
   };
 
+
+  const handleGoBackHome = () => {
+    navigate("/dashboard/user-home")
+    setSuccessConfirmation(false)
+  }
   return (
     <div className="flex">
       {/* <OrganizerView/> */}
       <InputForm
+        sheculeDate={sheculeDate}
         handleBack={handleBack}
         createGoogleEvent={createGoogleEvent}
         saveParticipant={saveParticipant}
       />
+      {showSuccessConfirmation && <MeetingConfirmed 
+      eventLink={meetingLink}
+       handleGoBackHome={handleGoBackHome}
+       sheculeDate={sheculeDate}
+       />}
     </div>
   );
 }
 
-function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
+function InputForm({ handleBack, createGoogleEvent, saveParticipant,sheculeDate }) {
   const {
     register,
     handleSubmit,
@@ -98,10 +132,9 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     // fun for create google meet event
     await createGoogleEvent(data?.email);
+    //save participant after creating event
     await saveParticipant(data);
   };
 
@@ -112,27 +145,19 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
     document.body.style.backgroundColor = "#EAEAEA";
   }
 
-  const data = {
-    type: "Meeting",
-    duration: 60,
-    location: "Virtual",
-    scheduled_time: "2024-03-03 15:30",
-    description: "A brief description of the event",
-    buffer_time: 10,
-    user: "john@example.com",
-  };
-
   return (
-    <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full md:w-[80%]  min-h-[100vh] overflow-hidden pb-8">
+    <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full lg:w-[90%]  md:min-h-[100vh] overflow-hidden pb-8">
       <Card
-        className="p-5 pt-16  mb-2 bg-white md:w-[500px] max-h-[600px] sm:mx-4"
+        className="p-5 md:pt-16  mb-2 bg-white md:w-[500px] md:max-h-[550px] "
         color="transparent"
-        shadow={false}>
+        shadow={false}
+      >
         <div className="flex flex-col  gap-5 ">
           <Typography
             variant="h6"
             className="text-[20px] md:text-2xl lg:text-3xl font-normal text-left mb-6"
-            color="blue-gray">
+            color="blue-gray"
+          >
             Confirm Booking
           </Typography>
         </div>
@@ -142,7 +167,8 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             <Typography
               variant="p"
               color="blue-gray"
-              className="-mb-6 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within">
+              className="-mb-6 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within"
+            >
               first Name
             </Typography>
             <Input
@@ -162,7 +188,8 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             <Typography
               variant="p"
               color="blue-gray"
-              className="-mb-8 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within">
+              className="-mb-8 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within"
+            >
               Last Name
             </Typography>
             <Input
@@ -178,7 +205,8 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             <Typography
               variant="p"
               color="blue-gray"
-              className="-mb-7 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within:border-none">
+              className="-mb-7 text-[13px] md:text-[14px] lg:text-[16px] mt-2 border-none outline-none focus-within:outline-none focus-within:border-none"
+            >
               Email
             </Typography>
             <Input
@@ -195,25 +223,23 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant }) {
             )}
           </div>
 
-          <div className="flex justify-between gap-2 pt-6 mt-6">
-            <Button
-              onClick={handleBack}
-              className="w-1/2 bg-transparent lg:bg-black lg:text-white text-black shadow-none  hover:shadow-none  ">
+          <div className="md:flex md:space-y-0 space-y-3 md:flex-col items-center lg:flex-row justify-between gap-2 pt-6 mt-6">
+            <button onClick={handleBack} className=" btn w-full lg:w-1/2">
               Back
-            </Button>
+            </button>
 
-            <Button
+            <button
               type="submit"
-              className="w-1/2 text-[13px] md:text-[14px] lg:text-[16px]  bg-transparent shadow-none text-primary"
-              fullWidth
-              disabled={!isValid}>
+              disabled={!isValid}
+              className="btn bg-primary text-white w-full hover:bg-primaryHover lg:w-1/2"
+            >
               Confirm
-            </Button>
+            </button>
           </div>
         </form>
       </Card>
-      <div className="bg-[#f6f6f6] h-screen lg:w-80 sm:p-4 max-h-[600px]">
-        <MeetingDetailsCard />
+      <div className=" mb-6 md:mb-0 lg:w-80 sm:p-4 md:max-h-[600px]">
+        <MeetingDetailsCard sheculeDate={sheculeDate}/>
       </div>
     </div>
   );

@@ -7,125 +7,137 @@ import customer1 from "../../../assets/images/customer1.jpg";
 import customer2 from "../../../assets/images/customer2.jpg";
 import stack from "../../../assets/stack.mp4";
 import Container from "../../Container/Container";
+import TitleAndDescription from "../../TiteleAndDescription/TitleAndDescription";
+
+import bookingEventImg from "../../../assets/images/bookingEvent.png";
+import GradientShed from "../../GradientShade/GradientShed";
 
 const FeatureOverview = () => {
   return (
-    <section className="max-w-[1400px] mx-auto mt-24 md:mt-32 lg:mt-36 xl:mt-40">
+    <section className="max-w-[1400px] mx-auto ">
       <Container>
-        <h1 className="text-center text-special text-3xl md:text-4xl xl:text-5xl font-play font-bold mb-8 md:mb-12 lg:mb-14 xl:mb-16">
-          Our Features
-        </h1>
-        <div className="p-10 rounded-lg sm:h-[300px] flex flex-col sm:flex-row-reverse justify-between bg-cardBG">
-          <div className="sm:w-2/5 h-[300px]">
+        <div className="text-center relative">
+          <TitleAndDescription
+            title={"Our Feature"}
+            type={"h2"}
+            description={
+              "Here are what we provide let's take brief overview in it"
+            }
+          />
+        </div>
+
+        {/* Gradient shade */}
+
+        
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          {/* Zoom and Google */}
+          <div
+            data-aos="fade-right"
+            data-aos-easing="linear"
+            data-aos-duration="800"
+            className="bg-white lg:col-span-2 shadow-lg  rounded-lg"
+          >
+            <div className="">
+              <div className="pl-4 sm:pl-0">
+                <img
+                  className=" h-40 md:h-52 lg:h-72 object-cover object-top md:object-center w-full rounded-lg"
+                  src="https://cdn.dribbble.com/userupload/3908561/file/original-8fa26578764ae7b4c9b158eb1c07ec90.png?resize=752x"
+                  alt=""
+                />
+              </div>
+              <div className="p-4 pb-8">
+                <h2 className="mb-3 text-lg md:text-xl">Zoom and Google</h2>
+                <p className="text-justify text-sm md:text-base text-light-gray">
+                  Integrate Zoom and Google features for seamless virtual events
+                  and collaboration.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* First Section - Booking Event */}
+          <div
+            data-aos="fade-left"
+            data-aos-easing="linear"
+            data-aos-duration="800"
+            className="bg-white shadow-lg"
+          >
+            <div className="">
+              <div className="pl-4 sm:pl-0">
+                <img
+                  className="object-cover object-top md:object-center h-40  md:h-52 lg:h-72 w-full rounded-lg"
+                  src={bookingEventImg}
+                  alt=""
+                />
+              </div>
+              <div className="p-4 pb-8">
+                <h2 className="mb-3 text-lg md:text-xl">Booking Event</h2>
+                <p className="text-justify text-sm md:text-base text-light-gray">
+                  Simplify event management by easily booking and organizing
+                  events.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Second Section - Setting Event Calendar */}
+          <div
+            data-aos="fade-up-right"
+            data-aos-easing="linear"
+            data-aos-duration="800"
+            className="bg-white shadow-lg rounded-lg"
+          >
+            <div className="">
+              <div className="pl-4 sm:pl-0">
+                <img
+                  className="object-cover object-top md:object-center h-40  md:h-52 lg:h-72 w-full rounded-lg"
+                  src="https://cdn.dribbble.com/userupload/3234396/file/original-afbe9420bc45b933609ccb0d58412752.png?resize=400x300&vertical=center"
+                  alt=""
+                />
+              </div>
+              <div className="p-4 pb-8">
+                <h2 className="mb-3 text-lg md:text-xl">
+                  Setting Event Calendar
+                </h2>
+                <p className="text-justify text-sm md:text-base text-light-gray">
+                  Craft personalized calendars to streamline and enhance the
+                  event management experience.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Collaboration  */}
+          <div className="bg-white shadow-lg lg:col-span-2 rounded-lg"
+             data-aos="fade-up-right"
+            data-aos-easing="linear"
+            data-aos-duration="800"
+          
+          
+          >
             <div className="pl-4 sm:pl-0">
               <img
                 data-aos="zoom-in"
                 data-aos-easing="linear"
                 data-aos-duration="1500"
-                className="object-cover h-48 w-full rounded-lg"
-                src={card1}
+                className="ver h-40 md:h-52 lg:h-72 object-cover object-top md:object-center w-full rounded-lg"
+                src="https://cdn.dribbble.com/users/4341791/screenshots/8574595/media/3cbca4ba607b111c4d4702f210062a62.gif"
                 alt=""
               />
+            </div>
+            <div className="p-4 pb-8">
+              <h2 className="mb-3 text-lg md:text-xl">
+                Effortless collaboration
+              </h2>
+              <p className="text-justify text-sm md:text-base text-light-gray">
+                Integrate Zoom and Google features for seamless virtual events
+                and collaboration.
+              </p>
+            </div>
+          </div>
 
-              <div className="w-28 sm:w-32 py-2 rounded-md -mt-12 -ml-10 sm:-ml-14">
-                <img
-                  data-aos="flip-up"
-                  data-aos-easing="linear"
-                  data-aos-duration="1600"
-                  className=" rounded-lg"
-                  src={schedule}
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-          <div className="sm:w-2/5 h-[200px] sm:h-[300px]">
-            <h2 className="font-play mb-3 font-bold text-lg md:text-xl lg:text-2xl">
-              Manage your schedule effortlessly
-            </h2>
-            <p className="text-justify text-sm md:text-base">
-              Empower yourself with flexible tools to organize and prosper on
-              your terms – tailor precisely when and how clients can schedule
-              with you, conduct virtual appointments or classes, and reserve
-              personal time as needed.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-2 my-2">
-          <div className="w-full p-10 sm:w-1/2 bg-cardBG h-[520px] rounded-lg">
-            <h2 className="font-play mb-3 font-bold text-lg md:text-xl lg:text-2xl">
-              Expand your clientele and foster engagement
-            </h2>
-            <p className="text-justify text-sm md:text-base">
-              Craft personalized intake forms to streamline and enhance the
-              customer experience. Harness the potential of robust loyalty tools
-              to stimulate business growth and foster lasting relationships that
-              encourage customers to return.
-            </p>
-
-            <div className="mx-auto w-64 relative">
-              <div className="mt-5 flex justify-center">
-                <div className="w-48 bg-white rounded-lg">
-                  <Lottie animationData={clientForm} autoPlay={true} />
-                </div>
-              </div>
-              <img
-                className="absolute -top-4 right-4 w-10 h-10 rounded-full object-contain"
-                src={customer1}
-                alt=""
-              />
-              <img
-                className="absolute -bottom-4 left-4 w-10 h-10 rounded-full bg-cover"
-                src={customer2}
-                alt=""
-              />
-            </div>
-          </div>
-          <div className="w-full p-10 sm:w-1/2 bg-cardBG h-[520px] rounded-lg">
-            <h2 className="font-play mb-3 font-bold text-lg md:text-xl lg:text-2xl">
-              Facilitate automated appointment bookings
-            </h2>
-            <p className="text-justify text-sm md:text-base">
-              Effortlessly oversee multiple locations and empower clients to
-              effortlessly modify or reschedule appointments on their own.
-              Streamline the process by sending automated receipts and timely
-              reminder notifications at each step of the scheduling journey,
-              ensuring clients stay punctual.
-            </p>
-            <div className="mt-10 flex justify-center">
-              <img
-                data-aos="zoom-in"
-                data-aos-easing="linear"
-                data-aos-duration="1500"
-                className="w-52 bg-cover rounded-lg"
-                src={automate}
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        <div className="p-10 rounded-lg sm:h-[300px] flex flex-col-reverse sm:flex-row justify-between bg-cardBG">
-          <div className="sm:w-2/5 h-[200px] sm:h-[300px]">
-            <h2 className="font-play mb-3 font-bold text-lg md:text-xl lg:text-2xl">
-              Safeguard your time and optimize your revenue
-            </h2>
-            <p className="text-justify text-sm md:text-base">
-              Experience peace of mind with no-show protection tools such as
-              secure credit card storage and deposits. Easily provide recurring
-              subscriptions, packages, and gift cards to boost your income
-              seamlessly.
-            </p>
-          </div>
-          <div className="sm:w-2/5 lg:w-1/3 xl:w-[28%] flex items-center mb-5 sm:mb-0">
-            <video
-              className="rounded-lg"
-              autoPlay
-              loop
-              muted
-              playsInline
-              src={stack}
-            ></video>
-          </div>
+          {/* Continue the pattern for the remaining sections */}
         </div>
       </Container>
     </section>

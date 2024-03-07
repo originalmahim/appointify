@@ -1,14 +1,16 @@
 import SingleAvatar from "../../components/Avatar/SingleAvatar";
 import Calendar from "../DynamicMeetingPage/Calendar/Calendar";
 import { WiTime1 } from "react-icons/wi";
+import BookingFormCalendar from "./BookingFormCalendar";
 
-const MeetingDetailsCard = () => {
+const MeetingDetailsCard = ({sheculeDate}) => {
   return (
     <div>
-      <div className="card  bg-base-100 shadow-sm p-3 ">
+      <div className="card overflow-hidden  bg-base-100 shadow-sm p-3 ">
         <div className="">
-          <div className="mt-3 pt-3 flex items-center gap-3 ">
+          <div className="mt-3 pt-6 md:pt-3 flex items-center gap-3 ">
             <SingleAvatar
+              usedIn={"bookingForm"}
               img={
                 "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
               }
@@ -29,7 +31,7 @@ const MeetingDetailsCard = () => {
           </div>
         </div>
 
-        <Calendar type={"confirm-form"} />
+        <BookingFormCalendar sheculeDate={sheculeDate} type={"confirm-form"} />
       </div>
     </div>
   );

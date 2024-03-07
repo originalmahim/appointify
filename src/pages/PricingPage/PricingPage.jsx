@@ -8,7 +8,7 @@ import PricingCard from "../../components/Pricing/PricingCard";
 const PricingPage = () => {
   const [monthlyBill, setMonthlyBill] = useState(true);
   const handleChange = () => {
-    console.log("toggled");
+    // console.log("toggled");
     setMonthlyBill(!monthlyBill);
   };
   return (

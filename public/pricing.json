@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "plan": "Free",
-    "annualFee": 0,
-    "monthlyFee": 0,
+    "plan": "Strater",
+    "annualFee": 100,
+    "monthlyFee": 10,
     "facilities": [
       "One event type with 50 meetings",
       "Connect one calendar and basic integration",
