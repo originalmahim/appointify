@@ -2,7 +2,9 @@ import { Button, Option, Select, Switch } from "@material-tailwind/react";
 import { AiOutlineCopy, AiOutlinePlus } from "react-icons/ai";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { generate12HourTimeArray } from "../../utils/generate12HourTimeArray";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useTransTackData from "../../hooks/useTransTackData";
+import Loading from "../../components/common/Loading/Loading";
 
 const Availability = () => {
   const days = [
@@ -44,8 +46,15 @@ const Availability = () => {
       _id: "65df55ac660fea1ede848d7d",
     },
   ];
+    const { data,isLoading } = useTransTackData(
+      `/users/availability/forhadairdrop@gmail.com`
+    );
 
 
+    if(isLoading){
+      return <Loading/>
+    }
+console.log(data.availability);
 
 
 
@@ -57,7 +66,7 @@ const Availability = () => {
         ))}
       </div> */}
       <div className="mx-10 mt-20 ">
-        <Days />
+        <Days availableSlots={data?.availability} daysArray={data.daysArr} />
       </div>
     </>
   );
@@ -65,8 +74,11 @@ const Availability = () => {
 
 export default Availability;
 
-  const Days = () => {
+  const Days = ({availableSlots,daysArray}) => {
     const [isDayOn,setIsDayOn] = useState(false)
+    const [selectedDay, setSelectedDay] = useState([]);
+    const axios = useAxiosPublic()
+    // console.log(data);
     const dayName = [
       "Sunday",
       "Monday",
@@ -77,18 +89,52 @@ export default Availability;
       "Saturday",
     ];
 
-  const handleDaySubmit =()=>{
-    console.log('ok');
+  const handleDaySubmit =(name)=>{
+    console.log(name);
+    setIsDayOn(!isDayOn)
+    setSelectedDay([...selectedDay,name])
+    // slotPost(name)
   }
+
+
+async function slotPost(slotName){
+  const newSlot = {
+    day: slotName,
+    slots: [{ start_time: "07:00", end_time: "11:00" }],
+  };
+  try {
+   const res =  await axios.post(`/users/availability/forhadairdrop@gmail.com`,newSlot);
+   console.log(res);
+  } catch (err) {
+    console.error(err);
+    
+  }
+
+} 
+async function slotRemove(slotId){
+
+  try {
+   const res = await axios.delete(
+     `/users/removeSlot/forhadairdrop@gmail.com/slots/:slotId`);
+   console.log(res);
+  } catch (err) {
+    console.error(err);
+    
+  }
+
+} 
+
+
+
+  // console.log(selectedDay);
     return (
       <div>
         {dayName.map((name, idx) => (
-          <div key={name} className="flex gap-3 items">
+          <div key={name} className="flex gap-3 items-start">
             <div className="flex gap-3 items-center w-40">
-              <div className="flex">
-                <Switch onClick={handleDaySubmit} />
-                <p>{name}</p>
-              </div>
+              <Switch defaultChecked={daysArray.includes(name)} onClick={() => handleDaySubmit(name)} />
+
+              <p>{name}</p>
             </div>
             {/* <Select label="Select Version">
               <Option>Material Tailwind HTML</Option>
@@ -97,7 +143,14 @@ export default Availability;
               <Option>Material Tailwind Angular</Option>
               <Option>Material Tailwind Svelte</Option>
             </Select> */}
-            {/* <TimeInput /> */}
+            <div className="flex flex-col">
+              {availableSlots?.map(
+                (days) =>
+                  days.day === name &&
+                  days.slots.map((slot) => <TimeInput key={days._id} />)
+              )}
+              {/* <TimeInput /> */}
+            </div>
           </div>
         ))}
       </div>
@@ -106,26 +159,38 @@ export default Availability;
 
 export function TimeInput() {
   const [selectSlots, setSelectedSlots] = useState("");
+  const [itemPlus,setItemPlus] = useState(false)
 
   const handleSlotSubmit = (time) => {
     console.log(time);
     setSelectedSlots(time);
   };
+  const handlePlus = (time) => {
+    console.log("item plus");
+    setItemPlus(true)
+
+  };
 
   return (
     <div className="flex items-center gap-5">
-      <div className="flex gap-5 mb-3">
-        {/* {[1, 2, 3].map(idx=>)} */}
-        <SlotTimes
-          handleSlotSubmit={handleSlotSubmit}
-          selectSlots={selectSlots}
-          label="Start Time"
-        />
-        <SlotTimes handleSlotSubmit={handleSlotSubmit} label="End Time" />
+      <div>
+        <div className="flex gap-5 mb-3">
+          {/* {[1, 2, 3].map(idx=>)} */}
+          <SlotTimes
+            handleSlotSubmit={handleSlotSubmit}
+            selectSlots={selectSlots}
+            label="Start Time"
+          />
+          <SlotTimes
+            handleSlotSubmit={handleSlotSubmit}
+            selectSlots={selectSlots}
+            label="End Time"
+          />
+        </div>
       </div>
       <div className="flex gap-5">
         <button>
-          <AiOutlinePlus />
+          <AiOutlinePlus onClick={handlePlus} />
         </button>
         <button>
           <AiOutlineCopy />
@@ -138,14 +203,58 @@ export function TimeInput() {
 
 export function SlotTimes({ handleSlotSubmit, selectSlots, label }) {
   const slots = generate12HourTimeArray(15);
+  const days = [
+    {
+      day: "Tuesday",
+      slots: [
+        {
+          start_time: "06:00",
+          end_time: "11:00",
+          _id: "65df04bf336126e3277c982b",
+        },
+        {
+          start_time: "06:00",
+          end_time: "11:00",
+          _id: "65df04cc336126e3277c983c",
+        },
+      ],
+      _id: "65df04bf336126e3277c982a",
+    },
+    {
+      day: "Sunday",
+      slots: [
+        {
+          start_time: "07:00",
+          end_time: "11:00",
+          _id: "65df55ac660fea1ede848d7e",
+        },
+        {
+          start_time: "09:00",
+          end_time: "04:00",
+          _id: "65df563f660fea1ede848d86",
+        },
+        {
+          start_time: "02:00",
+          end_time: "04:00",
+          _id: "65df56fea942815b3e13dc2c",
+        },
+      ],
+      _id: "65df55ac660fea1ede848d7d",
+    },
+  ];
+
+
   return (
-    <Select label={label}>
-      {slots?.map((time) => (
-        <Option onClick={() => handleSlotSubmit(time)} key={time}>
-          {time}
-        </Option>
-      ))}
-    </Select>
+    <>
+      {/* {days.map((day) => {})} */}
+      <Select label={label}>
+        {slots?.map((time) => (
+          <Option onClick={() => handleSlotSubmit(time)} key={time}>
+            {time}
+          </Option>
+        ))}
+      </Select>
+    </>
   );
 }
 
