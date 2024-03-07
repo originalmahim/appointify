@@ -16,6 +16,7 @@ import getDayNameFromDate from "../../utils/getDayNameFromDate";
 import Loading from "../../components/common/Loading/Loading";
 import { convertTo24HourFormat } from "../../utils/convertTo24HourFormat";
 import { calculateNewScheduled } from "../../utils/calculateNewScheduled";
+import Timezone from "../../components/Timezone/Timezone";
 
 const DynamicMeetingPage = () => {
   const { id } = useParams();
@@ -152,7 +153,7 @@ function EventInfo({ meetingDetails }) {
       </div>
       <div className="flex items-center">
         <GlobeAltIcon className="h-6 w-6" />
-        {/* <Timezone /> */}
+        <Timezone />
       </div>
     </>
   );

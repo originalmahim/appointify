@@ -24,6 +24,7 @@ import BookingConfirmation from "./BookingConfirmation";
 import { FaBowlingBall } from "react-icons/fa";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Search from "../../../components/Search/Search";
+import MeetingDescription from "./MeetingDescription";
 
 const UserHome = () => {
   // use axios for data fetching
@@ -40,6 +41,7 @@ const UserHome = () => {
 
   // Selected hour, minute, schedule time, location, and platform
   const [title, setTitle] = useState("");
+  const [meetingDescription, setDescriptionChange] = useState("");
   const [selectedHour, setSelectedHour] = useState("");
   const [selectedMinute, setSelectedMinute] = useState("");
   const [scheduleTime, setScheduleTime] = useState("");
@@ -51,9 +53,6 @@ const UserHome = () => {
   const [selectedParticipants, setSelectedParticipants] = useState([]);
   const [bufferTime, setBufferTime] = useState(0);
 
-  // Hover state
-  const [isCreateBookingHover, setIsCreateBookingHover] = useState(false);
-
   //Posted event
   const [newAddedEvent, setNewlyAddedEvent] = useState({});
   const [isAddedEvent, setIsAddedEvent] = useState(false);
@@ -64,7 +63,7 @@ const UserHome = () => {
 
   
   
-  // Example usage in your handleDayToggle function
+  // usage in your handleDayToggle function
   const handleDayToggle = (day) => {
     setAvailableDays((prevAvailableDays) => {
       // Push unchecked days to the state
@@ -89,18 +88,20 @@ const UserHome = () => {
 
     const event = {
       type: title,
+      description:meetingDescription,
       duration: parseInt(selectedHour) * 60 + parseInt(selectedMinute),
       buffer_time: bufferTime,
       location,
+      platform,
+      eventLink:"",
       participants: selectedParticipants,
       scheduled_time: "",
-      platform,
       status: "scheduled",
       availability,
     };
 
     const response = await axios.post(
-      `/events/shakilahmmed8882@gmail.com`,
+      `/events/${user&&user?.email}`,
       event
     );
     if (response.data._id) {
@@ -113,9 +114,8 @@ const UserHome = () => {
 
   // Search handler
   const handleSearchSubmit = async(query) => {
-
     setSearchQuery(query)
-    const allSearchEvents = await axios.get(`/events/${user&&user?.email}/${query}`)
+    const allSearchEvents = await axios.get(`/events/eventsSearch/${user&&user?.email}/${query}`)
     if(allSearchEvents?.data?.length > 0){
       setAllSearchedEvents(allSearchEvents.data)
     } else{
@@ -123,6 +123,7 @@ const UserHome = () => {
     }
     
   };
+
 
   return (
     <>
@@ -144,15 +145,15 @@ const UserHome = () => {
             onChange={handleSearchSubmit}
             placeholder="Search your events.."
           />
+
           {/* Button for creating a new booking */}
           <h2
-            onMouseEnter={() => setIsCreateBookingHover(true)}
-            onMouseLeave={() => setIsCreateBookingHover(false)}
             onClick={() => document.getElementById("my_modal_3").showModal()}
             className="rounded-full w-9 h-9 justify-center bg-primary  text-white hover:bg-[#ff5e00] transition-all duration-300 inline-flex items-center cursor-pointer relative"
+            title="Create booking"
           >
             <FaPlusCircle />
-            <PopOver text={"Book"} isHover={isCreateBookingHover} />
+           
           </h2>
         </div>
         {/* Modal for creating a new booking */}
@@ -183,7 +184,6 @@ const UserHome = () => {
 
             {/* Form for creating a booking */}
             {isAddedEvent ? (
-              // see..
               <>
                 <BookingConfirmation event={newAddedEvent} />
               </>
@@ -197,6 +197,9 @@ const UserHome = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"
                   />
+
+                  {/* Meeting description */}
+                  <MeetingDescription setDescriptionChange={setDescriptionChange}/>
 
                   <div>
                     {/* Set hours and minutes for the meeting duration */}
