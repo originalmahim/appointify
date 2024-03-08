@@ -1,86 +1,126 @@
 import { Switch } from "@material-tailwind/react";
 import TimeInput from "./TimeInput";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const Days = ({ availableSlots, daysArray, refetch, userEmail }) => {
-  const [isDayOn, setIsDayOn] = useState(false);
-  const [selectedDay, setSelectedDay] = useState([]);
-  const axios = useAxiosPublic();
-  // console.log(data);
-  const dayName = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-console.log(isDayOn);
-  const handleDaySubmit = (name,val) => {
+const [selectedDay, setSelectedDay] = useState(daysArray || []); // Initialize with daysArray
+const [isPostingOrRemoving, setIsPostingOrRemoving] = useState(false); // Flag for ongoing operations
+const axios = useAxiosPublic();
+const dayName = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
-    console.log(name,val);
+const handleToggle = async (name) => {
+  // Prevent multiple operations during ongoing actions
+  if (isPostingOrRemoving) return;
 
-    setSelectedDay([...selectedDay, name]);
-    // slotPost(name)
-  };
+  setIsPostingOrRemoving(true); // Set flag to indicate operation in progress
+
+  try {
+    if (selectedDay.includes(name)) {
+      await removeAllSlot(name);
+      setSelectedDay(selectedDay.filter((day) => day !== name));
+    } else {
+      await postNewSlot({
+        day: name,
+        slots: [{ start_time: "09:00", end_time: "05:00" }],
+      });
+      setSelectedDay([...selectedDay, name]);
+    }
+    refetch(); // Refetch data after successful operation
+    toast.success(
+      selectedDay.includes(name)
+        ? "Slot removed successfully!"
+        : "Slot created successfully!"
+    );
+  } catch (err) {
+    console.error(err);
+    toast.error(
+      selectedDay.includes(name)
+        ? "Error removing slot."
+        : "Error creating slot."
+    );
+  } finally {
+    setIsPostingOrRemoving(false); // Reset flag after operation
+  }
+};
 
   async function postNewSlot(slotName) {
-    const newSlot = {
-      day: slotName,
-      slots: [{ start_time: "07:00", end_time: "11:00" }],
-    };
     try {
-      const res = await axios.post(`/users/availability/${userEmail}`, newSlot);
+      const res = await axios.post(
+        `/users/availability/${userEmail}`,
+        slotName
+      );
       if (res.status === 200) {
-        refetch();
+        // refetch(); // Refetch data after successful post
+        // toast.success("Slot created successfully!");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Error creating slot.");
     }
   }
-  async function removeAllSlot(slotId) {
+
+  async function removeAllSlot(dayName) {
     try {
       const res = await axios.delete(
-        `/users/removeSlot/${userEmail}/slots/:slotId`
+        `/users/removeDay/${userEmail}/day/${dayName}`
       );
-      console.log(res);
+      if (res.status === 200) {
+        // refetch(); // Refetch data after successful deletion
+        // toast.success(res.data.message);
+      }
     } catch (err) {
       console.error(err);
+      toast.error("Error removing slots.");
     }
   }
+
+
+
+  const shouldDisplayTimeInput = (day) =>
+    availableSlots?.some(
+      (slotData) => slotData.day === day && slotData.slots.length > 0
+    );
 
   return (
     <div>
       {dayName.map((name, idx) => (
         <div key={name} className="flex gap-3 items-start">
-          <div className="flex gap-3 items-center w-40">
+          <div className="flex gap-3 items-center mb-2 w-40">
             <Switch
-              defaultChecked={daysArray.includes(name)}
-            //   onChange={setIsDayOn(!isDayOn)}
-              onClick={(val) => handleDaySubmit(name,val)}
+              defaultChecked={selectedDay.includes(name)}
+              onClick={() => handleToggle(name)}
+              disabled={isPostingOrRemoving} // Disable button during operations
             />
-
             <p>{name}</p>
           </div>
 
           <div className="flex flex-col">
-            {availableSlots?.map(
-              (days) =>
-                days.day === name &&
-                days.slots.map((slot, idx) => (
-                  <TimeInput
-                    key={slot._id}
-                    postNewSlot={postNewSlot}
-                    slotIndex={idx}
-                    refetch={refetch}
-                    slot={slot}
-                    userEmail={userEmail}
-                    dayName={name}
-                  />
-                ))
-            )}
+            {shouldDisplayTimeInput(name) &&
+              availableSlots?.map(
+                (days) =>
+                  days.day === name &&
+                  days.slots.map((slot, idx) => (
+                    <TimeInput
+                      key={slot._id}
+                      postNewSlot={postNewSlot}
+                      slotIndex={idx}
+                      refetch={refetch}
+                      slot={slot}
+                      userEmail={userEmail}
+                      dayName={name}
+                    />
+                  ))
+              )}
           </div>
         </div>
       ))}
@@ -88,4 +128,4 @@ console.log(isDayOn);
   );
 };
 
-export default Days
+export default Days;

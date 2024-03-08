@@ -72,7 +72,6 @@ function SlotTimesOption({ label,FdValue,EdValue }) {
   // console.log(FdValue);
   // console.log(EdValue);
 
-console.log(value);
 
   return (
     <>
