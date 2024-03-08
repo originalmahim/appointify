@@ -5,7 +5,7 @@ export function generate12HourTimeArray(intervalMinutes) {
       const formattedHours = String(hours % 12 || 12).padStart(2, "0");
       const formattedMinutes = String(minutes).padStart(2, "0");
       const period = hours < 12 ? "AM" : "PM";
-      times.push(`${formattedHours}:${formattedMinutes} ${period}`);
+      times.push(`${formattedHours}:${formattedMinutes}`);
     }
   }
   return times;

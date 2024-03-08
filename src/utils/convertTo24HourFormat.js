@@ -19,6 +19,6 @@ export function convertTo24HourFormat(timeString) {
 }
 
 // Example usage:
-const inputTime = "08:20 AM";
-const convertedTime = convertTo24HourFormat(inputTime);
-console.log(`Converted time: ${convertedTime}`);
+// const inputTime = "08:20 AM";
+// const convertedTime = convertTo24HourFormat(inputTime);
+// console.log(`Converted time: ${convertedTime}`);

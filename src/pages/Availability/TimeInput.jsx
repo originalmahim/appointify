@@ -41,14 +41,13 @@ export default function TimeInput({ postNewSlot, dayName,  slot, slotIndex,userE
         <div className="flex gap-5 mb-3">
           <SlotTimesOption
             handleSlotSubmit={handleSlotSubmit}
-            selectSlots={selectSlots}
-            FdValue={slot?.start_time}
+            inputDefault={slot?.start_time}
             label="Start Time"
           />
           <SlotTimesOption
             handleSlotSubmit={handleSlotSubmit}
-            selectSlots={selectSlots}
-            EdValue={slot?.end_time}
+
+            inputDefault={slot?.end_time}
             label="End Time"
           />
           {slotIndex === 0 ? (
@@ -66,23 +65,28 @@ export default function TimeInput({ postNewSlot, dayName,  slot, slotIndex,userE
     </div>
   );
 }
-function SlotTimesOption({ label,FdValue,EdValue }) {
+function SlotTimesOption({ label,inputDefault }) {
   const slots = generate12HourTimeArray(15);
-  const [value, setValue] = useState("");
-  // console.log(FdValue);
-  // console.log(EdValue);
+  const [value, setValue] = useState(inputDefault);
+  const [selectedValue ,setSelectedValue] = useState("")
+const filteredSlots = slots?.filter(time=> time !== selectedValue)
+const handleChange = (val)=>{
+  setValue(val)
+  setSelectedValue(val)
+}
+console.log(filteredSlots);
 
-
+// console.log(slots);
   return (
     <>
       <Select
         size="md"
         value={value}
-        label={FdValue || EdValue}
-        onChange={(val) => setValue(val)}
+        label={label}
+        onChange={(val) => handleChange(val)}
       >
-        {slots?.map((time) => (
-          <Option value={time} key={time}>
+        {filteredSlots?.map((time, idx) => (
+          <Option value={time} key={idx}>
             {time}
           </Option>
         ))}
