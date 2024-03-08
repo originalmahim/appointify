@@ -43,7 +43,7 @@ console.log(isDayOn);
   async function removeAllSlot(slotId) {
     try {
       const res = await axios.delete(
-        `/users/removeSlot/forhadairdrop@gmail.com/slots/:slotId`
+        `/users/removeSlot/${userEmail}/slots/:slotId`
       );
       console.log(res);
     } catch (err) {

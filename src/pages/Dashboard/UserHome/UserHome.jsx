@@ -99,7 +99,6 @@ const UserHome = () => {
       status: "scheduled",
       availability,
     };
-
     const response = await axios.post(
       `/events/${user&&user?.email}`,
       event
