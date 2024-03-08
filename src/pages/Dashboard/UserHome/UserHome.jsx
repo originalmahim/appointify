@@ -37,8 +37,9 @@ const UserHome = () => {
   const [onDaysToggle, setOnDaysToggle] = useState(false);
 
   // State for start and end time
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [startTime, setStartTime] = useState("12:30 pm");
+const [endTime, setEndTime] = useState("8:30 am");
+
 
   // Selected hour, minute, schedule time, location, and platform
   const [title, setTitle] = useState("");
@@ -91,15 +92,18 @@ const UserHome = () => {
       type: title,
       description:meetingDescription,
       duration: parseInt(selectedHour) * 60 + parseInt(selectedMinute),
-      buffer_time: bufferTime,
-      location,
+      buffer_time:10,
+      location:"virtual",
       platform,
       eventLink:"",
       participants: selectedParticipants,
-      scheduled_time: "",
+      scheduled_time: "12:30",
       status: "scheduled",
       availability,
     };
+
+    console.log(event)
+    
 
     const response = await axios.post(
       `/events/${user&&user?.email}`,
@@ -234,19 +238,10 @@ const UserHome = () => {
                       />
                     </div>
                     <span className="text-gray-500">:</span>
-                  </div>
 
-                  {/* Available time range */}
-                  <AvailableTimeRange
-                    setStartTime={setStartTime}
-                    setEndTime={setEndTime}
-                    startTime={startTime}
-                    endTime={endTime}
-                  />
-                  {/* Platform and Scheduled time selection */}
-                  <div className="flex gap-2 justify-between items-center space-x-2 mt-4">
-                    {/* Platform selection */}
-                    <div className="w-1/2">
+
+                     {/* Platform selection */}
+                     <div className="w-[44%]">
                       <Select
                         label="Platform"
                         style={{ display: "flex" }}
@@ -268,11 +263,17 @@ const UserHome = () => {
                         </Option>
                       </Select>
                     </div>
-                    <span className="text-gray-500">:</span>
-
-                    
                   </div>
 
+                  {/* Available time range */}
+                  <AvailableTimeRange
+                    setStartTime={setStartTime}
+                    setEndTime={setEndTime}
+                    startTime={startTime}
+                    endTime={endTime}
+                  />
+                  {/* Platform and Scheduled time selection */}
+             
                   {/* Confirm button */}
                   <div className="flex ">
                     <button

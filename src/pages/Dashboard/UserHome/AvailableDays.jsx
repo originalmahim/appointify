@@ -35,9 +35,6 @@ const AvailableDays = ({ availableDays, onDaysToggle, handleDayToggle }) => {
                   onChange={() => handleDayToggle(day)}
                 />
                 <span className=" text-gray-700">{day}</span>
-
-
-                <div><AvailableTimeRange/></div>
               </div>
             ))}
           </div>
