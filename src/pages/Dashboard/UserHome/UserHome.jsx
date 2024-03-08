@@ -1,5 +1,3 @@
-// tempo is being tested
-
 
 import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -102,6 +100,7 @@ const UserHome = () => {
       status: "scheduled",
       availability,
     };
+
     const response = await axios.post(
       `/events/${user&&user?.email}`,
       event
@@ -193,12 +192,15 @@ const UserHome = () => {
               <>
                 <form onSubmit={handleSchedule} className="space-y-6">
                   {/* Title input */}
+
+                  <div className="mt-8">
                   <Input
-                    variant="static"
-                    defaultValue={"space 1 "}
+                    variant="outlined"
+                    defaultValue="Title"
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Title"
+                    placeholder="title"
                   />
+                  </div>
 
                   {/* Meeting description */}
                   <MeetingDescription setDescriptionChange={setDescriptionChange}/>
@@ -232,24 +234,6 @@ const UserHome = () => {
                       />
                     </div>
                     <span className="text-gray-500">:</span>
-                    {/* Participants selection */}
-                    <div className="border-b-[1px] border-[#b4b3b3] w-[46%] flex justify-between pb-3">
-                      <p
-                        onClick={() =>
-                          setIsOpenParticipants(!isOpenParticipants)
-                        }
-                        className="flex gap-1 items-center text-[14px] cursor-pointer text-gray-600"
-                      >
-                        <LuUsers2 className="text-[14px]" /> Participants
-                      </p>
-
-                      {/* Participants component */}
-                      <Participants
-                        setSelectedParticipants={setSelectedParticipants}
-                        selectedParticipants={selectedParticipants}
-                        isOpenParticipants={isOpenParticipants}
-                      />
-                    </div>
                   </div>
 
                   {/* Available time range */}
@@ -259,25 +243,6 @@ const UserHome = () => {
                     startTime={startTime}
                     endTime={endTime}
                   />
-
-                  {/* Buffer time and Location selection */}
-                  <div className="flex gap-2 justify-between items-center space-x-2 mt-4">
-                    <BufferTime setBufferTime={setBufferTime} />
-                    <span className="text-gray-500">:</span>
-
-                    {/* Location selection */}
-                    <div className="w-1/2">
-                      <Select
-                        label="Location"
-                        variant="standard"
-                        onChange={setLocation}
-                      >
-                        <Option value="Physical">Physical</Option>
-                        <Option value="Virtual">Virtual</Option>
-                      </Select>
-                    </div>
-                  </div>
-
                   {/* Platform and Scheduled time selection */}
                   <div className="flex gap-2 justify-between items-center space-x-2 mt-4">
                     {/* Platform selection */}
@@ -305,21 +270,7 @@ const UserHome = () => {
                     </div>
                     <span className="text-gray-500">:</span>
 
-                    {/* Scheduled time input */}
-                    <div className="w-1/2">
-                      <input
-                        title="Schedule time"
-                        required
-                        className="h-8 w-1/2 rounded-md focus-within:outline-none cursor-pointer border px-2 appearance-none"
-                        type="time"
-                        name="start"
-                        value={scheduleTime}
-                        onChange={(e) => setScheduleTime(e.target.value)}
-                        // Specify time format to include AM/PM
-                        inputMode="text"
-                        pattern="[0-9]{2}:[0-9]{2} [APap][mM]"
-                      />
-                    </div>
+                    
                   </div>
 
                   {/* Confirm button */}
