@@ -1,8 +1,6 @@
-
 import dateIcon from "../../assets/icons/date.png";
 import successIcon from "../../assets/icons/success.gif";
 import SingleAvatar from "../Avatar/SingleAvatar";
-
 
 import MeetLink from "./MeetLink";
 import Remaindar from "./Remaindar";
@@ -10,16 +8,12 @@ import Notes from "./Notes";
 import Feedback from "./Feedback";
 import Gradient from "../Gradient/Gradient";
 import { useState } from "react";
+import { IoIosArrowRoundBack} from "react-icons/io";
 
-const MeetingConfirmed = () => {
-  
-  
-  
-  
-  //Remaindar state 
-  const [remaindar,setRemaindar] = useState(0)
-  
-  
+const MeetingConfirmed = ({ handleGoBackHome, eventLink, sheculeDate }) => {
+  //Remaindar state
+  const [remaindar, setRemaindar] = useState(0);
+
   // participant and organizer photo url
   const organizerImg =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Stephen_tWitch_Boss_at_Dizzy_Feet_Gala_2014.jpg/220px-Stephen_tWitch_Boss_at_Dizzy_Feet_Gala_2014.jpg";
@@ -55,19 +49,25 @@ const MeetingConfirmed = () => {
                 <figure className="bg-[#e9f4ff] w-9 p-2 rounded-full">
                   <img className="w-6" src={dateIcon} alt="" />
                 </figure>
-                <p className="text-[14px] md:text-[16px]">2/3/2024</p>
+                <p className="text-[14px] md:text-[16px]">
+                  {sheculeDate ? sheculeDate.slice(0, 10) : "2/3/2024"}
+                </p>
               </div>
               {/* Meeting link, Remaindar and Notes */}
-              <MeetLink url={"/link/"} />
-              <Remaindar 
-              remaindar={remaindar}
-              setRemaindar={setRemaindar}/>
+              <MeetLink url={eventLink} />
+              <Remaindar remaindar={remaindar} setRemaindar={setRemaindar} />
               <Notes content={"Point your notes"} />
             </div>
           </div>
-
           <Feedback />
-          {/*  */}
+          <div
+            onClick={() => handleGoBackHome()}
+            className="lg:p-3 mx-auto mt-8 text-left md:bg-gray-200 lg:w-16 lg:h-16 flex items-center rounded-full"
+          >
+            <button className=" text-white  mx-auto text-left bg-primary md:w-24 md:h-24 lg:w-11 lg:h-11 rounded-full flex  items-center justify-center">
+              <IoIosArrowRoundBack className=" lg:text-3xl" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
