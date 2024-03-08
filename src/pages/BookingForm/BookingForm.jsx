@@ -88,7 +88,7 @@ export default function BookingForm() {
   async function eventLinkPost(eventLink) {
     try {
       //post data
-      const res = await axios.put(`/events/updateEvent/${eventId}`, {
+       await axios.put(`/events/updateEvent/${eventId}`, {
         eventLink,
       });
       setMeetingLink(eventLink)
@@ -146,7 +146,7 @@ function InputForm({ handleBack, createGoogleEvent, saveParticipant,sheculeDate 
   }
 
   return (
-    <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full lg:w-[90%]  md:min-h-[100vh] overflow-hidden pb-8">
+    <div className="flex flex-col-reverse md:flex-row  mx-auto justify-center w-full lg:w-[90%]  md:min-h-[100vh] overflow-hidden mt-20 pb-8">
       <Card
         className="p-5 md:pt-16  mb-2 bg-white md:w-[500px] md:max-h-[550px] "
         color="transparent"

@@ -20,7 +20,6 @@ const useTransTackData = (endpoint, key) => {
     queryFn: fetchData,
     // Consider adding dependencies like [axios, endpoint, key] to the dependency array
   });
-  
 };
 
 export default useTransTackData;
