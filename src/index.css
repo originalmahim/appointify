@@ -98,7 +98,7 @@ input[type="time"]::-webkit-datetime-edit-ampm-field {
 
 
 /* active route style */
-a.active{
+/* a.active{
   background-color: #FF4F00 !important;
   color: #fff;
-}
+} */

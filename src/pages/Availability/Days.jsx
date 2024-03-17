@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 const Days = ({ availableSlots, daysArray, refetch, userEmail }) => {
 const [selectedDay, setSelectedDay] = useState(daysArray || []); // Initialize with daysArray
 const [isPostingOrRemoving, setIsPostingOrRemoving] = useState(false); // Flag for ongoing operations
+const [slots,setSlots] = useState(availableSlots) 
 const axios = useAxiosPublic();
 const dayName = [
   "Sunday",
@@ -18,7 +19,10 @@ const dayName = [
   "Saturday",
 ];
 
+console.log(slots);
+
 const handleToggle = async (name) => {
+  
   // Prevent multiple operations during ongoing actions
   if (isPostingOrRemoving) return;
 
@@ -53,14 +57,14 @@ const handleToggle = async (name) => {
   }
 };
 
-  async function postNewSlot(slotName) {
+  async function postNewSlot(newSlot) {
     try {
       const res = await axios.post(
         `/users/availability/${userEmail}`,
-        slotName
+        newSlot
       );
       if (res.status === 200) {
-        // refetch(); // Refetch data after successful post
+        refetch(); // Refetch data after successful post
         // toast.success("Slot created successfully!");
       }
     } catch (err) {
@@ -94,7 +98,7 @@ const handleToggle = async (name) => {
   return (
     <div>
       {dayName.map((name, idx) => (
-        <div key={name} className="flex gap-3 items-start">
+        <div key={name} className="flex gap-3 flex-wrap items-start">
           <div className="flex gap-3 items-center mb-2 w-40">
             <Switch
               defaultChecked={selectedDay.includes(name)}
@@ -116,6 +120,7 @@ const handleToggle = async (name) => {
                       slotIndex={idx}
                       refetch={refetch}
                       slot={slot}
+                      lastSlot={days.slots[length - 1]}
                       userEmail={userEmail}
                       dayName={name}
                     />

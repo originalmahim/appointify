@@ -16,7 +16,7 @@ const MeetingDetailsCard = ({sheculeDate}) => {
               }
             />
             <div className="flex items-center md:text-[14px] lg:text-[16px] justify-between w-full">
-              <p>Organizeer</p>
+              <p>Shakil Ahmmed</p>
               <p className="flex items-center gap-1 text-light-gray">
                 <WiTime1 className="md:text-[14px] lg:text-[18px] text-active" />
                 30m

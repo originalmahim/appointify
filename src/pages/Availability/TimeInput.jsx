@@ -6,19 +6,19 @@ import { AiOutlineDelete } from "react-icons/ai";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from 'react-hot-toast'
 
-export default function TimeInput({ postNewSlot, dayName,  slot, slotIndex,userEmail, refetch }) {
+export default function TimeInput({ postNewSlot, dayName,lastSlot,  slot, slotIndex,userEmail, refetch }) {
   const axios = useAxiosPublic();
   const [selectSlots, setSelectedSlots] = useState("");
-  const [itemPlus, setItemPlus] = useState(false);
-  // console.log(dValue.length);
-  const handleSlotSubmit = (time) => {
-    console.log(time);
-    setSelectedSlots(time);
-  };
-  const handlePlus = (time) => {
+  const [startSlot, setStartSlot] = useState("");
+  const [endSlot, setEndSlot] = useState("");
+
+  const handlePlus = () => {
     console.log("item plus");
-    setItemPlus(true);
-    postNewSlot(dayName);
+ const newSlot = {
+        day: dayName,
+        slots: [{ start_time: "09:00", end_time: "05:00" }],
+      }
+    postNewSlot(newSlot);
   };
 
   const handleRemoveSlot = async (id) => {
@@ -40,13 +40,12 @@ export default function TimeInput({ postNewSlot, dayName,  slot, slotIndex,userE
       <div>
         <div className="flex gap-5 mb-3">
           <SlotTimesOption
-            handleSlotSubmit={handleSlotSubmit}
+            handleChange={setStartSlot}
             inputDefault={slot?.start_time}
             label="Start Time"
           />
           <SlotTimesOption
-            handleSlotSubmit={handleSlotSubmit}
-
+            handleChange={setEndSlot}
             inputDefault={slot?.end_time}
             label="End Time"
           />
@@ -65,27 +64,17 @@ export default function TimeInput({ postNewSlot, dayName,  slot, slotIndex,userE
     </div>
   );
 }
-function SlotTimesOption({ label,inputDefault }) {
+function SlotTimesOption({ label, inputDefault, handleChange,value }) {
   const slots = generate12HourTimeArray(15);
-  const [value, setValue] = useState(inputDefault);
-  const [selectedValue ,setSelectedValue] = useState("")
-const filteredSlots = slots?.filter(time=> time !== selectedValue)
-const handleChange = (val)=>{
-  setValue(val)
-  setSelectedValue(val)
-}
-console.log(filteredSlots);
 
-// console.log(slots);
   return (
     <>
       <Select
-        size="md"
-        value={value}
+        value={inputDefault}
         label={label}
-        onChange={(val) => handleChange(val)}
+        onChange={(val, idx) => handleChange(val, idx)}
       >
-        {filteredSlots?.map((time, idx) => (
+        {slots?.map((time, idx) => (
           <Option value={time} key={idx}>
             {time}
           </Option>

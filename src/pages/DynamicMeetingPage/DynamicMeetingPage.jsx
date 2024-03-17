@@ -27,7 +27,6 @@ const DynamicMeetingPage = () => {
   const [allowDays, setAllowDays] = useState([]);
   const [meetingDetails, setMeetingDetails] = useState({});
   const { data, isLoading } = useTransTackData(`/events/singleEvent/${id}`, id);
-
   //loading
   if (isLoading) <Loading />;
   // Fetch event document by that id
