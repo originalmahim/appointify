@@ -37,7 +37,7 @@ const UserHome = () => {
   const [onDaysToggle, setOnDaysToggle] = useState(false);
 
   // State for start and end time
-  const [startTime, setStartTime] = useState("12:30 pm");
+  const [startTime, setStartTime] = useState("12c:30 pm");
 const [endTime, setEndTime] = useState("8:30 am");
 
 
