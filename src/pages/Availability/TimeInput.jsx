@@ -20,7 +20,7 @@ export default function TimeInput({ postNewSlot, dayName,lastSlot,  slot, slotIn
       }
     postNewSlot(newSlot);
   };
-
+console.log(startSlot);
   const handleRemoveSlot = async (id) => {
     try {
       const res = await axios.delete(

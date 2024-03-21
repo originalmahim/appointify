@@ -5,64 +5,78 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const Days = ({ availableSlots, daysArray, refetch, userEmail }) => {
-const [selectedDay, setSelectedDay] = useState(daysArray || []); // Initialize with daysArray
-const [isPostingOrRemoving, setIsPostingOrRemoving] = useState(false); // Flag for ongoing operations
-const [slots,setSlots] = useState(availableSlots) 
-const axios = useAxiosPublic();
-const dayName = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+  const [selectedDay, setSelectedDay] = useState(daysArray || []); // Initialize with daysArray
+  const [isChecked, setIsChecked] = useState(false);
+  const [slots, setSlots] = useState(availableSlots);
+  const [newSlotsArr, setNewSlotsArr] = useState([]);
+  const axios = useAxiosPublic();
+  const dayName = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-console.log(slots);
 
-const handleToggle = async (name) => {
-  
-  // Prevent multiple operations during ongoing actions
-  if (isPostingOrRemoving) return;
+  const weekAvailability = [
+    {
+      day: "Saturday",
+      slots: [{ start_time: "09:00", end_time: "05:00" }],
+    },
+    {
+      day: "Sunday",
+      slots: [],
+    },
+    {
+      day: "Monday",
+      slots: [],
+    },
+    {
+      day: "Tuesday",
+      slots: [], 
+    },
+    {
+      day: "Wednesday",
+      slots: [],
+    },
+    {
+      day: "Thursday",
+      slots: [], 
+    },
+    {
+      day: "Friday",
+      slots: [], 
+    },
+  ];
 
-  setIsPostingOrRemoving(true); // Set flag to indicate operation in progress
-
-  try {
-    if (selectedDay.includes(name)) {
-      await removeAllSlot(name);
-      setSelectedDay(selectedDay.filter((day) => day !== name));
-    } else {
-      await postNewSlot({
-        day: name,
-        slots: [{ start_time: "09:00", end_time: "05:00" }],
-      });
-      setSelectedDay([...selectedDay, name]);
+  const handleToggle = async (name) => {
+   setIsChecked(!isChecked);
+    const newSlot = {
+      day: name,
+      slots: [{ start_time: "09:00", end_time: "05:00" }],
+    };
+    const isExist = slots.find(item => item.day === name)
+    // console.log("day" in isExist);
+    if(isExist){
+      const filtered = slots?.filter(item => item.day !== name)
+      setSlots([...filtered])
+    }else{
+      setSlots([...slots,newSlot])
+      console.log('not ok');
+      setNewSlotsArr([...newSlotsArr,newSlot])
     }
-    refetch(); // Refetch data after successful operation
-    toast.success(
-      selectedDay.includes(name)
-        ? "Slot removed successfully!"
-        : "Slot created successfully!"
-    );
-  } catch (err) {
-    console.error(err);
-    toast.error(
-      selectedDay.includes(name)
-        ? "Error removing slot."
-        : "Error creating slot."
-    );
-  } finally {
-    setIsPostingOrRemoving(false); // Reset flag after operation
-  }
-};
+    
+    // setNewSlotsArr([...newSlotsArr,newSlot])
+  };
+
+  console.log(newSlotsArr);
 
   async function postNewSlot(newSlot) {
     try {
-      const res = await axios.post(
-        `/users/availability/${userEmail}`,
-        newSlot
-      );
+      const res = await axios.post(`/users/availability/${userEmail}`, newSlot);
       if (res.status === 200) {
         refetch(); // Refetch data after successful post
         // toast.success("Slot created successfully!");
@@ -73,59 +87,22 @@ const handleToggle = async (name) => {
     }
   }
 
-  async function removeAllSlot(dayName) {
-    try {
-      const res = await axios.delete(
-        `/users/removeDay/${userEmail}/day/${dayName}`
-      );
-      if (res.status === 200) {
-        // refetch(); // Refetch data after successful deletion
-        // toast.success(res.data.message);
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("Error removing slots.");
-    }
-  }
-
-
-
-  const shouldDisplayTimeInput = (day) =>
-    availableSlots?.some(
-      (slotData) => slotData.day === day && slotData.slots.length > 0
-    );
-
   return (
     <div>
-      {dayName.map((name, idx) => (
-        <div key={name} className="flex gap-3 flex-wrap items-start">
+      {weekAvailability.map((day, idx) => (
+        <div key={day.day} className="flex gap-3 flex-wrap items-start">
           <div className="flex gap-3 items-center mb-2 w-40">
             <Switch
               defaultChecked={selectedDay.includes(name)}
-              onClick={() => handleToggle(name)}
-              disabled={isPostingOrRemoving} // Disable button during operations
+              onChange={handleToggle.bind(null, name)}
             />
-            <p>{name}</p>
+            <p>{day.day}</p>
           </div>
 
           <div className="flex flex-col">
-            {shouldDisplayTimeInput(name) &&
-              availableSlots?.map(
-                (days) =>
-                  days.day === name &&
-                  days.slots.map((slot, idx) => (
-                    <TimeInput
-                      key={slot._id}
-                      postNewSlot={postNewSlot}
-                      slotIndex={idx}
-                      refetch={refetch}
-                      slot={slot}
-                      lastSlot={days.slots[length - 1]}
-                      userEmail={userEmail}
-                      dayName={name}
-                    />
-                  ))
-              )}
+            {
+              day.slots.map((slot,idx) => <TimeInput key={idx} slot={slot}/>)
+            }
           </div>
         </div>
       ))}
