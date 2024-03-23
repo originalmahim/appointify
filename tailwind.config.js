@@ -9,7 +9,7 @@ module.exports = withMT({
     },
     extend: {
       colors: {
-        primary: "#FF4F00",
+        primary: "#00BCD4",
         primaryHover: "#ff6200",
         special: "#5E4E77",
         active: "#7EDA4A",
@@ -27,6 +27,9 @@ module.exports = withMT({
         "gradient-blue": "linear-gradient(to right, #3A6FB3, #4FA3D1)",
       },
     },
+    fontFamily:{
+      body:["Poppins"]
+    }
   },
   plugins: [require("daisyui")],
   daisyui: {

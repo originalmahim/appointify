@@ -12,6 +12,9 @@ import AvailabilityProvider from "./Context/AvailabilityProvider";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+
+  <div className="font-body">
+
   <AuthProvider>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -23,4 +26,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </QueryClientProvider>
     </HelmetProvider>
   </AuthProvider>
+
+  </div>
 );
