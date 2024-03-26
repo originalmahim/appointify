@@ -1,108 +1,68 @@
 import { Switch } from "@material-tailwind/react";
 import TimeInput from "./TimeInput";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-
-const Days = ({ availableSlots, daysArray, refetch, userEmail }) => {
-  const [selectedDay, setSelectedDay] = useState(daysArray || []); // Initialize with daysArray
-  const [isChecked, setIsChecked] = useState(false);
-  const [slots, setSlots] = useState(availableSlots);
-  const [newSlotsArr, setNewSlotsArr] = useState([]);
-  const axios = useAxiosPublic();
-  const dayName = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-
-  const weekAvailability = [
-    {
-      day: "Saturday",
-      slots: [{ start_time: "09:00", end_time: "05:00" }],
-    },
-    {
-      day: "Sunday",
-      slots: [],
-    },
-    {
-      day: "Monday",
-      slots: [],
-    },
-    {
-      day: "Tuesday",
-      slots: [], 
-    },
-    {
-      day: "Wednesday",
-      slots: [],
-    },
-    {
-      day: "Thursday",
-      slots: [], 
-    },
-    {
-      day: "Friday",
-      slots: [], 
-    },
-  ];
-
-  const handleToggle = async (name) => {
-   setIsChecked(!isChecked);
-    const newSlot = {
-      day: name,
-      slots: [{ start_time: "09:00", end_time: "05:00" }],
-    };
-    const isExist = slots.find(item => item.day === name)
-    // console.log("day" in isExist);
-    if(isExist){
-      const filtered = slots?.filter(item => item.day !== name)
-      setSlots([...filtered])
-    }else{
-      setSlots([...slots,newSlot])
-      console.log('not ok');
-      setNewSlotsArr([...newSlotsArr,newSlot])
-    }
-    
-    // setNewSlotsArr([...newSlotsArr,newSlot])
+const Days = ({ availableSlots, setAvailableSlots }) => {
+  // Function to handle slot change
+  const handleSlotChange = (value, index, dayName) => {
+    const updatedSlots = availableSlots?.map((day) => {
+      if (day.day === dayName && day.slots.length > index) {
+        return {
+          ...day,
+          slots: day.slots.map((slot, idx) => {
+            if (idx === index) {
+              return {
+                ...slot,
+                ...value,
+              };
+            }
+            return slot;
+          }),
+        };
+      }
+      return day;
+    });
+    setAvailableSlots(updatedSlots);
   };
 
-  console.log(newSlotsArr);
-
-  async function postNewSlot(newSlot) {
-    try {
-      const res = await axios.post(`/users/availability/${userEmail}`, newSlot);
-      if (res.status === 200) {
-        refetch(); // Refetch data after successful post
-        // toast.success("Slot created successfully!");
+  // Function to handle day toggle
+  const handleDayToggle = async (dayName) => {
+    const newSlot = {
+      day: dayName,
+      slots: [{ start_time: "09:00", end_time: "05:00" }],
+    };
+    const updatedAvailability = availableSlots?.map((day) => {
+      if (day.day === dayName) {
+        return {
+          ...day,
+          slots: day.slots.length === 0 ? [newSlot] : [],
+        };
       }
-    } catch (err) {
-      console.error(err);
-      toast.error("Error creating slot.");
-    }
-  }
+      return day;
+    });
+    setAvailableSlots(updatedAvailability);
+  };
 
   return (
     <div>
-      {weekAvailability.map((day, idx) => (
+      {availableSlots?.map((day) => (
         <div key={day.day} className="flex gap-3 flex-wrap items-start">
           <div className="flex gap-3 items-center mb-2 w-40">
             <Switch
-              defaultChecked={selectedDay.includes(name)}
-              onChange={handleToggle.bind(null, name)}
+              defaultChecked={day.slots.length > 0}
+              onChange={() => handleDayToggle(day.day)}
             />
             <p>{day.day}</p>
           </div>
 
           <div className="flex flex-col">
-            {
-              day.slots.map((slot,idx) => <TimeInput key={idx} slot={slot}/>)
-            }
+            {day.slots.map((slot, index) => (
+              <TimeInput
+                key={index}
+                slot={slot}
+                slotIndex={index}
+                dayName={day.day}
+                handleChange={handleSlotChange}
+              />
+            ))}
           </div>
         </div>
       ))}

@@ -5,7 +5,7 @@ import {
   AiOutlineArrowUp,
 } from "react-icons/ai";
 
-const AvailabilityHeader = () => {
+const AvailabilityHeader = ({ handleSaveData }) => {
   return (
     <div className="flex justify-between items-center mt-2">
       <div className="flex items-center gap-2">
@@ -14,9 +14,9 @@ const AvailabilityHeader = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        {/* <Button size="md" color="orange">
+        <Button onClick={handleSaveData} size="md" color="orange">
           Save
-        </Button> */}
+        </Button>
       </div>
     </div>
   );
