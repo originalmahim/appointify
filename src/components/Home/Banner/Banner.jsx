@@ -21,9 +21,10 @@ const Banner = () => {
 
  
   return (
-    <div className="bg-white pt-16 select-none">
-      <div className="max-w-screen-xl mx-auto px-6 py-12">
-        <div className="absolute top-0 left-0 w-full h-[80vh]  rounded-r-3xl" />
+    <Container>
+       <div className=" pt-28 select-none">
+      <div className=" py-12">
+        <div className="absolute top-0 left-0 w-full max-h-[100vh]  rounded-r-3xl" />
 
         <BgVideo />
 
@@ -40,21 +41,24 @@ const Banner = () => {
                 }
               />
 
-                <div className="flex gap-3 justify-center items-center mb-14">
+                <div className="flex gap-6 justify-center items-center mb-14">
               <Flag />
 
-              <button className="btn btn-wide bg-cyan-400 text-white hover:bg-cyan-500">Explore</button>
+              <button className="btn btn-wide bg-gradient-to-r from-[hsl(190,98%,46%)] to-[hsl(190,100%,47%)] text-white hover:bg-cyan-500">Explore</button>
                 </div>
             </div>
 
-            <div className=" md:flex justify-center gap-8">
+            <div className=" md:flex justify-center mx-auto gap-8">
               <CalendarSVG />
               <CardDemo />  
             </div>
           </div>
         </div>
       </div>
+
+
     </div>
+    </Container>
   );
 };
 

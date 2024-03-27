@@ -9,7 +9,7 @@ module.exports = withMT({
     },
     extend: {
       colors: {
-        primary: "#00BCD4",
+        primary: "#00B5D8",
         primaryHover: "#ff6200",
         special: "#5E4E77",
         active: "#7EDA4A",

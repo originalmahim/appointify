@@ -38,7 +38,8 @@ const UserReviews = () => {
   const shouldShowSeeMoreButton = ratings?.length > 3;
 
   return (
-    <section className=" mt-24 md:mt-32 lg:mt-36 xl:mt-40 bg-[#fffaf5] py-8">
+    <section className="  
+     py-8">
       <Container>
         <div className="text-center">
         <TitleAndDescription

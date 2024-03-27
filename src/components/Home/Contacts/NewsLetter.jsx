@@ -1,4 +1,10 @@
+import emailBox from "../../../assets/images/email.png";
+import floatUser from "../../../assets/images/floatUser.png";
+import floatSendEmail from "../../../assets/images/floatSendEmail.png";
+import floatEmail from "../../../assets/images/floatEmail.png";
+
 import toast from "react-hot-toast";
+
 import Bird from "./Bird";
 import Container from "../../Container/Container";
 // import useAuth from "../../../hooks/useAuth";
@@ -39,42 +45,52 @@ const NewsLetter = () => {
 
   return (
     <>
-      <section className="max-w-[1400px] mx-auto mt-24 md:mt-32 lg:mt-36 xl:mt-40">
+      <section className="relative md:mt-5 lg:mt-9 xl:mt-11">
         <Container>
           {/* newsletter side */}
-          <div className=" flex flex-col-reverse md:flex-row items-center gap-6">
-            <div className="flex-1">
-            <div className="text-left">
-              <TitleAndDescription
-              title={"Sign up for our newsletter"}
-              description={"Stay up to date with the announcements and exclusive discounts feel free to sign up with your email."}
-              />
-            </div>
+
+          <div className="flex justify-center mx-auto size-28 sm:size-32 md:size-44 lg:size-56 p-5 bg-gradient-to-t from-[#e3e3e3b4] to-[hsla(190,100%,46%,0)] rounded-full">
+            <img src={emailBox} alt="" />
+          </div>
+
+          <div className="">
+            <div className="text-center">
+              <div className="">
+                <TitleAndDescription
+                  customStyle={"text-center"}
+                  title={"Sign up for our newsletter"}
+                  description={
+                    "Stay up to date with exclusive discounts feel free to sign up with your email."
+                  }
+                />
+              </div>
               <form onSubmit={handleNewsLetter} className="join">
                 <input
-                  className="border-2 px-4 h-12 w-[100%] lg:w-[340px] rounded-l-xl"
+                  className="border-2 bg-white shadow-lg px-4 h-12 w-[100%] lg:w-[340px] rounded-l-xl"
                   type="email"
                   name="email"
                   placeholder="domain@example.com"
                   required
                 />
                 <div className="flex justify-start">
-                <button
-                  type="submit"
-                  className="bg-primary text-white p-2 rounded-r-sm"
-                >
-                  Subscribe
-                </button>
-
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-r  from-[hsl(190,100%,42%)] to-[hsl(190,100%,46%)] text-white rounded-r-lg p-2  shadow-lg"
+                  >
+                    Subscribe
+                  </button>
                 </div>
               </form>
             </div>
-            {/* animation side */}
-            <div className="flex-1">
-              <Bird />
-            </div>
           </div>
+
+          <img src={floatUser} className="absolute opacity-10 bottom-8 left-9" alt="" />
+          <img src={floatSendEmail} className="absolute opacity-20  top-8 right-9" alt="" />
+          
         </Container>
+
+
+
       </section>
     </>
   );

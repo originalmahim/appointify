@@ -25,7 +25,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="rounded-lg border
-        bg-white p-4  transition duration-300  transform hover:shadow-xl hover:shadow-[#ffecf3] hover:-translate-y-2 cursor-pointer">
+        bg-white p-4  transition duration-300  transform hover:shadow-xl hover:shadow-[#00bbd421] hover:-translate-y-2 cursor-pointer">
         <div className="flex gap-3  ">
           <img
             alt={name}
@@ -45,7 +45,7 @@ const ReviewCard = ({ image, name, rating, content, timeStamp }) => {
 
             </div>
             {/* rating stars  */}
-            <div className="flex  my-1 text-yellow-900 hover:text-inherit">
+            <div className="flex  my-1 text-primary hover:text-inherit">
               {Array.from({ length: rating }).map((_, index) => (
                 <svg
                   key={index}

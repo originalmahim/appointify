@@ -255,7 +255,7 @@ const DashboardLayout = () => {
                   <NavLink
                     to="/dashboard/user-home"
                     className={`${({ isActive }) =>
-                      isActive ? "bg-[red]" : "bg-[red]"} text-[16px]`}
+                      isActive ? "bg-primary" : ""} text-[16px]`}
                   >
                     <AiFillHome />
                     User Home

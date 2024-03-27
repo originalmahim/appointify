@@ -1,7 +1,7 @@
 export const CalendarSVG = () => {
   return (
     <>
-     <div className="bg-gradient-to-b w-full from-[#f9feffdb] to-[#fff]  md:w-1/2 relative  p-6 rounded-lg shadow-xl shadow-[#96d6e357]">
+     <div className="bg-white w-full   md:w-1/2 relative  p-6 rounded-lg shadow-xl shadow-[#96d6e357]">
   <div className="flex justify-between items-center mb-4">
     <h2 className="text-lg font-semibold text-gray-700">April 2021</h2>
     <div className="flex space-x-2">

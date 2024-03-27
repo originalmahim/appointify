@@ -2,7 +2,7 @@ const TitleAndDescription = ({ title,customStyle, description, lineBreak, lineBr
     return (
       <div className={`mt-5 ${customStyle}`}>
         <h1 className={`text-black z-20 mb-1 md:mb-0 text-3xl md:text-xl
-         ${type == "h1"?"lg:text-5xl mt-11 pb-4":"lg:text-4xl"} font-semibold md:leading-[45px] lg:leading-[50px]`}>
+         ${type == "h1"?"lg:text-[44px] mt-11 pb-4":"lg:text-3xl"} font-semibold md:leading-[45px] lg:leading-[50px]`}>
           {title}
           {lineBreak && <br className="hidden md:block" />}
           {lineBreakText && <span>{lineBreakText}</span>}

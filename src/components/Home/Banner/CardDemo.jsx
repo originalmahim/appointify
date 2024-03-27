@@ -1,7 +1,7 @@
 export const CardDemo = () => {
   return (
     <>
-      <div className="bg-white animate-pulse duration-500 p-6 w-2/3 rounded-lg shadow-xl hidden md:block shadow-[#96d6e357] max-w-sm">
+      <div className="bg-white duration-500 p-6 w-full rounded-lg shadow-xl hidden md:block shadow-[#96d6e357] lg:max-w-sm">
   <div className="flex items-center space-x-4 mb-4">
     <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
       <img
