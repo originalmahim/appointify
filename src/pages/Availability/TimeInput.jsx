@@ -11,6 +11,7 @@ export default function TimeInput({
   slotIndex,
   dayName,
   handleChange,
+  setAvailableSlots
 }) {
   const axios = useAxiosPublic();
   const slots = generate12HourTimeArray(15);
@@ -20,9 +21,9 @@ export default function TimeInput({
   };
 
   const handlePlus = () => {
-    console.log("Plus click");
+    console.log("Plus click", slot);
   };
-
+  console.log(slots);
   return (
     <div className="flex items-center gap-5">
       <div>
@@ -34,7 +35,7 @@ export default function TimeInput({
               handleChange({ start_time: value }, slotIndex, dayName)
             }
           >
-            {slots.map((time, idx) => (
+            {slots.filter((time) => slot.end_time !== time).map((time, idx) => (
               <Option value={time} key={idx}>
                 {time}
               </Option>
@@ -47,11 +48,13 @@ export default function TimeInput({
               handleChange({ end_time: value }, slotIndex, dayName)
             }
           >
-            {slots.map((time, idx) => (
-              <Option value={time} key={idx}>
-                {time}
-              </Option>
-            ))}
+            {slots
+              .filter((time) => slot.start_time !== time)
+              .map((time, idx) => (
+                <Option value={time} key={idx}>
+                  {time}
+                </Option>
+              ))}
           </Select>
           {slotIndex === 0 ? (
             <ActionButton handlePlus={handlePlus} />
