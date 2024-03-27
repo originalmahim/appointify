@@ -28,7 +28,7 @@ export default function TimeInput({
       <div>
         <div className="flex gap-5 mb-3">
           <Select
-            value={slot.start_time}
+            value={slot?.start_time}
             label="Start Time"
             onChange={(value) =>
               handleChange({ start_time: value }, slotIndex, dayName)
@@ -41,7 +41,7 @@ export default function TimeInput({
             ))}
           </Select>
           <Select
-            value={slot.end_time}
+            value={slot?.end_time}
             label="End Time"
             onChange={(value) =>
               handleChange({ end_time: value }, slotIndex, dayName)

@@ -25,10 +25,8 @@ const Days = ({ availableSlots, setAvailableSlots }) => {
 
   // Function to handle day toggle
   const handleDayToggle = async (dayName) => {
-    const newSlot = {
-      day: dayName,
-      slots: [{ start_time: "09:00", end_time: "05:00" }],
-    };
+    const newSlot = { start_time: "09:00", end_time: "05:00" }
+
     const updatedAvailability = availableSlots?.map((day) => {
       if (day.day === dayName) {
         return {
