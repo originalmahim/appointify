@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useUserData from "../../hooks/useUserData";
 import Container from "../Container/Container";
-import logo from "../../assets/icons/date.png"
+import logo from "../../assets/logos/appointiyogo.png"
 
 const NavBar = () => {
   const { logOut } = useContext(AuthContext);
@@ -15,7 +15,7 @@ const NavBar = () => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
-      setIsScrolled(scrollY >= 100);
+      setIsScrolled(scrollY >= 300);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -29,7 +29,7 @@ const NavBar = () => {
     const toastId = toast.loading("Logging Out...", {
       style: {
         borderRadius: "8px",
-        background: "#333",
+        background: "#fff",
         color: "#fff",
       },
     });
@@ -65,7 +65,7 @@ const NavBar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-special text-sm md:text-lg font-semibold"
-              : "text-sm md:text-base lg:text-lg font-medium"
+              : "text-sm md:text-[black] lg:text-lg "
           }
         >
           Home
@@ -77,7 +77,7 @@ const NavBar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-special text-sm md:text-lg font-semibold"
-              : "text-sm md:text-base lg:text-lg font-medium"
+              : "text-sm md:text-[black] lg:text-lg "
           }
         >
           Blogs
@@ -89,7 +89,7 @@ const NavBar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-special text-sm md:text-lg font-semibold"
-              : "text-sm md:text-base lg:text-lg font-medium"
+              : "text-sm md:text-[black] lg:text-lg "
           }
         >
           Pricing
@@ -101,7 +101,7 @@ const NavBar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-special text-sm md:text-lg font-semibold"
-              : "text-sm md:text-base lg:text-lg font-medium"
+              : "text-sm md:text-[black] lg:text-lg "
           }
         >
           Ratings
@@ -113,7 +113,7 @@ const NavBar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-special text-sm md:text-lg font-semibold"
-              : "text-sm md:text-base lg:text-lg font-medium"
+              : "text-sm md:text-[black] lg:text-lg "
           }
         >
           Contact
@@ -125,7 +125,7 @@ const NavBar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-special text-sm md:text-lg font-semibold"
-              : "text-sm md:text-base lg:text-lg font-medium"
+              : "text-sm md:text-[black] lg:text-lg "
           }
         >
           About Us
@@ -135,13 +135,13 @@ const NavBar = () => {
   );
 
   return (
-    <div className="fixed z-50 w-screen">
+    <div className="fixed z-50 w-screen bg-[#ffffff79] my-1">
       <nav
         className={`${
-          isScrolled ? "bg-gray-50 transition duration-1000" : ""
+          isScrolled ? "bg-gray-50 transition duration-1000" :""
         }`}
       >
-        <div className="h-[75px] bg-[#ffffff4f]">
+        <div className="h-[75px] ">
         <Container>
           <div className="navbar">
             <div className="navbar-start">
@@ -157,17 +157,17 @@ const NavBar = () => {
                 </ul>
               </div>
               {/* logo & name */}
-              <div className="flex items-center gap-2">
+              <div className="">
+                <Link
+                  to="/"
+                  className=" text-2xl md:text-3xl lg:text-3xl font-play font-bold italic"
+                >
                 <img
-                  className="w-8 md:w-10 "
+                  className="w-10 md:w-40 "
                   src={logo}
                   alt="logo-img"
                 />
-                <Link
-                  to="/"
-                  className="text-primary text-2xl md:text-3xl lg:text-3xl font-play font-bold italic"
-                >
-                  Appointify
+                  
                 </Link>
               </div>
             </div>
